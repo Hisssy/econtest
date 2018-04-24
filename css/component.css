@@ -8,6 +8,16 @@
 	vertical-align: top;
 }
 
+.input__captcha {
+	position: relative;
+	z-index: 1;
+	display: inline-block;
+	margin: 1em;
+	max-width: 400px;
+	width: calc(100% - 2em);
+	vertical-align: top;
+}
+
 .input__field {
 	position: relative;
 	display: block;
@@ -449,6 +459,13 @@
 	-webkit-transition: box-shadow 0.3s;
 	transition: box-shadow 0.3s;
 }
+.input__field__captcha--minoru {
+	background: #fff;
+	box-shadow: 0px 0px 0px 2px transparent;
+	color: #eca29b;
+	-webkit-transition: box-shadow 0.3s;
+	transition: box-shadow 0.3s;
+}
 
 .input__label--minoru {
 	padding: 0;
@@ -471,11 +488,24 @@
 	box-shadow: 0px 0px 0px 2px #eca29b;
 }
 
+.input__field__captcha--minoru:focus {
+	box-shadow: 0px 0px 0px 2px #eca29b;
+}
+
 .input__field--minoru:focus + .input__label--minoru {
 	pointer-events: none;
 }
 
+.input__field__captcha--minoru:focus + .input__label--minoru {
+	pointer-events: none;
+}
+
 .input__field--minoru:focus + .input__label--minoru::after {
+	-webkit-animation: anim-shadow 0.3s forwards;
+	animation: anim-shadow 0.3s forwards;
+}
+
+.input__field__captcha--minoru:focus + .input__label--minoru::after {
 	-webkit-animation: anim-shadow 0.3s forwards;
 	animation: anim-shadow 0.3s forwards;
 }
