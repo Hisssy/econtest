@@ -1,10 +1,11 @@
 <?php
 include 'configure.php';
-$handle=mysqli_connect("$host","$usr","$pwd")or die('数据库连接失败');
+$handle=mysqli_connect("$db_host","$db_user","$db_pwd")or die('数据库连接失败');
 function _session_open($save_path,$session_name)
 {
     global $handle;
-	mysqli_select_db($handle,'contest')or die('数据库无此库');
+    global $db_name;
+	mysqli_select_db($handle,"$db_name")or die('数据库无此库');
 	return(true);
 }
 function _session_close()
