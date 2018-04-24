@@ -23,37 +23,37 @@
 		}
 	</style>
 </head>
-
 <body>
-
 	<div class="container">
+        <form action="verification.php" method="post">
 	<section class="content">
 				<h2>重邮e站</h2>
 				<span class="input input--minoru">
-					<input class="input__field input__field--minoru" type="text" id="input-13" />
-					<label class="input__label input__label--minoru" for="input-13">
+					<input class="input__field input__field--minoru" type="text" id="input-1" name="user" />
+					<label class="input__label input__label--minoru" for="input-1">
 						<span class="input__label-content input__label-content--minoru">用户名</span>
 					</label>
 				</span>
 				<span class="input input--minoru">
-					<input class="input__field input__field--minoru" type="text" id="input-14" />
-					<label class="input__label input__label--minoru" for="input-14">
+					<input class="input__field input__field--minoru" type="text" id="input-2" name="pwd"/>
+					<label class="input__label input__label--minoru" for="input-2">
 						<span class="input__label-content input__label-content--minoru">密码</span>
 					</label>
 				</span>
     </section>
     <section>
 			<span class="input__captcha">
-                <img src="images/captcha.jpg" style="height: 3em;">
+                <img src="verification.php" style="height: 3em;">
 					<input class="input__field input__field__captcha--minoru" type="text" id="input-15" />
 					<label class="input__label input__label--minoru" for="input-15">
-						<span class="input__label-content input__label-content--minoru">验证码</span>
+						<span class="input__label-content input__label-content--minoru" style="font-size: 18px">验证码</span>
 					</label>
             </span>
     </section>
+        </form>
 	</div>
     <div id="button" style="text-align: center">
-    <input type="button" class="asd" value="登录">
+        <button type="submit" class="asd">登录</button>
     <a href="register.html"><input class="asd" value="注册账号" type="button"></a>
     </div>
 </body>

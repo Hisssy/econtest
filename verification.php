@@ -16,7 +16,7 @@ $image_b=imagecreate($inage_width,$inage_height);
 imagecolorallocate($image_b,255,255,255);
 for($i=0;$i<strlen($_SESSION[check]);$i++)
 {
-  $font=mt_rand(3,5);
+    $font=mt_rand(3,5);
   $x=mt_rand(1,8)+$inage_width*$i/4;
   $y=mt_rand(1,$inage_height/4);
   $color=imagecolorallocate($image_b,mt_rand(0,100),mt_rand(0,150),mt_rand(0,200));

@@ -1,9 +1,10 @@
 <?php
+include 'configure.php';
+$handle=mysqli_connect("$host","$usr","$pwd")or die('数据库连接失败');
 function _session_open($save_path,$session_name)
 {
-	global $handle;
-	$handle=mysqli_connect('localhost','root','980919')or die('数据库连接失败');
-	mysqli_select_db($handle,'chewei')or die('数据库无此库');
+    global $handle;
+	mysqli_select_db($handle,'contest')or die('数据库无此库');
 	return(true);
 }
 function _session_close()
@@ -61,4 +62,3 @@ function _session_gc($expiry_time)
 	$result=mysqli_query($handle,$sql);
 	return($result);
 }
-?>
