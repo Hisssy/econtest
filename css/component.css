@@ -14,8 +14,8 @@
 	display: inline-block;
 	margin: 1em;
 	max-width: 400px;
-	width: calc(100% - 2em);
-	vertical-align: top;
+	width: calc(100% - 10em);
+
 }
 
 .input__field {
