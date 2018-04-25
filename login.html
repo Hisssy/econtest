@@ -7,6 +7,13 @@
 	<link rel="stylesheet" type="text/css" href="css/demo.css" />
 	<link rel="stylesheet" type="text/css" href="css/component.css" />
 	<script src="js/classie.js"></script>
+    <script>
+        function reload() {
+            let obj=document.getElementById("captcha");
+            let url="verification.php";
+            obj.src =url+"?time=" + new Date().getTime();
+        }
+    </script>
 	<style>
 		.asd{
 			line-height: 60px;
@@ -43,7 +50,7 @@
     </section>
     <section>
 			<span class="input__captcha">
-                <img src="verification.php" alt="验证码" style="height: 3em;">
+                <img onclick="reload()" src="verification.php" alt="验证码" style="height: 3em;">
 					<input class="input__field input__field__captcha--minoru" type="text" id="input-3" name="check" />
 					<label class="input__label input__label--minoru" for="input-3">
 						<span class="input__label-content input__label-content--minoru" style="font-size: 18px">验证码</span>

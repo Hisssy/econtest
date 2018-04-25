@@ -10,14 +10,9 @@
     <script src="js/jquery.min.js"></script>
     <script>
         function reload() {
-            $.ajax({
-                type:"GET",
-                dataType:"image/png",
-                url:"verification.php",
-                success:function (result) {
-                    document.getElementById("captcha").src=result;
-                }
-            })
+            let obj=document.getElementById("captcha");
+            let url="verification.php";
+            obj.src =url+"?time=" + new Date().getTime();
         }
     </script>
 	<style>
