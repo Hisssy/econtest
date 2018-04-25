@@ -7,6 +7,19 @@
 	<link rel="stylesheet" type="text/css" href="css/demo.css" />
 	<link rel="stylesheet" type="text/css" href="css/component.css" />
 	<script src="js/classie.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script>
+        function reload() {
+            $.ajax({
+                type:"GET",
+                dataType:"image/png",
+                url:"verification.php",
+                success:function (result) {
+                    document.getElementById("captcha").src=result;
+                }
+            })
+        }
+    </script>
 	<style>
 		.asd{
 			line-height: 60px;
@@ -27,36 +40,35 @@
 <body>
 	<div class="container">
         <form action="register.php" method="post">
-	<section class="content">
+	    <section class="content">
 				<h2>注册</h2>
 				<span class="input input--minoru">
-					<input class="input__field input__field--minoru" type="text" id="input-1" name="user"/>
+					<input class="input__field input__field--minoru" type="text" id="input-1" name="user" required/>
 					<label class="input__label input__label--minoru" for="input-1">
 						<span class="input__label-content input__label-content--minoru">用户名</span>
 					</label>
 				</span>
 						<span class="input input--minoru">
-					<input class="input__field input__field--minoru" type="text" id="input-2" />
+					<input class="input__field input__field--minoru" type="text" id="input-2" name="nickname" required/>
 					<label class="input__label input__label--minoru" for="input-2">
-						<span class="input__label-content input__label-content--minoru" name="nickname">昵称</span>
+						<span class="input__label-content input__label-content--minoru" >昵称</span>
 					</label>
 				</span>
 				<span class="input input--minoru">
-					<input class="input__field input__field--minoru" type="text" id="input-3" />
+					<input class="input__field input__field--minoru" type="password" id="input-3" name="pwd" required />
 					<label class="input__label input__label--minoru" for="input-3">
-						<span class="input__label-content input__label-content--minoru" name="pwd">密码</span>
+						<span class="input__label-content input__label-content--minoru" >密码(6-20位)</span>
 					</label>
 				</span>
 			</section>
 		<span class="input__captcha">
-                <img src="verification.php" style="height: 3em;vertical-align: center">
-					<input class="input__field input__field__captcha--minoru" type="text" id="input-5" name="check" />
+                <img onclick="reload()" src="verification.php" id="captcha" alt="验证码" style="height: 3em;vertical-align: center">
+					<input class="input__field input__field__captcha--minoru" type="text" id="input-5" name="check" required/>
 					<label class="input__label input__label--minoru" for="input-5">
 						<span class="input__label-content input__label-content--minoru" style="font-size: 18px">验证码</span>
 					</label>
 		</span>
         <div style="text-align: center"> <button  class="asd" type="submit">注册账号</button></div>
-
         </form>
 	</div>
 </body>
