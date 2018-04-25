@@ -1,3 +1,9 @@
+<?php
+include 'session.php';
+session_set_save_handler('_session_open','_session_close','_session_read','_session_write','_session_destroy','_session_gc');
+session_start();
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -92,11 +98,30 @@
                 </div>
             </div>
         </div>
+
         <div class="right1">
             <div class="denglu">
-                <h4 style="color: #000000;padding-top: 7%;padding-left: 5%">状态：<span>未登录</span></h4>
-                <h4 style="color: #000000;padding-left: 5%">ID：<span>-</span></h4>
-                <h4 style="color: #000000;padding-left: 5%">个人说明：<span>-</span></h4>
+
+                <h4 style="color: #000000;padding-top: 7%;padding-left: 5%">状态：<span>
+                        <?php
+                        if (isset($_SESSION["user"]))
+                        echo "已登录";
+                        else echo "未登录";
+                        ?>
+                    </span></h4>
+                <h4 style="color: #000000;padding-left: 5%">ID：<span>
+                        <?php
+                        if (isset($_SESSION["user"]))
+                            echo $_SESSION["user"];
+                        else echo "-";
+                        ?>
+                    </span></h4>
+                <h4 style="color: #043745;padding-left: 5%"><a onclick="window.location.href='logout.php'">
+                        <?php
+                        if (isset($_SESSION["user"]))
+                            echo "退出";
+                        else echo "-";
+                        ?></a></h4>
                 <img src="images/789.png" class="touxiang" />
             </div>
             <div class="block">
