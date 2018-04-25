@@ -1,6 +1,4 @@
 // JavaScript Document
-
-var link = document.getElementByID("link");
 function a(x){
             $(x).css({
                 "box-shadow": "1px 1px 2px #c1bdb9",
@@ -30,7 +28,3 @@ function a(x){
                 "transform": "translate(0,240%)"
             });
         }
-
-	link.onclick = function(){
-		window.location.href = 登录页.html;
-}
