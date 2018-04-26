@@ -12,7 +12,7 @@ if($_POST['check']==$_SESSION['check'])
 	$row=mysqli_num_rows($result);
 	if($row==0)
 	{
-    $sql_nickname="select nickname from account_user where nickname='$_POST[nickname]'";
+    $sql_nickname="select nickname from account_user where nickname='$_POST["nickname"]'";
 		$result_nickname=mysqli_query($hand,$sql_nickname);
 		$row_nickname=mysqli_num_rows($result_nickname);
 		if($row_nickname==0)
