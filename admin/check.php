@@ -23,4 +23,3 @@ session_start();
     window.alert('账号或密码错误');
     window.location.href='login.php';</script>";
   }
-}
