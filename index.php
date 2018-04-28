@@ -154,11 +154,11 @@ session_start();
                                 echo $_SESSION["user"];
                             else echo "-";
                             ?></span></h4>
-                    <h4 style="color: #043745;padding-left: 5%"><a onclick="window.location.href='logout.php'"></h4>
+                    <h4 style="color: #043745;padding-left: 5%"></h4>
                 </div>
                 <div id="dimg" style="
     margin: 2%;
-
+    width: 28%;
     height: 60%;
 ">
                     <img src="images/789.png" class="touxiang" />
