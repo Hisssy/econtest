@@ -1,7 +1,7 @@
 <?php
 include '../session.php';
 include '../configure.php';
-session_set_save_handler('_session_open','_session_close','_session_read','_session_write','_session_destroy','_session_gc');//通过session.php将session信息保存在数据库
+session_set_save_handler($handler, true);//通过session.php将session信息保存在数据库
 session_start();
   $_SESSION["user"]=$_POST["user"];
   $_SESSION["pwd"]=$_POST["pwd"];

@@ -1,6 +1,6 @@
 <?php
 include 'session.php';
-session_set_save_handler('_session_open','_session_close','_session_read','_session_write','_session_destroy','_session_gc');
+session_set_save_handler($handler, true);
 session_start();
 ?>
 
@@ -173,7 +173,11 @@ session_start();
                     <button class="dec" style="background-color: #f6bd80;width: 100%;">我的组队</button>
                 </div>
                 <div class="btn">
-                    <button onclick="window.location.href='login.html'" class="dec" style="margin-bottom: 1.5%;background-color: #458df9;">
+                    <button onclick="window.location.href='<?php
+                    if (isset($_SESSION["user"]))
+                        echo "logout.php";
+                    else echo "login.html";
+                    ?>'" class="dec" style="margin-bottom: 1.5%;background-color: #458df9;">
                         <?php
                         if (isset($_SESSION["user"]))
                             echo "退出";

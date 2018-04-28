@@ -1,7 +1,7 @@
 <?php
 include 'session.php';
 include 'configure.php';
-session_set_save_handler('_session_open','_session_close','_session_read','_session_write','_session_destroy','_session_gc');
+session_set_save_handler($handler, true);
 session_start();
 $image_width=55;
 $image_height=18;
