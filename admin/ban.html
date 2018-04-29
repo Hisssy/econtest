@@ -1,0 +1,34 @@
+<html>
+<head>
+  <script type="text/javascript">
+function make_sure()
+  {
+  var r=confirm("确定要封禁该用户？")
+  if (r==true)
+    {
+    return true;
+    }
+  else
+    {
+    return false;
+    }
+  }
+</script>
+</head>
+<body>
+<form name="form1" action="ban.php" onsubmit="return make_sure()">
+  <table width="521" height="394" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <tr>
+		    <td height="24" align="right">用户id：</td>
+			<td height="24" align="left"><input name="user" type="text" id="user" size="20"></td>
+		  </tr>
+		  <tr align="center">
+		    <td height="24" colspan="2"><input type="submit" name="Submit" value="提交"></td>
+		  </tr>
+		</table>
+	  </td>
+	</tr>
+  </table>
+</body>
+</html>
