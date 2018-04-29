@@ -76,7 +76,7 @@
 	justify-content: space-between;
 	display: flex;
 	height: 15%;
-	font-size: 18px;
+	/* font-size: 18px; */
 	align-items: center;
 }
 
@@ -495,7 +495,7 @@ p {
 .denglu {
 	border-radius: 0.3em;
 	display: flex;
-	height: 49.5%;
+	height: 48%;
 	justify-content: space-between;
 	background-color: aliceblue;
 }

@@ -4,7 +4,7 @@ function a(x){
                 "box-shadow": "1px 1px 2px #c1bdb9",
                 "border-radius":"6px"
             });
-            $(x+" img").css({
+            $(x+" pic").css({
                 "opacity":"0.8"
             });
             $(x+" p").css({
@@ -18,7 +18,7 @@ function a(x){
                 "box-shadow": "",
                 "border-radius":""
             });
-            $(x+" img").css({
+            $(x+" pic").css({
                 "opacity":"1"
 
             });

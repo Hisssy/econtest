@@ -2,6 +2,7 @@
 include '../session.php';
 include '../configure.php';
 session_set_save_handler($handler, true);//通过session.php将session信息保存在数据库
+session_start();
 if(!$_SESSION["user"])
 {
   echo "<script language=\"JavaScript\">
