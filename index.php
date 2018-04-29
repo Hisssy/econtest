@@ -10,12 +10,83 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>重邮e站</title>
     <link type="text/css" rel="stylesheet" href="css/index.css">
-    <!--    <link href="https://cdn.bootcss.com/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet">-->
+<!--    <link href="https://cdn.bootcss.com/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet">-->
     <script src="js/index.js"></script>
     <script src="js/jquery.min.js"></script>
-    <!--    <script src="https://cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>-->
+<!--    <script src="https://cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>-->
+    <script>
+        function modalOpen() {
+            let obj=document.getElementById('modal1');
+            obj.style.display='block';
+        }
+        function modalClose() {
+            let obj=document.getElementById('modal1');
+            obj.style.display='none';
+        }
+
+    </script>
+    <style>
+        #tform label{
+            float: left;
+            margin-right: 3%;
+            width: 25%;
+            text-align: right;
+        }
+        #tform input{
+            height: 20px;
+        }
+        #modal1{
+            display: none;
+            background:rgba(0,0,0,0.60);
+            z-index: 998;
+            position: absolute;
+            height: 100%;
+            width: 100%;
+        }
+        #modal1 .mbox{
+            z-index: 999;
+            background: white;
+            box-shadow: black;
+            border-radius: .5em;
+            max-width: 550px;
+            height: 300px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            justify-content: space-between;
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 2%;
+        }
+    </style>
 </head>
 <body style="">
+<div id="modal1">
+    <div class="mbox">
+        <div style="height: 10%"><span onclick="modalClose()" style="height:40px;float: right;font-size: 40px;cursor: pointer ">×</span></div>
+        <div style="height:90%;align-items: center;display: flex;justify-content: center">
+            <form id="tform" style="line-height: 30px;width: 70%;" method="post" action="##">
+                <label for="sel1">选择比赛</label>
+                <select id="sel1" name="cid">
+                    <option>XXX大赛</option>
+                    <option>XXX大赛</option>
+                    <option>XXX大赛</option>
+                </select>
+                <br>
+                <label for="input1">队伍名</label>
+                <input id="input1" placeholder="xx" name="name" required>
+                <br>
+                <label for="input2">所需人数</label>
+                <input id="input2" placeholder="xx" name="num" required>
+                <br>
+                <label></label><button type="submit" style="
+    margin-left: 28%;
+">提交</button>
+            </form>
+        </div>
+    </div>
+</div>
 <div style="
     background-color: #1cc3c9;
 ">
@@ -165,7 +236,7 @@ session_start();
             <div class="block_btn">
                 <div class="btn" style="
 ">
-                    <button class="dec" style="margin-bottom: 1.5%;background-color: #f6868b;width: 100%;">创建队伍</button>
+                    <button class="dec" style="margin-bottom: 1.5%;background-color: #f6868b;width: 100%;" onclick="modalOpen()">创建队伍</button>
                     <button class="dec" style="background-color: #f6bd80;width: 100%;">我的组队</button>
                 </div>
                 <div class="btn">

@@ -26,7 +26,6 @@
 	background-clip: padding-box;
 	background-color: #1cc3c9;
 	height: 60px;
-	z-index: 999;
 	display: flex;
 	justify-content: space-between;
 }
@@ -76,7 +75,6 @@
 	justify-content: space-between;
 	display: flex;
 	height: 15%;
-	/* font-size: 18px; */
 	align-items: center;
 }
 
@@ -85,7 +83,7 @@
 
 body {
 	width: 100%;
-	margin: 0px auto;
+	margin: 0 auto;
 	background-image: url(../images/背景5.jpg);
 	background-size: 100% 100%;
 	padding-top: 0;
@@ -97,6 +95,7 @@ body {
 	overflow: hidden;
 	margin: 0 auto;
 	min-width: 755px;
+	box-sizing: border-box;
 }
 
 .main1 {
