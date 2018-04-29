@@ -14,7 +14,7 @@ session_start();
   {
     echo "<script language=\"JavaScript\">
     window.alert('登录成功');
-    window.location.href='#';</script>";
+    window.location.href='index.php';</script>";
   }
   else
   {
