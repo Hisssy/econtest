@@ -10,10 +10,8 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>重邮e站</title>
     <link type="text/css" rel="stylesheet" href="css/index.css">
-<!--    <link href="https://cdn.bootcss.com/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet">-->
     <script src="js/index.js"></script>
-    <script src="js/jquery.min.js"></script>
-<!--    <script src="https://cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>-->
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
     <script>
         function ajaxPost(url) {
             $.ajax({
@@ -21,8 +19,16 @@ session_start();
                 dataType:"JSON",
                 url:url,
                 data:$('#tform').serialize(),
-                success: alert("提交成功！"),
-                error:alert("提交失败！")
+                success: function (result){
+                    if(result.msgCode==='1'){
+                        alert("提交成功！");
+                        modalClose();
+                    }
+                    else if(result.msgCode==='0')
+                        alert("队名重复！");
+                    else
+                        alert("服务器错误！");
+                }
             })
         }
         function modalOpen() {
@@ -32,6 +38,16 @@ session_start();
         function modalClose() {
             let obj=document.getElementById('modal1');
             obj.style.display='none';
+        }
+        function search(url) {
+            $.ajax({
+                type:"POST",
+                dataType:"JSON",
+                url:url,
+                data:$('#tform').serialize(),
+                success: alert("提交成功！"),
+                error:alert("提交失败！")
+            })
         }
     </script>
     <style>
@@ -78,9 +94,9 @@ session_start();
             <form id="tform" style="line-height: 30px;width: 70%;" method="post" action="#">
                 <label for="sel1">选择比赛</label>
                 <select id="sel1" name="cname">
-                    <option>XXX大赛</option>
-                    <option>XXX大赛</option>
-                    <option>XXX大赛</option>
+                    <option value="1">XXX大赛</option>
+                    <option value="2">XXY大赛</option>
+                    <option value="3">XXZ大赛</option>
                 </select>
                 <br>
                 <label for="input1">队伍名</label>
@@ -132,9 +148,12 @@ session_start();
     padding-left: 10px;
     height: 70%;
 ">
-                    <input type="text" placeholder="请输入比赛或队伍关键词" class="search1" title="">
-                    <select title="" class="select1" size="2"> <option value="0">比赛</option> <option value="1">队伍</option> </select>
-                    <img src="images/放大镜2.png" class="fangdajing2">
+                    <input type="text" title="" class="search1" placeholder="请输入比赛或队伍关键词" name="content" required>
+                    <select title="" size="1" class="select1" name="method">
+                        <option value="1">比赛</option>
+                        <option value="2">队伍</option>
+                    </select>
+                    <img src="images/放大镜2.png" class="fangdajing2" onclick="search('search.php')">
                 </div>
                 <ul class="fenlei">
                     <li>分类：</li>

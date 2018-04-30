@@ -6,6 +6,9 @@
  * Time: 9:50
  */
 
+
+//需要登录的页面都用此头文件
+
 include 'session.php';
 include 'configure.php';
 session_set_save_handler($handler, true);

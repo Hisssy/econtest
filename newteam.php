@@ -6,11 +6,13 @@
  * Time: 9:37
  */
 
+//
+
 include 'needauth.php';
 $hand=mysqli_connect("$db_host","$db_user","$db_pwd")or die('数据库连接失败');
 mysqli_select_db($hand,"$db_name")or die('数据库无此库');
-if(isset($_POST['cname'])&&isset($_POST['name'])&&isset($_POST['num'])){
-    $contest=$_POST['cname'];
+if(isset($_POST['cid'])&&isset($_POST['name'])&&isset($_POST['num'])){
+    $contest=$_POST['cid'];
     $user=$_SESSION['user'];
     $team=$_POST['name'];
     $num=$_POST['num'];
@@ -19,23 +21,21 @@ if(isset($_POST['cname'])&&isset($_POST['name'])&&isset($_POST['num'])){
     $result=mysqli_query($hand,$sql);
     $row=mysqli_num_rows($result);
     if($row==0) {
-        $query1="SELECT id FROM contest_list where name='$contest'";
         $query2="SELECT uid FROM account_user where user='$user'";
-        $r1=mysqli_query($hand,$query1);
         $r2=mysqli_query($hand,$query2);
-        $a1=mysqli_fetch_array($r1,MYSQLI_ASSOC);
         $a2=mysqli_fetch_array($r2,MYSQLI_ASSOC);
-        $cid=$a1["id"];
+        $cid=$contest;
         $tcid=$a2["uid"];
         $time=time();
         $sql="insert into contest_team (`cid`, `created`,`name`, `intro`,`peoplenum`,`tcid`,`status`) values('$cid','$time','$team','$intro','$num','$tcid',1)";
         $result=mysqli_query($hand,$sql);
+        $return=["msgCode"=>"1"];
+        echo json_encode($return);
     }
     else
     {
-        echo "<script>
-			window.alert('此队名已被使用');
-			window.location.href='register.html';</script>";
+        $return=["msgCode"=>0];
+        echo json_encode($return);
     }
 }else{
     echo "<script>alert('请勿直接调用此界面');window.location.href='index.php'</script>";
