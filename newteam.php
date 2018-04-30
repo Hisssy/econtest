@@ -6,7 +6,6 @@
  * Time: 9:37
  */
 
-
 include 'needauth.php';
 $hand=mysqli_connect("$db_host","$db_user","$db_pwd")or die('数据库连接失败');
 mysqli_select_db($hand,"$db_name")or die('数据库无此库');
@@ -42,5 +41,6 @@ if($_SESSION["user"]&&isset($_POST['name']) && isset($_POST['cid']) &&isset($_PO
         echo json_encode($return);
     }
 }else{
+    $return=["msgCode"=>"2"];
     echo "<script>alert('请勿直接调用此界面');window.location.href='index.php'</script>";
 }

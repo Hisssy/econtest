@@ -28,6 +28,10 @@ mysqli_select_db($hand,"$db_name")or die('数据库无此库');
                     }
                     else if(result.msgCode==='0')
                         alert("队名重复！");
+                    else if(result.msgCode==='2'){
+                        alert('请登录！');
+                        modalClose();
+                    }
                     else
                         alert("服务器错误！");
                 }
