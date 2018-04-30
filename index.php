@@ -15,6 +15,16 @@ session_start();
     <script src="js/jquery.min.js"></script>
 <!--    <script src="https://cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>-->
     <script>
+        function ajaxPost(url) {
+            $.ajax({
+                type:"POST",
+                dataType:"JSON",
+                url:url,
+                data:$('#tform').serialize(),
+                success: alert("提交成功！"),
+                error:alert("提交失败！")
+            })
+        }
         function modalOpen() {
             let obj=document.getElementById('modal1');
             obj.style.display='block';
@@ -23,7 +33,6 @@ session_start();
             let obj=document.getElementById('modal1');
             obj.style.display='none';
         }
-
     </script>
     <style>
         #tform label{
@@ -66,9 +75,9 @@ session_start();
     <div class="mbox">
         <div style="height: 10%"><span onclick="modalClose()" style="height:40px;float: right;font-size: 40px;cursor: pointer ">×</span></div>
         <div style="height:90%;align-items: center;display: flex;justify-content: center">
-            <form id="tform" style="line-height: 30px;width: 70%;" method="post" action="##">
+            <form id="tform" style="line-height: 30px;width: 70%;" method="post" action="#">
                 <label for="sel1">选择比赛</label>
-                <select id="sel1" name="cid">
+                <select id="sel1" name="cname">
                     <option>XXX大赛</option>
                     <option>XXX大赛</option>
                     <option>XXX大赛</option>
@@ -80,9 +89,12 @@ session_start();
                 <label for="input2">所需人数</label>
                 <input id="input2" placeholder="xx" name="num" required>
                 <br>
-                <label></label><button type="submit" style="
+                <label for="input3">队伍介绍</label>
+                <input id="input3" placeholder="xx" name="intro" required>
+                <br>
+                <label></label><button type="button" style="
     margin-left: 28%;
-">提交</button>
+" onclick="ajaxPost('newteam.php')">提交</button>
             </form>
         </div>
     </div>
@@ -413,7 +425,7 @@ session_start();
                     </div>
                 </div>
                 <div class="tw">
-                    <h3 style="margin-top: 0%;">提问</h3>
+                    <h3 style="margin-top: 0;">提问</h3>
                     <textarea class="ban" style="margin-top: -2%" title=""></textarea>
                     <div class="fb">
                         <p><a href="#">发布</a></p>
