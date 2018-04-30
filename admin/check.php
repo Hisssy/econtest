@@ -20,5 +20,5 @@ session_start();
   {
     echo "<script language=\"JavaScript\">
     window.alert('账号或密码错误');
-    window.location.href='login.php';</script>";
+    window.location.href='login.html';</script>";
   }

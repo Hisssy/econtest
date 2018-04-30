@@ -3,7 +3,6 @@ include 'configure.php';
 $handle=mysqli_connect("$db_host","$db_user","$db_pwd")or die('数据库连接失败');
 class MySessionHandler implements SessionHandlerInterface
 {
-
     public function open($savePath, $sessionName)
     {
         global $handle;

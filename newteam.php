@@ -6,12 +6,11 @@
  * Time: 9:37
  */
 
-//
 
 include 'needauth.php';
 $hand=mysqli_connect("$db_host","$db_user","$db_pwd")or die('数据库连接失败');
 mysqli_select_db($hand,"$db_name")or die('数据库无此库');
-if(isset($_POST['cid'])&&isset($_POST['name'])&&isset($_POST['num'])){
+if($_SESSION["user"]&&isset($_POST['name']) && isset($_POST['cid']) &&isset($_POST['num'])){
     $contest=$_POST['cid'];
     $user=$_SESSION['user'];
     $team=$_POST['name'];
@@ -21,7 +20,6 @@ if(isset($_POST['cid'])&&isset($_POST['name'])&&isset($_POST['num'])){
     $result=mysqli_query($hand,$sql);
     $row=mysqli_num_rows($result);
     if($row==0) {
-
         $query2="SELECT uid FROM account_user where user='$user'";
         $r2=mysqli_query($hand,$query2);
         $a2=mysqli_fetch_array($r2,MYSQLI_ASSOC);

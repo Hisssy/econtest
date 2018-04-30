@@ -1,8 +1,8 @@
-
+<!DOCTYPE html>
+<meta charset="UTF-8">
 <html>
 <body>
-<form action="insert.php" method="post"
-enctype="multipart/form-data">
+<form method="post" action="insert.php" enctype="multipart/form-data">
 <label for="file">比赛图片:</label>
 <input type="file" name="file" id="file" />
 <br />
@@ -32,7 +32,7 @@ enctype="multipart/form-data">
   <td height="24" align="left"><input name="num" type="text" id="num" size="20"></td>
   </tr>
   <tr align="center">
-    <td height="24" colspan="2"><input type="submit" name="Submit" value="添加" onClick="return check(form);"></td>
+      <td height="24" colspan="2"><button type="submit">添加</button></td>
   </tr>
 </form>
 <a href='index.php'>返回</a>

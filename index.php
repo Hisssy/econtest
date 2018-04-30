@@ -2,6 +2,8 @@
 include 'session.php';
 session_set_save_handler($handler, true);
 session_start();
+$hand=mysqli_connect("$db_host","$db_user","$db_pwd")or die('数据库连接失败');
+mysqli_select_db($hand,"$db_name")or die('数据库无此库');
 ?>
 
 <!DOCTYPE html>
@@ -12,6 +14,7 @@ session_start();
     <link type="text/css" rel="stylesheet" href="css/index.css">
     <script src="js/index.js"></script>
     <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="js/ellipsis.js"></script>
     <script>
         function ajaxPost(url) {
             $.ajax({
@@ -44,11 +47,36 @@ session_start();
                 type:"POST",
                 dataType:"JSON",
                 url:url,
-                data:$('#tform').serialize(),
-                success: alert("提交成功！"),
-                error:alert("提交失败！")
-            })
+                data:$('#sform').serialize(),
+                success: function (result) {
+                    function htm(tcname,contest,peoplenum) {
+                        return '                <div class="xialatiao1">\n' +
+                            '                    <img src="images/tu.png" class="xialatiao_image">\n' +
+                            '                    <div class="example">\n' +
+                            '                        <h4 class="title">队长：<span>' + tcname + '</span></h4>\n' +
+                            '                        <div class="ec">\n' +
+                            '                            <p>赛事名称：<span>' + contest + '</span></p>\n' +
+                            '                            <p>成员数目：<span>' + peoplenum + '</span></p>\n' +
+                            '                            <p>加入队伍</p>\n' +
+                            '                            <p>关注队伍</p>\n' +
+                            '                        </div>\n' +
+                            '                    </div>\n' +
+                            '                </div>';
+                    }
+                    if (!result.length[0]) {
+                        alert('没有找到相关信息！');
+                    } else {
+                        let obj=$('.xialatiao1');
+                        obj.remove();
+                        let div=$('.xiala1');
+                        for(let i=0;i<result.length;i++){
+                            div.append(htm(result[i].tcname,result[i].contest,result[i].peoplenum));
+                        }
+                    }
+                },
+            });
         }
+        $('#intro').ellipsis({maxWidth:120,maxLine:4});
     </script>
     <style>
         #tform label{
@@ -91,24 +119,25 @@ session_start();
     <div class="mbox">
         <div style="height: 10%"><span onclick="modalClose()" style="height:40px;float: right;font-size: 40px;cursor: pointer ">×</span></div>
         <div style="height:90%;align-items: center;display: flex;justify-content: center">
-            <form id="tform" style="line-height: 30px;width: 70%;" method="post" action="#">
+            <form id="tform" style="line-height: 30px;width: 70%;">
                 <label for="sel1">选择比赛</label>
-                <select id="sel1" name="cname">
-                    <option value="1">XXX大赛</option>
-                    <option value="2">XXY大赛</option>
-                    <option value="3">XXZ大赛</option>
+                <select id="sel1" name="cid">
+                    <?php $sql4="SELECT name,id FROM contest_list";$query=mysqli_query($hand,$sql4)?>
+                    <?php while($row=mysqli_fetch_assoc($query)) :?>
+                        <option value="<?php echo $row['id']?>"><?php echo $row['name']?></option>
+                    <?php endwhile;?>
                 </select>
                 <br>
                 <label for="input1">队伍名</label>
-                <input id="input1" placeholder="xx" name="name" required>
+                <input id="input1" placeholder="黄桷垭通信维修公司" name="name" required>
                 <br>
                 <label for="input2">所需人数</label>
-                <input id="input2" placeholder="xx" name="num" required>
+                <input id="input2" name="num" onkeyup="value=value.replace(/[^\d]/g,'')" placeholder="请输入数字" required>
                 <br>
                 <label for="input3">队伍介绍</label>
-                <input id="input3" placeholder="xx" name="intro" required>
+                <textarea id="input3" placeholder="接各种通信管线维修，没有中间商赚差价" name="intro" required></textarea>
                 <br>
-                <label></label><button type="button" style="
+                <button type="button" style="
     margin-left: 28%;
 " onclick="ajaxPost('newteam.php')">提交</button>
             </form>
@@ -148,12 +177,14 @@ session_start();
     padding-left: 10px;
     height: 70%;
 ">
+                    <form id="sform" style="display:flex;">
                     <input type="text" title="" class="search1" placeholder="请输入比赛或队伍关键词" name="content" required>
                     <select title="" size="1" class="select1" name="method">
                         <option value="1">比赛</option>
                         <option value="2">队伍</option>
                     </select>
                     <img src="images/放大镜2.png" class="fangdajing2" onclick="search('search.php')">
+                    </form>
                 </div>
                 <ul class="fenlei">
                     <li>分类：</li>
@@ -164,78 +195,32 @@ session_start();
                 </ul>
             </div>
             <div class="xiala1">
-                <div class="xialatiao1">
-                    <img src="images/tu.png" class="xialatiao_image">
-                    <div class="example">
-                        <h4 class="title">队长：<span>（队长的ID）</span></h4>
-                        <div class="ec">
-                            <p>赛事名称：<span>（队长的ID）</span></p>
-                            <p>成员数目：<span>（队长的ID）</span></p>
+                <?php
+                 $sql="SELECT tcid,cid,peoplenum FROM contest_team";
+                $q=mysqli_query($hand,$sql);
+                $i=0;
+                         while($obj=mysqli_fetch_assoc($q)){
+                             $l=$obj['tcid'];
+                             $sql1="SELECT user FROM account_user where uid=$l";
+                             $r1=mysqli_query($hand,$sql1);
+                             $obj1=mysqli_fetch_assoc($r1);
+                             $c=$obj['cid'];
+                             $sql2="SELECT name FROM contest_list where id=$c";
+                             $r2=mysqli_query($hand,$sql2);
+                             $obj2=mysqli_fetch_assoc($r2);
+                                    echo "<div class=\"xialatiao1\">
+                    <img src=\"images/tu.png\" class=\"xialatiao_image\">
+                    <div class=\"example\">
+                        <h4 class=\"title\">队长：<span>$obj1[user]</span></h4>
+                        <div class=\"ec\">
+                            <p>赛事名称：<span>$obj2[name]</span></p>
+                            <p>成员数目：<span>$obj[peoplenum]</span></p>
                             <p>加入队伍</p>
                             <p>关注队伍</p>
                         </div>
                     </div>
-                </div>
-                <div class="xialatiao1">
-                    <img src="images/tu.png" class="xialatiao_image">
-                    <div class="example">
-                        <h4 class="title">队长：<span>（队长的ID）</span></h4>
-                        <div class="ec">
-                            <p>赛事名称：<span>（队长的ID）</span></p>
-                            <p>成员数目：<span>（队长的ID）</span></p>
-                            <p>加入队伍</p>
-                            <p>关注队伍</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="xialatiao1">
-                    <img src="images/tu.png" class="xialatiao_image">
-                    <div class="example">
-                        <h4 class="title">队长：<span>（队长的ID）</span></h4>
-                        <div class="ec">
-                            <p>赛事名称：<span>（队长的ID）</span></p>
-                            <p>成员数目：<span>（队长的ID）</span></p>
-                            <p>加入队伍</p>
-                            <p>关注队伍</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="xialatiao1">
-                    <img src="images/tu.png" class="xialatiao_image">
-                    <div class="example">
-                        <h4 class="title">队长：<span>（队长的ID）</span></h4>
-                        <div class="ec">
-                            <p>赛事名称：<span>（队长的ID）</span></p>
-                            <p>成员数目：<span>（队长的ID）</span></p>
-                            <p>加入队伍</p>
-                            <p>关注队伍</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="xialatiao1">
-                    <img src="images/tu.png" class="xialatiao_image">
-                    <div class="example">
-                        <h4 class="title">队长：<span>（队长的ID）</span></h4>
-                        <div class="ec">
-                            <p>赛事名称：<span>（队长的ID）</span></p>
-                            <p>成员数目：<span>（队长的ID）</span></p>
-                            <p>加入队伍</p>
-                            <p>关注队伍</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="xialatiao1">
-                    <img src="images/tu.png" class="xialatiao_image">
-                    <div class="example">
-                        <h4 class="title">队长：<span>（队长的ID）</span></h4>
-                        <div class="ec">
-                            <p>赛事名称：<span>（队长的ID）</span></p>
-                            <p>成员数目：<span>（队长的ID）</span></p>
-                            <p>加入队伍</p>
-                            <p>关注队伍</p>
-                        </div>
-                    </div>
-                </div>
+                </div>";}
+                ?>
             </div>
         </div>
         <div class="right1">
@@ -290,51 +275,18 @@ session_start();
     </div>
     <div class="main2">
         <div class="left2">
+            <?php $sql3="SELECT name,intro,begin,stop FROM contest_list";$query=mysqli_query($hand,$sql3)?>
+            <?php while($row=mysqli_fetch_assoc($query)) :?>
             <div class="example1">
                 <div class="information">
                     <img src="images/tu.png" style="width: 30%" class="image">
-                    <p style="color: #000000;font-size: 18px;padding: 1%;margin-top:0">大赛名称：<span>2018中国旅游商品大赛</span></p>
-                    <p style="color: #000000;font-size: 18px;padding: 1%;margin-right: 3%">大赛主题：本次大赛的书画艺术生活化创意旅游商品主要包括：以陶瓷、金属、纺织品、玻璃、竹木等为材料，以生活中...</p>
-                    <p style="color: #000000;font-size: 18px;padding: 1%;margin-right: 3%">报名时间：<span>["20180320", "20180515"]</span></p>
+                    <p style="color: #000000;font-size: 18px;padding: 1%;margin-top:0">大赛名称：<span><?php echo $row['name']?></span></p>
+                    <p style="color: #000000;font-size: 18px;padding: 1%;margin-right: 3%">大赛主题：<span id="intro"><?php echo $row['intro']?></span></p>
+                    <p style="color: #000000;font-size: 18px;padding: 1%;margin-right: 3%">报名时间：<span><?php echo $row['begin']."到".$row['stop'] ?></span></p>
                     <p style="float: right;margin-right: 4%;color: #000000">更多信息...</p>
                 </div>
             </div>
-            <div class="example1">
-                <div class="information">
-                    <img src="images/tu.png" style="width: 30%" class="image">
-                    <p style="color: #000000;font-size: 18px;padding: 1%;margin-right: 3%">大赛名称：<span>2018中国旅游商品大赛</span></p>
-                    <p style="color: #000000;font-size: 18px;padding: 1%;margin-right: 3%">大赛主题：<span>本次大赛的书画艺术生活化创意旅游商品主要包括：以陶瓷、金属、纺织品、玻璃、竹木等为材料，以生活中...</span></p>
-                    <p style="color: #000000;font-size: 18px;padding: 1%;margin-right: 3%">报名时间：<span>3月20日至5月15日</span></p>
-                    <p style="float: right;margin-right: 4%;color: #000000">更多信息...</p>
-                </div>
-            </div>
-            <div class="example1">
-                <div class="information">
-                    <img src="images/tu.png" style="width: 30%" class="image">
-                    <p style="color: #000000;font-size: 18px;padding: 1%;margin-right: 3%">大赛名称：<span>2018中国旅游商品大赛</span></p>
-                    <p style="color: #000000;font-size: 18px;padding: 1%;margin-right: 3%">大赛主题：<span>本次大赛的书画艺术生活化创意旅游商品主要包括：以陶瓷、金属、纺织品、玻璃、竹木等为材料，以生活中...</span></p>
-                    <p style="color: #000000;font-size: 18px;padding: 1%;margin-right: 3%">报名时间：<span>3月20日至5月15日</span></p>
-                    <p style="float: right;margin-right: 4%;color: #000000">更多信息...</p>
-                </div>
-            </div>
-            <div class="example1">
-                <div class="information">
-                    <img src="images/tu.png" style="width: 30%" class="image">
-                    <p style="color: #000000;font-size: 18px;padding: 1%;margin-right: 3%">大赛名称：<span>2018中国旅游商品大赛</span></p>
-                    <p style="color: #000000;font-size: 18px;padding: 1%;margin-right: 3%">大赛主题：<span>本次大赛的书画艺术生活化创意旅游商品主要包括：以陶瓷、金属、纺织品、玻璃、竹木等为材料，以生活中...</span></p>
-                    <p style="color: #000000;font-size: 18px;padding: 1%;margin-right: 3%">报名时间：<span>3月20日至5月15日</span></p>
-                    <p style="float: right;margin-right: 4%;color: #000000">更多信息...</p>
-                </div>
-            </div>
-            <div class="example1">
-                <div class="information">
-                    <img src="images/tu.png" style="width: 30%" class="image">
-                    <p style="color: #000000;font-size: 18px;padding: 1%;margin-right: 3%">大赛名称：<span>2018中国旅游商品大赛</span></p>
-                    <p style="color: #000000;font-size: 18px;padding: 1%;margin-right: 3%">大赛主题：<span>本次大赛的书画艺术生活化创意旅游商品主要包括：以陶瓷、金属、纺织品、玻璃、竹木等为材料，以生活中...</span></p>
-                    <p style="color: #000000;font-size: 18px;padding: 1%;margin-right: 3%">报名时间：<span>3月20日至5月15日</span></p>
-                    <p style="float: right;margin-right: 4%;color: #000000">更多信息...</p>
-                </div>
-            </div>
+            <?php endwhile;?>
         </div>
         <div class="right2">
             <div class="friends">
