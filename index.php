@@ -14,7 +14,6 @@ mysqli_select_db($hand,"$db_name")or die('数据库无此库');
     <link type="text/css" rel="stylesheet" href="css/index.css">
     <script src="js/index.js"></script>
     <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
-    <script src="js/ellipsis.js"></script>
     <script>
         function ajaxPost(url) {
             $.ajax({
@@ -76,7 +75,6 @@ mysqli_select_db($hand,"$db_name")or die('数据库无此库');
                 },
             });
         }
-        $('#intro').ellipsis({maxWidth:120,maxLine:4});
     </script>
     <style>
         #tform label{
