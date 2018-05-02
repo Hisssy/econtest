@@ -304,6 +304,7 @@ p {
 }
 
 .lv_left {
+	display: none;
 	float: left;
 	width: 10%;
 	height: 100%;
@@ -312,7 +313,7 @@ p {
 
 .lv_right {
 	float: right;
-	width: 89%;
+	width: 100%;
 	height: 100%;
 	background-color: #efefef;
 	opacity: 0.8;

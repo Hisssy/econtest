@@ -66,7 +66,7 @@ mysqli_select_db($hand,"$db_name")or die('数据库无此库');
                             '                    </div>\n' +
                             '                </div>';
                     }
-                    if (!result.length[0]) {
+                    if (result[0]==false) {
                         alert('没有找到相关信息！');
                     } else {
                         let obj=$('.xialatiao1');
@@ -79,6 +79,11 @@ mysqli_select_db($hand,"$db_name")or die('数据库无此库');
                 },
             });
         }
+        $("search1").on('keypress',function(event) {
+            if (event.keyCode===13){
+                $("#fangdajing2").click();
+            }
+        })
     </script>
     <style>
         #tform label{
@@ -146,6 +151,7 @@ mysqli_select_db($hand,"$db_name")or die('数据库无此库');
         </div>
     </div>
 </div>
+<!-- 加队伍验证  -->
 <div style="
     background-color: #1cc3c9;
 ">
@@ -179,7 +185,7 @@ mysqli_select_db($hand,"$db_name")or die('数据库无此库');
     padding-left: 10px;
     height: 70%;
 ">
-                    <form id="sform" style="display:flex;">
+                    <form id="sform" style="display:flex;" onsubmit="return false">
                     <input type="text" title="" class="search1" placeholder="请输入比赛或队伍关键词" name="content" required>
                     <select title="" size="1" class="select1" name="method">
                         <option value="1">比赛</option>
@@ -291,6 +297,7 @@ mysqli_select_db($hand,"$db_name")or die('数据库无此库');
             <?php endwhile;?>
         </div>
         <div class="right2">
+<!--     我加入的队伍       -->
             <div class="friends">
                 <ul class="ful" style="
     padding-left: 5%;
