@@ -2,12 +2,13 @@
 include 'session.php';
 session_set_save_handler($handler, true);
 session_start();
-$hand=mysqli_connect("$db_host","$db_user","$db_pwd")or die('数据库连接失败');
-mysqli_select_db($hand,"$db_name")or die('数据库无此库');
+$hand = mysqli_connect("$db_host", "$db_user", "$db_pwd") or die('数据库连接失败');
+mysqli_select_db($hand, "$db_name") or die('数据库无此库');
 ?>
 
 <!DOCTYPE html>
-<html><head>
+<html>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>重邮e站</title>
@@ -17,18 +18,18 @@ mysqli_select_db($hand,"$db_name")or die('数据库无此库');
     <script>
         function ajaxPost(url) {
             $.ajax({
-                type:"POST",
-                dataType:"JSON",
-                url:url,
-                data:$('#tform').serialize(),
-                success: function (result){
-                    if(result.msgCode==='1'){
+                type: "POST",
+                dataType: "JSON",
+                url: url,
+                data: $('#tform').serialize(),
+                success: function (result) {
+                    if (result.msgCode === '1') {
                         alert("提交成功！");
                         modalClose();
                     }
-                    else if(result.msgCode==='0')
+                    else if (result.msgCode === '0')
                         alert("队名重复！");
-                    else if(result.msgCode==='2'){
+                    else if (result.msgCode === '2') {
                         alert('请登录！');
                         modalClose();
                     }
@@ -37,22 +38,25 @@ mysqli_select_db($hand,"$db_name")or die('数据库无此库');
                 }
             })
         }
+
         function modalOpen() {
-            let obj=document.getElementById('modal1');
-            obj.style.display='block';
+            let obj = document.getElementById('modal1');
+            obj.style.display = 'block';
         }
+
         function modalClose() {
-            let obj=document.getElementById('modal1');
-            obj.style.display='none';
+            let obj = document.getElementById('modal1');
+            obj.style.display = 'none';
         }
+
         function search(url) {
             $.ajax({
-                type:"POST",
-                dataType:"JSON",
-                url:url,
-                data:$('#sform').serialize(),
+                type: "POST",
+                dataType: "JSON",
+                url: url,
+                data: $('#sform').serialize(),
                 success: function (result) {
-                    function htm(tcname,contest,peoplenum) {
+                    function htm(tcname, contest, peoplenum) {
                         return '                <div class="xialatiao1">\n' +
                             '                    <img src="images/tu.png" class="xialatiao_image">\n' +
                             '                    <div class="example">\n' +
@@ -66,44 +70,49 @@ mysqli_select_db($hand,"$db_name")or die('数据库无此库');
                             '                    </div>\n' +
                             '                </div>';
                     }
-                    if (result[0]==false) {
+
+                    if (result[0] == false) {
                         alert('没有找到相关信息！');
                     } else {
-                        let obj=$('.xialatiao1');
+                        let obj = $('.xialatiao1');
                         obj.remove();
-                        let div=$('.xiala1');
-                        for(let i=0;i<result.length;i++){
-                            div.append(htm(result[i].tcname,result[i].contest,result[i].peoplenum));
+                        let div = $('.xiala1');
+                        for (let i = 0; i < result.length; i++) {
+                            div.append(htm(result[i].tcname, result[i].contest, result[i].peoplenum));
                         }
                     }
                 },
             });
         }
-        $("search1").on('keypress',function(event) {
-            if (event.keyCode===13){
+
+        $("search1").on('keypress', function (event) {
+            if (event.keyCode === 13) {
                 $("#fangdajing2").click();
             }
         })
     </script>
     <style>
-        #tform label{
+        #tform label {
             float: left;
             margin-right: 3%;
             width: 25%;
             text-align: right;
         }
-        #tform input{
+
+        #tform input {
             height: 20px;
         }
-        #modal1{
+
+        #modal1 {
             display: none;
-            background:rgba(0,0,0,0.60);
+            background: rgba(0, 0, 0, 0.60);
             z-index: 998;
             position: absolute;
             height: 100%;
             width: 100%;
         }
-        #modal1 .mbox{
+
+        #modal1 .mbox {
             z-index: 999;
             background: white;
             box-shadow: black;
@@ -124,15 +133,17 @@ mysqli_select_db($hand,"$db_name")or die('数据库无此库');
 <body style="">
 <div id="modal1">
     <div class="mbox">
-        <div style="height: 10%"><span onclick="modalClose()" style="height:40px;float: right;font-size: 40px;cursor: pointer ">×</span></div>
+        <div style="height: 10%"><span onclick="modalClose()"
+                                       style="height:40px;float: right;font-size: 40px;cursor: pointer ">×</span></div>
         <div style="height:90%;align-items: center;display: flex;justify-content: center">
             <form id="tform" style="line-height: 30px;width: 70%;">
                 <label for="sel1">选择比赛</label>
                 <select id="sel1" name="cid">
-                    <?php $sql4="SELECT name,id FROM contest_list";$query=mysqli_query($hand,$sql4)?>
-                    <?php while($row=mysqli_fetch_assoc($query)) :?>
-                        <option value="<?php echo $row['id']?>"><?php echo $row['name']?></option>
-                    <?php endwhile;?>
+                    <?php $sql4 = "SELECT name,id FROM contest_list";
+                    $query = mysqli_query($hand, $sql4) ?>
+                    <?php while ($row = mysqli_fetch_assoc($query)) : ?>
+                        <option value="<?php echo $row['id'] ?>"><?php echo $row['name'] ?></option>
+                    <?php endwhile; ?>
                 </select>
                 <br>
                 <label for="input1">队伍名</label>
@@ -146,7 +157,8 @@ mysqli_select_db($hand,"$db_name")or die('数据库无此库');
                 <br>
                 <button type="button" style="
     margin-left: 28%;
-" onclick="ajaxPost('newteam.php')">提交</button>
+" onclick="ajaxPost('newteam.php')">提交
+                </button>
             </form>
         </div>
     </div>
@@ -168,7 +180,7 @@ mysqli_select_db($hand,"$db_name")or die('数据库无此库');
                 <li>大事记</li>
                 <li>重邮图库</li>
                 <li>更多相关</li>
-                <li> <input type="text" class="search" title=""> <img src="images/放大镜.png" class="fangdajing"> </li>
+                <li><input type="text" class="search" title=""> <img src="images/放大镜.png" class="fangdajing"></li>
             </ul>
         </div>
     </div>
@@ -186,12 +198,12 @@ mysqli_select_db($hand,"$db_name")or die('数据库无此库');
     height: 70%;
 ">
                     <form id="sform" style="display:flex;" onsubmit="return false">
-                    <input type="text" title="" class="search1" placeholder="请输入比赛或队伍关键词" name="content" required>
-                    <select title="" size="1" class="select1" name="method">
-                        <option value="1">比赛</option>
-                        <option value="2">队伍</option>
-                    </select>
-                    <img src="images/放大镜2.png" class="fangdajing2" onclick="search('search.php')">
+                        <input type="text" title="" class="search1" placeholder="请输入比赛或队伍关键词" name="content" required>
+                        <select title="" size="1" class="select1" name="method">
+                            <option value="1">比赛</option>
+                            <option value="2">队伍</option>
+                        </select>
+                        <img src="images/放大镜2.png" class="fangdajing2" onclick="search('search.php')">
                     </form>
                 </div>
                 <ul class="fenlei">
@@ -204,19 +216,19 @@ mysqli_select_db($hand,"$db_name")or die('数据库无此库');
             </div>
             <div class="xiala1">
                 <?php
-                 $sql="SELECT tcid,cid,peoplenum FROM contest_team";
-                $q=mysqli_query($hand,$sql);
-                $i=0;
-                         while($obj=mysqli_fetch_assoc($q)){
-                             $l=$obj['tcid'];
-                             $sql1="SELECT user FROM account_user where uid=$l";
-                             $r1=mysqli_query($hand,$sql1);
-                             $obj1=mysqli_fetch_assoc($r1);
-                             $c=$obj['cid'];
-                             $sql2="SELECT name FROM contest_list where id=$c";
-                             $r2=mysqli_query($hand,$sql2);
-                             $obj2=mysqli_fetch_assoc($r2);
-                                    echo "<div class=\"xialatiao1\">
+                $sql = "SELECT tcid,cid,peoplenum FROM contest_team";
+                $q = mysqli_query($hand, $sql);
+                $i = 0;
+                while ($obj = mysqli_fetch_assoc($q)) {
+                    $l = $obj['tcid'];
+                    $sql1 = "SELECT user FROM account_user where uid=$l";
+                    $r1 = mysqli_query($hand, $sql1);
+                    $obj1 = mysqli_fetch_assoc($r1);
+                    $c = $obj['cid'];
+                    $sql2 = "SELECT name FROM contest_list where id=$c";
+                    $r2 = mysqli_query($hand, $sql2);
+                    $obj2 = mysqli_fetch_assoc($r2);
+                    echo "<div class=\"xialatiao1\">
                     <img src=\"images/tu.png\" class=\"xialatiao_image\">
                     <div class=\"example\">
                         <h4 class=\"title\">队长：<span>$obj1[user]</span></h4>
@@ -227,7 +239,8 @@ mysqli_select_db($hand,"$db_name")or die('数据库无此库');
                             <p>关注队伍</p>
                         </div>
                     </div>
-                </div>";}
+                </div>";
+                }
                 ?>
             </div>
         </div>
@@ -260,8 +273,10 @@ mysqli_select_db($hand,"$db_name")or die('数据库无此库');
             <div class="block_btn">
                 <div class="btn" style="
 ">
-                    <button class="dec" style="margin-bottom: 1.5%;background-color: #f6868b;width: 100%;" onclick="modalOpen()">创建队伍</button>
-                    <button class="dec" style="background-color: #f6bd80;width: 100%;">我的组队</button>
+                    <button class="dec" style="margin-bottom: 1.5%;background-color: #f6868b;width: 100%;"
+                            onclick="modalOpen()">创建队伍
+                    </button>
+                    <button class="dec" style="background-color: #f6bd80;width: 100%;">管理队伍</button>
                 </div>
                 <div class="btn">
                     <button onclick="window.location.href='<?php
@@ -275,7 +290,7 @@ mysqli_select_db($hand,"$db_name")or die('数据库无此库');
                         else echo "登录";
                         ?></button>
                     <button class="dec" style="background-color: #8dd16f;">个人<br>中心</button>
-                    <button class="dec" style="background-color: #999999; ">问题<br>反馈</button>
+                    <button class="dec" style="background-color: #999999; ">找回<br>密码</button>
                     <button class="dec" style="background-color: #c2dc49;">关于<br>我们</button>
                 </div>
             </div>
@@ -283,57 +298,26 @@ mysqli_select_db($hand,"$db_name")or die('数据库无此库');
     </div>
     <div class="main2">
         <div class="left2">
-            <?php $sql3="SELECT name,intro,begin,stop FROM contest_list";$query=mysqli_query($hand,$sql3)?>
-            <?php while($row=mysqli_fetch_assoc($query)) :?>
-            <div class="example1">
-                <div class="information">
-                    <img src="images/tu.png" style="width: 30%" class="image">
-                    <p style="color: #000000;font-size: 18px;padding: 1%;margin-top:0">大赛名称：<span><?php echo $row['name']?></span></p>
-                    <p style="color: #000000;font-size: 18px;padding: 1%;margin-right: 3%">大赛主题：<span id="intro"><?php echo $row['intro']?></span></p>
-                    <p style="color: #000000;font-size: 18px;padding: 1%;margin-right: 3%">报名时间：<span><?php echo $row['begin']."到".$row['stop'] ?></span></p>
-                    <p style="float: right;margin-right: 4%;color: #000000">更多信息...</p>
+            <?php $sql3 = "SELECT name,intro,begin,stop FROM contest_list";
+            $query = mysqli_query($hand, $sql3) ?>
+            <?php while ($row = mysqli_fetch_assoc($query)) : ?>
+                <div class="example1">
+                    <div class="information">
+                        <img src="images/tu.png" style="width: 30%" class="image">
+                        <p style="color: #000000;font-size: 18px;padding: 1%;margin-top:0">
+                            大赛名称：<span><?php echo $row['name'] ?></span></p>
+                        <p style="color: #000000;font-size: 18px;padding: 1%;margin-right: 3%">大赛主题：<span
+                                    id="intro"><?php echo $row['intro'] ?></span></p>
+                        <p style="color: #000000;font-size: 18px;padding: 1%;margin-right: 3%">
+                            报名时间：<span><?php echo $row['begin'] . "到" . $row['stop'] ?></span></p>
+                        <p style="float: right;margin-right: 4%;color: #000000">更多信息...</p>
+                    </div>
                 </div>
-            </div>
-            <?php endwhile;?>
+            <?php endwhile; ?>
         </div>
         <div class="right2">
-<!--     我加入的队伍       -->
+            <!--     我加入的队伍       -->
             <div class="friends">
-                <ul class="ful" style="
-    padding-left: 5%;
-    padding-right: 5%;
-">
-                    <li>
-                        <div class="a111">
-                            <img src="images/789.png">
-                            <p>ID:(此人的名字) <span style="float: right">删除好友</span><br><br>个人说明：</p>
-                        </div> </li>
-                    <li>
-                        <div class="a111">
-                            <img src="images/789.png">
-                            <p>ID:(此人的名字)<span style="float: right">删除好友</span><br><br>个人说明：</p>
-                        </div> </li>
-                    <li>
-                        <div class="a111">
-                            <img src="images/789.png">
-                            <p>ID:(此人的名字) <span style="float: right">删除好友</span><br><br>个人说明：</p>
-                        </div> </li>
-                    <li>
-                        <div class="a111">
-                            <img src="images/789.png">
-                            <p>ID:(此人的名字) <span style="float: right">删除好友</span><br><br>个人说明：</p>
-                        </div> </li>
-                    <li>
-                        <div class="a111">
-                            <img src="images/789.png">
-                            <p>ID:(此人的名字) <span style="float: right">删除好友</span><br><br>个人说明：</p>
-                        </div> </li>
-                    <li>
-                        <div class="a111">
-                            <img src="images/789.png">
-                            <p>ID:(此人的名字) <span style="float: right">删除好友</span><br><br>个人说明：</p>
-                        </div> </li>
-                </ul>
             </div>
             <div class="redian">
                 <div style="margin-top: 2%">
@@ -372,11 +356,13 @@ mysqli_select_db($hand,"$db_name")or die('数据库无此库');
             <div class="lv_left">
                 <div class="lt" onmouseover="a('.lt')" onmouseout="b('.lt')" style="">
                     <img src="images/lt.png" style="opacity: 1;">
-                    <p style="text-align: center; opacity: 0; transition: transform 1s; transform: translate(0px, 240%);">比赛论坛</p>
+                    <p style="text-align: center; opacity: 0; transition: transform 1s; transform: translate(0px, 240%);">
+                        比赛论坛</p>
                 </div>
                 <div class="wt" onmouseover="a('.wt')" onmouseout="b('.wt')" style="">
                     <img src="images/wt.png" style="opacity: 1;">
-                    <p style="text-align: center; opacity: 0; transition: transform 1s; transform: translate(0px, 240%);">我的问题</p>
+                    <p style="text-align: center; opacity: 0; transition: transform 1s; transform: translate(0px, 240%);">
+                        我的问题</p>
                 </div>
             </div>
             <div class="lv_right">
@@ -421,19 +407,21 @@ mysqli_select_db($hand,"$db_name")or die('数据库无此库');
             <ul style="
     margin-top: 0;
 ">
-                <li> <a>版权所有@重邮e站</a> </li>
-                <li> <a>地址：重庆南岸区崇文路2号</a> </li>
-                <li> <a>邮编：xxxxxxx</a> </li>
-                <li> <a>邮箱：xxxxxxx</a> </li>
-                <li> <a>渝ICPxxxxxxx</a> </li>
+                <li><a>版权所有@重邮e站</a></li>
+                <li><a>地址：重庆南岸区崇文路2号</a></li>
+                <li><a>邮编：xxxxxxx</a></li>
+                <li><a>邮箱：xxxxxxx</a></li>
+                <li><a>渝ICPxxxxxxx</a></li>
             </ul>
         </div>
         <!--qqwxxl-->
-        <p class="bq_lx"> <img src="images/qqt.jpg"> <img src="images/wxt.jpg"> <a href="https://weibo.com/cyez"><img src="images/xlt.jpg"></a> </p>
+        <p class="bq_lx"><img src="images/qqt.jpg"> <img src="images/wxt.jpg"> <a href="https://weibo.com/cyez"><img
+                        src="images/xlt.jpg"></a></p>
         <div class="kk">
             <img src="images/QQ图片20180409175117.jpg" style="width: 80%">
         </div>
     </div>
 </div>
 
-</body></html>
+</body>
+</html>

@@ -1,501 +1,501 @@
 @charset "utf-8";
 
 .ec {
-	display: flex;
-	justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
 }
 
 .ec p {
-	margin-bottom: 0;
+    margin-bottom: 0;
 }
 
 .btn {
-	width: 48%;
+    width: 48%;
 }
 
 .right2 .ful img {
-	top: 8px;
-	width: 50px;
-	height: 50px;
-	float: left;
-	margin-right: 5px;
+    top: 8px;
+    width: 50px;
+    height: 50px;
+    float: left;
+    margin-right: 5px;
 }
 
 .header {
-	align-items: center;
-	background-clip: padding-box;
-	background-color: #1cc3c9;
-	height: 60px;
-	display: flex;
-	justify-content: space-between;
+    align-items: center;
+    background-clip: padding-box;
+    background-color: #1cc3c9;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .logo {
-	height: 75%;
-	cursor: pointer;
+    height: 75%;
+    cursor: pointer;
 }
 
 .daohang {
-	display: flex;
-	padding-left: 0;
-	margin: 0;
-	cursor: pointer;
-	height: 30px;
+    display: flex;
+    padding-left: 0;
+    margin: 0;
+    cursor: pointer;
+    height: 30px;
 }
 
 .daohang li {
-	list-style: none;
-	float: left;
+    list-style: none;
+    float: left;
 }
 
 .left1 li {
-	color: white;
-	text-decoration: none;
-	list-style: none;
-	float: left;
-	margin-left: 2%;
+    color: white;
+    text-decoration: none;
+    list-style: none;
+    float: left;
+    margin-left: 2%;
 }
 
 .header li {
-	display: flex;
-	margin-left: 6px;
-	list-style: none;
+    display: flex;
+    margin-left: 6px;
+    list-style: none;
 }
 
 .search {
-	justify-content: space-between;
-	display: flex;
-	height: 15%;
-	font-size: 18px;
-	padding: 13px;
+    justify-content: space-between;
+    display: flex;
+    height: 15%;
+    font-size: 18px;
+    padding: 13px;
 }
 
 .search2 {
-	width: 100%;
-	justify-content: space-between;
-	display: flex;
-	height: 15%;
-	align-items: center;
+    width: 100%;
+    justify-content: space-between;
+    display: flex;
+    height: 15%;
+    align-items: center;
 }
 
 .fangdajing {
 }
 
 body {
-	width: 100%;
-	margin: 0 auto;
-	background-image: url(../images/背景5.jpg);
-	background-size: 100% 100%;
-	padding-top: 0;
+    width: 100%;
+    margin: 0 auto;
+    background-image: url(../images/背景5.jpg);
+    background-size: 100% 100%;
+    padding-top: 0;
 }
 
 .container {
-	max-width: 1140px;
-	width: 100%;
-	overflow: hidden;
-	margin: 0 auto;
-	min-width: 755px;
-	box-sizing: border-box;
+    max-width: 1140px;
+    width: 100%;
+    overflow: hidden;
+    margin: 0 auto;
+    min-width: 755px;
+    box-sizing: border-box;
 }
 
 .main1 {
-	display: flex;
-	justify-content: space-between;
-	margin-bottom: 10px;
-	height: 363px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    height: 363px;
 }
 
 .left1 {
-	display: flex;
-	flex-direction: column;
-	background-image: url(../images/青年.png);
-	background-size: 100% 100%;
-	width: 64%;
-	height: 100%;
-	align-items: center;
+    display: flex;
+    flex-direction: column;
+    background-image: url(../images/青年.png);
+    background-size: 100% 100%;
+    width: 64%;
+    height: 100%;
+    align-items: center;
 }
 
 .search1 {
-	font-size: 14px;
-	line-height: 26px;
+    font-size: 14px;
+    line-height: 26px;
 }
 
 .select1 {
-	font-size: 10.5px;
+    font-size: 10.5px;
 }
 
 .fangdajing2 {
-	cursor: pointer;
+    cursor: pointer;
 }
 
 .fenlei {
-	color: aliceblue;
+    color: aliceblue;
 }
 
 .xiala1 {
-	margin-top: 3%;
-	height: 70%;
-	width: 95%;
-	overflow-y: auto;
+    margin-top: 3%;
+    height: 70%;
+    width: 95%;
+    overflow-y: auto;
 }
 
 .xialatiao1 {
-	margin-bottom: 4%;
-	display: flex;
-	height: 53.53px;
+    margin-bottom: 4%;
+    display: flex;
+    height: 53.53px;
 }
 
 .example {
-	background-color: #4F4F4F;
-	opacity: 0.5;
-	width: 89%;
+    background-color: #4F4F4F;
+    opacity: 0.5;
+    width: 89%;
 }
 
 .title {
-	margin-top: 0%;
-	margin-left: 2%;
-	margin-bottom: 0;
-	color: aliceblue;
+    margin-top: 0%;
+    margin-left: 2%;
+    margin-bottom: 0;
+    color: aliceblue;
 }
 
 .xialatiao_image {
-	height: 100%;
-	position: relative;
+    height: 100%;
+    position: relative;
 }
 
 p {
-	font-size: 14px;
-	color: aliceblue;
+    font-size: 14px;
+    color: aliceblue;
 }
 
 .right1 {
-	flex-direction: column;
-	display: flex;
-	justify-content: space-between;
-	width: 35%;
-	border-radius: 5px;
+    flex-direction: column;
+    display: flex;
+    justify-content: space-between;
+    width: 35%;
+    border-radius: 5px;
 }
 
 .touxiang {
-	float:  right;
-	height: 100%;
+    float: right;
+    height: 100%;
 }
 
 .block_btn {
-	display: flex;
-	justify-content: space-between;
-	width: 100%;
-	height: 49.5%;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 49.5%;
 }
 
 .dec {
-	font-size: 20px;
-	font-weight: 500;
-	color: white;
-	vertical-align: top;
-	text-decoration: none;
-	display: inline-block;
-	border: none;
-	text-shadow: 0.05em 0.05em 0.05em black;
-	height: 48.5%;
-	width: 48%;
-	text-align: center;
-	border-radius: 5px;
-	cursor: pointer;
+    font-size: 20px;
+    font-weight: 500;
+    color: white;
+    vertical-align: top;
+    text-decoration: none;
+    display: inline-block;
+    border: none;
+    text-shadow: 0.05em 0.05em 0.05em black;
+    height: 48.5%;
+    width: 48%;
+    text-align: center;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 .pic {
-	margin-top: 18%;
-	box-shadow: 0.2px 0.2px 0.2px #d6d4ce;
+    margin-top: 18%;
+    box-shadow: 0.2px 0.2px 0.2px #d6d4ce;
 }
 
 .main2 {
-	display: flex;
-	height: 825px;
-	margin-bottom: 10px;
+    display: flex;
+    height: 825px;
+    margin-bottom: 10px;
 }
 
 .left2 {
-	width: 64%;
-	margin-right: 1%;
-	overflow-y: auto;
-	background-color: aliceblue;
-	opacity: 0.9;
+    width: 64%;
+    margin-right: 1%;
+    overflow-y: auto;
+    background-color: aliceblue;
+    opacity: 0.9;
 }
 
 .image {
-	margin-right: 2%;
-	float: left;
-	position: relative;
-	max-height: 100%;
-	max-width: 100%;
+    margin-right: 2%;
+    float: left;
+    position: relative;
+    max-height: 100%;
+    max-width: 100%;
 }
 
 .information {
-	position: relative;
-	width: 100%;
-	height: 100%;
+    position: relative;
+    width: 100%;
+    height: 100%;
 }
 
 .information p {
-	margin-top: 5px;
-	margin-bottom: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .example1 {
-	height: 210px;
-	margin-bottom: 5px;
+    height: 210px;
+    margin-bottom: 5px;
 }
 
 .right2 {
-	display: flex;
-	width: 35%;
-	flex-direction: column;
-	justify-content: space-between;
+    display: flex;
+    width: 35%;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .friends {
-	border-radius: 0.3em;
-	float: right;
-	height: 48%;
-	background: #FFFFFF;
+    border-radius: 0.3em;
+    float: right;
+    height: 48%;
+    background: #FFFFFF;
 }
 
 .ful li {
-	list-style: none;
-	margin-right: 0;
-	margin-left: 0;
-	width: 100%;
-	height: 50px;
-	position: relative;
-	margin-top: 0;
-	cursor: pointer;
+    list-style: none;
+    margin-right: 0;
+    margin-left: 0;
+    width: 100%;
+    height: 50px;
+    position: relative;
+    margin-top: 0;
+    cursor: pointer;
 }
 
 .ful li p {
-	color: #000000;
+    color: #000000;
 }
 
 .ful li:hover {
-	background-color: #A3A3A3;
+    background-color: #A3A3A3;
 }
 
 .friends p {
-	font-size: 13px;
-	margin-left: 50px;
+    font-size: 13px;
+    margin-left: 50px;
 }
 
 .redian {
-	height: 23%;
-	border-radius: 0.3em;
-	background-color: aliceblue;
+    height: 23%;
+    border-radius: 0.3em;
+    background-color: aliceblue;
 }
 
 .img-right {
-	height: 25%;
+    height: 25%;
 }
 
 .lv {
-	display: flex;
-	justify-content: space-between;
-	height: 220px;
-	margin: 0 auto;
-	margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    height: 220px;
+    margin: 0 auto;
+    margin-bottom: 15px;
 }
 
 .lv_left {
-	display: none;
-	float: left;
-	width: 10%;
-	height: 100%;
-	position: relative;
+    display: none;
+    float: left;
+    width: 10%;
+    height: 100%;
+    position: relative;
 }
 
 .lv_right {
-	float: right;
-	width: 100%;
-	height: 100%;
-	background-color: #efefef;
-	opacity: 0.8;
+    float: right;
+    width: 100%;
+    height: 100%;
+    background-color: #efefef;
+    opacity: 0.8;
 }
 
 .lt {
-	height: 45.4545%;
-	cursor: pointer;
+    height: 45.4545%;
+    cursor: pointer;
 }
 
 .lt img {
-	width: 100%;
-	height: 100%;
+    width: 100%;
+    height: 100%;
 }
 
 .lt p {
-	text-align: center;
-	font-size: 120%;
-	opacity: 0;
-	color: #000;
-	font-weight: bold;
+    text-align: center;
+    font-size: 120%;
+    opacity: 0;
+    color: #000;
+    font-weight: bold;
 }
 
 .wt p {
-	text-align: center;
-	font-size: 120%;
-	opacity: 0;
-	color: #000;
-	font-weight: bold;
+    text-align: center;
+    font-size: 120%;
+    opacity: 0;
+    color: #000;
+    font-weight: bold;
 }
 
 .wt {
-	height: 45.4545%;
-	position: absolute;
-	bottom: 0;
-	cursor: pointer;
+    height: 45.4545%;
+    position: absolute;
+    bottom: 0;
+    cursor: pointer;
 }
 
 .wt img {
-	width: 100%;
-	height: 100%;
+    width: 100%;
+    height: 100%;
 }
 
 .wd {
-	float: left;
-	width: 59.775%;
-	height: 92%;
-	margin-left: 2.24%;
-	margin-top: 1%;
-	position: relative;
+    float: left;
+    width: 59.775%;
+    height: 92%;
+    margin-left: 2.24%;
+    margin-top: 1%;
+    position: relative;
 }
 
 .wd li {
-	font-size: 90%;
+    font-size: 90%;
 }
 
 .wd span {
-	float: right;
-	position: absolute;
-	right: 0;
+    float: right;
+    position: absolute;
+    right: 0;
 }
 
 .wd a {
-	text-decoration: none;
-	color: black;
+    text-decoration: none;
+    color: black;
 }
 
 .wd ul a:hover {
-	color: #646860;
+    color: #646860;
 }
 
-.syy,.xyy {
-	width: 7%;
-	height: 10%;
-	background-color: #ffffff;
+.syy, .xyy {
+    width: 7%;
+    height: 10%;
+    background-color: #ffffff;
 }
 
 .syy {
-	float: left;
-	margin-left: 28%;
+    float: left;
+    margin-left: 28%;
 }
 
 .xyy {
-	float: right;
-	margin-right: 28%;
+    float: right;
+    margin-right: 28%;
 }
 
-.syy a,.xyy a {
-	color: #bcbac1;
-	text-decoration: none;
-	font-size: 70%;
+.syy a, .xyy a {
+    color: #bcbac1;
+    text-decoration: none;
+    font-size: 70%;
 }
 
-.syy a:hover,.xyy a:hover {
-	box-shadow: 0.2px 0.2px 0.2px #d6d4ce;
-	color: #a9afa1;
+.syy a:hover, .xyy a:hover {
+    box-shadow: 0.2px 0.2px 0.2px #d6d4ce;
+    color: #a9afa1;
 }
 
 .ys {
-	float: left;
-	margin-left: 12%;
-	font-size: 80%;
+    float: left;
+    margin-left: 12%;
+    font-size: 80%;
 }
 
 .tw {
-	float: right;
-	width: 30.561%;
-	height: 92%;
-	margin-right: 2.24%;
-	margin-top: 1%;
+    float: right;
+    width: 30.561%;
+    height: 92%;
+    margin-right: 2.24%;
+    margin-top: 1%;
 }
 
 .ban {
-	width: 98%;
-	height: 58.762%;
-	background-color: #fff;
-	opacity: 1;
-	margin-top: 2%;
-	box-shadow: 2px 2px 2px #acacac;
+    width: 98%;
+    height: 58.762%;
+    background-color: #fff;
+    opacity: 1;
+    margin-top: 2%;
+    box-shadow: 2px 2px 2px #acacac;
 }
 
 .fb {
-	width: 20%;
-	height: 12%;
-	border-radius: 2px;
-	background-color: #1cc3c9;
-	box-shadow: 1.5px 1.5px 1px #3facb1;
-	margin-left: 78%;
-	margin-top: 4%;
+    width: 20%;
+    height: 12%;
+    border-radius: 2px;
+    background-color: #1cc3c9;
+    box-shadow: 1.5px 1.5px 1px #3facb1;
+    margin-left: 78%;
+    margin-top: 4%;
 }
 
 .fb p {
-	text-align: center;
+    text-align: center;
 }
 
 .fb a {
-	text-decoration: none;
+    text-decoration: none;
 }
 
 .bq {
-	display: flex;
-	height: 120px;
-	justify-content: space-between;
-	align-items: center;
-	background: #1cc3c9;
-	position: relative;
+    display: flex;
+    height: 120px;
+    justify-content: space-between;
+    align-items: center;
+    background: #1cc3c9;
+    position: relative;
 }
 
 .bq_ul {
-	width: 50%;
-	height: 86px;
+    width: 50%;
+    height: 86px;
 }
 
 .bq_ul li {
-	width: 168px;
-	float: left;
-	font-size: 12px;
-	line-height: 30px;
-	color: white;
+    width: 168px;
+    float: left;
+    font-size: 12px;
+    line-height: 30px;
+    color: white;
 }
 
 .bq_lx {
-	width: 40%;
-	height: 50px;
-	left: 720px;
-	top: 58px;
+    width: 40%;
+    height: 50px;
+    left: 720px;
+    top: 58px;
 }
 
 .bq_lx img {
-	margin-right: 40px;
-	cursor: pointer;
-	width: 12%
+    margin-right: 40px;
+    cursor: pointer;
+    width: 12%
 }
 
 .kk {
-	cursor: pointer;
+    cursor: pointer;
 }
 
 .denglu {
-	border-radius: 0.3em;
-	display: flex;
-	height: 48%;
-	justify-content: space-between;
-	background-color: aliceblue;
+    border-radius: 0.3em;
+    display: flex;
+    height: 48%;
+    justify-content: space-between;
+    background-color: aliceblue;
 }

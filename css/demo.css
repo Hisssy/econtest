@@ -21,14 +21,16 @@ a:hover, a:focus {
 }
 
 .container {
+	display:  flex;
 	margin: 0 auto;
 	text-align: center;
 	overflow: hidden;
+	justify-content:  center;
 }
 
 .content {
 	font-size: 150%;
-	padding: 3em 0;
+	padding-top: 3em;
 }
 
 .content h2 {
