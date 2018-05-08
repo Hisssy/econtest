@@ -13,133 +13,8 @@ mysqli_select_db($hand, "$db_name") or die('数据库无此库');
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>重邮e站</title>
     <link type="text/css" rel="stylesheet" href="css/index.css">
-    <script src="js/index.js"></script>
     <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
-    <script>
-        function ajaxPost(url) {
-            $.ajax({
-                type: "POST",
-                dataType: "JSON",
-                url: url,
-                data: $('#tform').serialize(),
-                success: function (result) {
-                    if (result.msgCode === '1') {
-                        alert("提交成功！");
-                        modalClose();
-                    }
-                    else if (result.msgCode === '0')
-                        alert("队名重复！");
-                    else if (result.msgCode === '2') {
-                        alert('请登录！');
-                        modalClose();
-                    }
-                    else
-                        alert("服务器错误！");
-                }
-            })
-        }
-
-        function modalOpen() {
-            let obj = document.getElementById('modal1');
-            obj.style.display = 'block';
-        }
-
-        function modalClose() {
-            let obj = document.getElementById('modal1');
-            obj.style.display = 'none';
-        }
-
-        function bbsPost(url) {
-            $.ajax({
-                type:"POST",
-                dataType:"JSON",
-                url:url,
-                data:$('#tw1').serialize(),
-                success:function (result) {
-                    if (result.msgcode===1)
-                        alert("提交成功");
-                }
-            })
-        }
-
-        function bbsReply() {
-
-        }
-
-        function search(url) {
-            $.ajax({
-                type: "POST",
-                dataType: "JSON",
-                url: url,
-                data: $('#sform').serialize(),
-                success: function (result) {
-                    function htm(tcname, contest, peoplenum) {
-                        return '                <div class="xialatiao1">\n' +
-                            '                    <img src="images/tu.png" class="xialatiao_image">\n' +
-                            '                    <div class="example">\n' +
-                            '                        <h4 class="title">队长：<span>' + tcname + '</span></h4>\n' +
-                            '                        <div class="ec">\n' +
-                            '                            <p>赛事名称：<span>' + contest + '</span></p>\n' +
-                            '                            <p>成员数目：<span>' + peoplenum + '</span></p>\n' +
-                            '                            <p>加入队伍</p>\n' +
-                            '                            <p>关注队伍</p>\n' +
-                            '                        </div>\n' +
-                            '                    </div>\n' +
-                            '                </div>';
-                    }
-
-                    if (result[0] == false) {
-                        alert('没有找到相关信息！');
-                    } else {
-                        let obj = $('.xialatiao1');
-                        obj.remove();
-                        let div = $('.xiala1');
-                        for (let i = 0; i < result.length; i++) {
-                            div.append(htm(result[i].tcname, result[i].contest, result[i].peoplenum));
-                        }
-                    }
-                },
-            });
-        }
-    </script>
-    <style>
-        #tform label {
-            float: left;
-            margin-right: 3%;
-            width: 25%;
-            text-align: right;
-        }
-
-        #tform input {
-            height: 20px;
-        }
-
-        #modal1 {
-            display: none;
-            background: rgba(0, 0, 0, 0.60);
-            z-index: 998;
-            position: absolute;
-            height: 100%;
-            width: 100%;
-        }
-
-        #modal1 .mbox {
-            z-index: 999;
-            background: white;
-            box-shadow: black;
-            border-radius: .5em;
-            max-width: 550px;
-            height: 300px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            justify-content: space-between;
-            top: 50%;
-            transform: translateY(-50%);
-            padding: 2%;
-        }
-    </style>
+    <script src="js/index.js"></script>
 </head>
 <body style="">
 <div id="modal1">
@@ -408,7 +283,7 @@ mysqli_select_db($hand, "$db_name") or die('数据库无此库');
                     <textarea class="ban" style="margin-top: -2%" title="" name="content"></textarea>
                     <div class="fb">
                         <div style="width: 30%;display: flex">
-                            <img src="verification.php" alt="验证码">
+                            <img src="verification.php" onclick="captchaReload()" id="captcha" alt="验证码">
                             <input title="" name="captcha" required="">
                         </div>
                         <button onclick="bbsPost('bbs_thread.php')" type="button" class="btn2">发布</button>
