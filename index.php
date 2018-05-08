@@ -49,6 +49,23 @@ mysqli_select_db($hand, "$db_name") or die('数据库无此库');
             obj.style.display = 'none';
         }
 
+        function bbsPost(url) {
+            $.ajax({
+                type:"POST",
+                dataType:"JSON",
+                url:url,
+                data:$('#tw1').serialize(),
+                success:function (result) {
+                    if (result.msgcode===1)
+                        alert("提交成功");
+                }
+            })
+        }
+
+        function bbsReply() {
+
+        }
+
         function search(url) {
             $.ajax({
                 type: "POST",
@@ -84,12 +101,6 @@ mysqli_select_db($hand, "$db_name") or die('数据库无此库');
                 },
             });
         }
-
-        $("search1").on('keypress', function (event) {
-            if (event.keyCode === 13) {
-                $("#fangdajing2").click();
-            }
-        })
     </script>
     <style>
         #tform label {
@@ -392,10 +403,17 @@ mysqli_select_db($hand, "$db_name") or die('数据库无此库');
                 </div>
                 <div class="tw">
                     <h3 style="margin-top: 0;">提问</h3>
-                    <textarea class="ban" style="margin-top: -2%" title=""></textarea>
+                    <form id="tw1">
+                    <input placeholder="标题" name="title" width="50%">
+                    <textarea class="ban" style="margin-top: -2%" title="" name="content"></textarea>
                     <div class="fb">
-                        <p><a href="#">发布</a></p>
+                        <div style="width: 30%;display: flex">
+                            <img src="verification.php" alt="验证码">
+                            <input title="" name="captcha" required="">
+                        </div>
+                        <button onclick="bbsPost('bbs_thread.php')" type="button" class="btn2">发布</button>
                     </div>
+                    </form>
                 </div>
             </div>
         </div>
