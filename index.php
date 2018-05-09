@@ -232,9 +232,6 @@ mysqli_select_db($hand, "$db_name") or die('数据库无此库');
                     </ol>
                 </div>
             </div>
-            <div class="img-right">
-                <img src="images/askldjml.png" style="width: 100%;height: 100%">
-            </div>
         </div>
     </div>
     <div class="main3">

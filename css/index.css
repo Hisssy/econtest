@@ -286,7 +286,7 @@ p {
 }
 
 .redian {
-    height: 23%;
+    height: 50%;
     border-radius: 0.3em;
     background-color: aliceblue;
 }
@@ -421,6 +421,7 @@ p {
 }
 
 .tw {
+    /* padding-bottom: 2px; */
     display:  flex;
     flex-direction: column;
     width: 30%;
@@ -430,7 +431,7 @@ p {
 }
 
 #tw1{
-    height: 80%;
+    height: 75%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;

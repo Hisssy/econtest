@@ -27,7 +27,7 @@ class MySessionHandler implements SessionHandlerInterface
         if ($row) {
             return ($row['session_data']);
         } else {
-            return (false);
+            return ("false");
         }
     }
 
