@@ -6,7 +6,7 @@ if($_GET["status"]==1)
 {
     $sql="select name from contest_hot";
     $result=mysqli_query($hand,$sql);
-    $row = mysqli_fetch_assoc($result)
+    $row = mysqli_fetch_assoc($result);
     $num=count($row);
     if($num>=10)
     {
