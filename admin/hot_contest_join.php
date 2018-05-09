@@ -24,11 +24,15 @@ if($_GET["status"]==1)
         window.location.href='hot_contest.php';</script>";
     }
 }
-if($_GET["status"]==2)
+else if($_GET["status"]==2)
 {
     $name=$_GET["name"];
     $sql="delete form contest_hot where name=$name";
     $result=mysqli_query($hand,$sql);
     echo "<script language=\"JavaScript\">
     window.location.href='hot_contest.php';</script>";
+}
+else
+{
+    echo "传参错误";
 }
