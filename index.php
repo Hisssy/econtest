@@ -186,12 +186,12 @@ mysqli_select_db($hand, "$db_name") or die('数据库无此库');
     <div class="main2">
         <div class="left2">
 
-            <?php $sql3 = "SELECT name,intro,begin,stop,imagesrc FROM contest_list";
+            <?php $sql3 = "SELECT name,intro,begin,stop,imagesrc FROM contest_list where status=1";
             $query = mysqli_query($hand, $sql3) ?>
             <?php while ($row = mysqli_fetch_assoc($query)) : ?>
                 <div class="example1">
 
-                    <img src="admin/pic/<?php echo $row['imagesrc']?>" style="width: 30%" class="image">
+                    <img src="admin/pic/<?php echo $row['imagesrc'] ?>" style="width: 30%" class="image">
                     <div class="information">
                         <p style="color: #000000;font-size: 18px;padding: 1%;margin-top:0">
                             大赛名称：<span><?php echo $row['name'] ?></span></p>
@@ -284,15 +284,15 @@ mysqli_select_db($hand, "$db_name") or die('数据库无此库');
                 <div class="tw">
                     <h3 style="margin-top: 0;">提问</h3>
                     <form id="tw1">
-                    <input placeholder="标题" name="title" width="50%">
-                    <textarea class="ban" style="margin-top: -2%" title="" name="content"></textarea>
-                    <div class="fb">
-                        <div style="width: 30%;display: flex">
-                            <img src="verification.php" onclick="captchaReload()" id="captcha" alt="验证码">
-                            <input title="" name="captcha" required="">
+                        <input placeholder="标题" name="title" width="50%">
+                        <textarea class="ban" style="margin-top: -2%" title="" name="content"></textarea>
+                        <div class="fb">
+                            <div style="width: 30%;display: flex">
+                                <img src="verification.php" onclick="captchaReload()" id="captcha" alt="验证码">
+                                <input title="" name="captcha" required="">
+                            </div>
+                            <button onclick="bbsPost('bbs_thread.php')" type="button" class="btn2">发布</button>
                         </div>
-                        <button onclick="bbsPost('bbs_thread.php')" type="button" class="btn2">发布</button>
-                    </div>
                     </form>
                 </div>
             </div>

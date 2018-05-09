@@ -15,15 +15,7 @@ $result = mysqli_query($hand, $sql);
 while ($row = mysqli_fetch_assoc($result)) {
     $id = $row["uid"];
     $name = $row["user"];
-    echo '<script type="text/javascript" language="javascript">
-<!--
-function confirmAct()
-{
-    return confirm("确定要解封该用户吗?");
-}
-//-->
-</script>';
-    echo "<a href='unbanplus.php?uid=$id' onclick ='return confirmAct();'>id:$id,name:$name</a>";
+    echo "<a href='unbanplus.php?uid=$id' onclick ='return confirm(\"确定要解封该用户吗?\");'>id:$id,name:$name</a>";
     echo "<br>";
 }
 echo "<a href='index.php'>返回</a>";

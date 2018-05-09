@@ -27,7 +27,7 @@ if ($captcha != $_SESSION["check"]) {
     $query2 = "SELECT uid FROM account_user where user='$user'";
     $r2 = mysqli_query($conn, $query2);//反查用户id
     $a2 = mysqli_fetch_array($r2, MYSQLI_ASSOC);
-    $aid=$a2["uid"];
+    $aid = $a2["uid"];
     $created = intval(time());//时间戳
     $last_reply = $created;
     $sql = "INSERT INTO `bbs_thread` ( `title`, `created`, `last_reply`, `text`, `aid`, `status`) VALUES ( '$title', '$created', '$last_reply', '$content', '$aid', '1');";
