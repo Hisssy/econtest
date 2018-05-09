@@ -33,7 +33,7 @@ mysqli_select_db($hand, "$db_name") or die('数据库无此库');
                 </select>
                 <br>
                 <label for="input1">队伍名</label>
-                <input id="input1" placeholder="黄桷垭通信维修公司" name="name" required>
+                <input id="input1" placeholder="黄桷垭通信施工队" name="name" required>
                 <br>
                 <label for="input2">所需人数</label>
                 <input id="input2" name="num" onkeyup="value=value.replace(/[^\d]/g,'')" placeholder="请输入数字" required>
@@ -102,7 +102,7 @@ mysqli_select_db($hand, "$db_name") or die('数据库无此库');
             </div>
             <div class="xiala1">
                 <?php
-                $sql = "SELECT tcid,cid,peoplenum FROM contest_team";
+                $sql = "SELECT tcid,cid,peoplenum,name FROM contest_team";
                 $q = mysqli_query($hand, $sql);
                 $i = 0;
                 while ($obj = mysqli_fetch_assoc($q)) {
@@ -117,12 +117,13 @@ mysqli_select_db($hand, "$db_name") or die('数据库无此库');
                     echo "<div class=\"xialatiao1\">
                     <img src=\"images/tu.png\" class=\"xialatiao_image\">
                     <div class=\"example\">
-                        <h4 class=\"title\">队长：<span>$obj1[user]</span></h4>
+                        <h4 class=\"title\">队名：<span>$obj[name]</span></h4>
                         <div class=\"ec\">
-                            <p>赛事名称：<span>$obj2[name]</span></p>
-                            <p>成员数目：<span>$obj[peoplenum]</span></p>
-                            <p>加入队伍</p>
-                            <p>关注队伍</p>
+                            <p>队长：<span>$obj1[user]</span></p> 
+                            <p>赛事：<span>$obj2[name]</span></p>
+                            <p>人数：<span>$obj[peoplenum]</span></p>
+                            <p>加入</p>
+                            <p>关注</p>
                         </div>
                     </div>
                 </div>";
@@ -184,19 +185,26 @@ mysqli_select_db($hand, "$db_name") or die('数据库无此库');
     </div>
     <div class="main2">
         <div class="left2">
-            <?php $sql3 = "SELECT name,intro,begin,stop FROM contest_list";
+
+            <?php $sql3 = "SELECT name,intro,begin,stop,imagesrc FROM contest_list";
             $query = mysqli_query($hand, $sql3) ?>
             <?php while ($row = mysqli_fetch_assoc($query)) : ?>
                 <div class="example1">
+
+                    <img src="admin/pic/<?php echo $row['imagesrc']?>" style="width: 30%" class="image">
                     <div class="information">
-                        <img src="images/tu.png" style="width: 30%" class="image">
                         <p style="color: #000000;font-size: 18px;padding: 1%;margin-top:0">
                             大赛名称：<span><?php echo $row['name'] ?></span></p>
-                        <p style="color: #000000;font-size: 18px;padding: 1%;margin-right: 3%">大赛主题：<span
-                                    id="intro"><?php echo $row['intro'] ?></span></p>
+                        <p style="overflow: hidden;
+    height: 40%;
+    color: #000000;
+    font-size: 18px;
+    padding: 1%;
+    margin-right: 3%;">大赛主题：<span id="intro"><?php echo $row['intro'] ?></span></p>
                         <p style="color: #000000;font-size: 18px;padding: 1%;margin-right: 3%">
                             报名时间：<span><?php echo $row['begin'] . "到" . $row['stop'] ?></span></p>
                         <p style="float: right;margin-right: 4%;color: #000000">更多信息...</p>
+
                     </div>
                 </div>
             <?php endwhile; ?>
