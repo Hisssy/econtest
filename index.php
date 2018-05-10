@@ -67,7 +67,7 @@ mysqli_select_db($hand, "$db_name") or die('数据库无此库');
                             <option value="1">比赛</option>
                             <option value="2">队伍</option>
                         </select>
-                        <img src="images/放大镜2.png" class="fangdajing2" onclick="search('search.php')">
+                        <img src="images/search2.png" class="fangdajing2" onclick="search('search.php')">
                     </form>
                 </div>
                 <ul class="fenlei">
