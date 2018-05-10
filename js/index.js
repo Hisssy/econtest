@@ -1,9 +1,9 @@
 // JavaScript Document
 
-function captchaReload() {
-    let obj=document.getElementById("captcha");
-    let url="verification.php";
-    obj.src =url+"?time=" + new Date().getTime();
+function reload(id) {
+    let obj = document.getElementById(id);
+    let url = "verification.php";
+    obj.src = url + "?time=" + new Date().getTime();
 }
 
 function ajaxPost(url) {
@@ -41,20 +41,20 @@ function modalClose() {
 
 function bbsPost(url) {
     $.ajax({
-        type:"POST",
-        dataType:"JSON",
-        url:url,
-        data:$('#tw1').serialize(),
-        success:function (result) {
-            if (result.msgcode===1)
+        type: "POST",
+        dataType: "JSON",
+        url: url,
+        data: $('#tw1').serialize(),
+        success: function (result) {
+            if (result.msgcode === 1)
                 alert("发布成功！");
-            else if(result.msgcode===0)
+            else if (result.msgcode === 0)
                 alert("数据库错误");
-            else if(result.msgcode===3){
+            else if (result.msgcode === 3) {
                 alert("验证码错误，请重新输入");
                 captchaReload();
             }
-            else if(result.msgcode===2){
+            else if (result.msgcode === 2) {
                 alert("请输入内容！");
             }
             else alert("未知错误！");

@@ -19,7 +19,7 @@ if ($_POST['check'] == $_SESSION['check']) {
             $result = mysqli_query($hand, $sql);
             echo "<script>
 			window.alert('注册成功');
-			window.location.href='login.html';</script>";
+			window.location.href='login.php'</script>";
         } else {
             echo "<script>
 			window.alert('此昵称已被使用');

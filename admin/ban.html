@@ -1,12 +1,7 @@
 <!DOCTYPE html>
-<meta charset="UTF-8">
 <html>
 <head>
-    <script type="text/javascript">
-        function make_sure() {
-            return confirm("确定要封禁该用户？");
-        }
-    </script>
+    <meta charset="UTF-8">
 </head>
 <body>
 <form method="post" action="ban.php">
@@ -18,7 +13,7 @@
         </tr>
         <tr align="center">
             <td height="24" colspan="2">
-                <button onclick="make_sure()" type="submit">提交</button>
+                <button onclick='return confirm("确定要封禁该用户？");' type="submit">提交</button>
             </td>
         </tr>
     </table>

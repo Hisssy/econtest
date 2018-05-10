@@ -1,6 +1,5 @@
 <?php
 include 'session.php';
-session_set_save_handler($handler, true);
 session_start();
 $hand = mysqli_connect("$db_host", "$db_user", "$db_pwd") or die('数据库连接失败');
 mysqli_select_db($hand, "$db_name") or die('数据库无此库');
@@ -11,16 +10,15 @@ mysqli_select_db($hand, "$db_name") or die('数据库无此库');
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>重邮e站</title>
     <link type="text/css" rel="stylesheet" href="css/index.css">
     <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
     <script src="js/index.js"></script>
+    <title>重邮e站</title>
 </head>
 <body style="">
 <div id="modal1">
     <div class="mbox">
-        <div style="height: 10%"><span onclick="modalClose()"
-                                       style="height:40px;float: right;font-size: 40px;cursor: pointer ">×</span></div>
+        <div style="height: 10%"><span onclick="modalClose()" style="height:40px;float: right;font-size: 40px;cursor: pointer ">×</span></div>
         <div style="height:90%;align-items: center;display: flex;justify-content: center">
             <form id="tform" style="line-height: 30px;width: 70%;">
                 <label for="sel1">选择比赛</label>
@@ -50,27 +48,7 @@ mysqli_select_db($hand, "$db_name") or die('数据库无此库');
     </div>
 </div>
 <!-- 加队伍验证  -->
-<div style="
-    background-color: #1cc3c9;
-">
-    <div class="container header">
-        <img src="images/logo.png" class="logo">
-        <div class="nav2" style="
-    display:  flex;
-    align-items: center;
-">
-            <ul class="daohang">
-                <li>首页</li>
-                <li>往期推送</li>
-                <li>微校专栏</li>
-                <li>大事记</li>
-                <li>重邮图库</li>
-                <li>更多相关</li>
-                <li><input type="text" class="search" title=""> <img src="images/放大镜.png" class="fangdajing"></li>
-            </ul>
-        </div>
-    </div>
-</div>
+<?php include 'header.html'?>
 <div class="container">
     <br>
     <p style="font-weight: bold;color: #000000;font-size: 18px;cursor: pointer;margin: 0;">首页&gt;&gt;赛事专区</p>
@@ -104,7 +82,6 @@ mysqli_select_db($hand, "$db_name") or die('数据库无此库');
                 <?php
                 $sql = "SELECT tcid,cid,peoplenum,name FROM contest_team";
                 $q = mysqli_query($hand, $sql);
-                $i = 0;
                 while ($obj = mysqli_fetch_assoc($q)) {
                     $l = $obj['tcid'];
                     $sql1 = "SELECT user FROM account_user where uid=$l";
@@ -154,12 +131,11 @@ mysqli_select_db($hand, "$db_name") or die('数据库无此库');
     width: 28%;
     height: 60%;
 ">
-                    <img src="images/789.png" class="touxiang">
+                    <img src="images/userhead.png" class="touxiang">
                 </div>
             </div>
             <div class="block_btn">
-                <div class="btn" style="
-">
+                <div class="btn">
                     <button class="dec" style="margin-bottom: 1.5%;background-color: #f6868b;width: 100%;"
                             onclick="modalOpen()">创建队伍
                     </button>
@@ -169,7 +145,7 @@ mysqli_select_db($hand, "$db_name") or die('数据库无此库');
                     <button onclick="window.location.href='<?php
                     if (isset($_SESSION["user"]))
                         echo "logout.php";
-                    else echo "login.html";
+                    else echo "login.php";
                     ?>'" class="dec" style="margin-bottom: 1.5%;background-color: #458df9;">
                         <?php
                         if (isset($_SESSION["user"]))
@@ -246,12 +222,12 @@ mysqli_select_db($hand, "$db_name") or die('数据库无此库');
         <div class="lv">
             <div class="lv_left">
                 <div class="lt" onmouseover="a('.lt')" onmouseout="b('.lt')" style="">
-                    <img src="images/lt.png" style="opacity: 1;">
+                    <img src="" style="opacity: 1;">
                     <p style="text-align: center; opacity: 0; transition: transform 1s; transform: translate(0px, 240%);">
                         比赛论坛</p>
                 </div>
                 <div class="wt" onmouseover="a('.wt')" onmouseout="b('.wt')" style="">
-                    <img src="images/wt.png" style="opacity: 1;">
+                    <img src="" style="opacity: 1;">
                     <p style="text-align: center; opacity: 0; transition: transform 1s; transform: translate(0px, 240%);">
                         我的问题</p>
                 </div>
@@ -288,7 +264,7 @@ mysqli_select_db($hand, "$db_name") or die('数据库无此库');
                         <textarea class="ban" style="margin-top: -2%" title="" name="content"></textarea>
                         <div class="fb">
                             <div style="width: 30%;display: flex">
-                                <img src="verification.php" onclick="captchaReload()" id="captcha" alt="验证码">
+                                <img src="verification.php" onclick="reload('captcha')" id="captcha" alt="验证码">
                                 <input title="" name="captcha" required="">
                             </div>
                             <button onclick="bbsPost('bbs_thread.php')" type="button" class="btn2">发布</button>
@@ -299,27 +275,5 @@ mysqli_select_db($hand, "$db_name") or die('数据库无此库');
         </div>
     </div>
 </div>
-<div class="bq">
-    <div class="container bq">
-        <div class="bq_ul">
-            <ul style="
-    margin-top: 0;
-">
-                <li><a>版权所有@重邮e站</a></li>
-                <li><a>地址：重庆南岸区崇文路2号</a></li>
-                <li><a>邮编：xxxxxxx</a></li>
-                <li><a>邮箱：xxxxxxx</a></li>
-                <li><a>渝ICPxxxxxxx</a></li>
-            </ul>
-        </div>
-        <!--qqwxxl-->
-        <p class="bq_lx"><img src="images/qqt.jpg"> <img src="images/wxt.jpg"> <a href="https://weibo.com/cyez"><img
-                        src="images/xlt.jpg"></a></p>
-        <div class="kk">
-            <img src="images/QQ图片20180409175117.jpg" style="width: 80%">
-        </div>
-    </div>
-</div>
-
-</body>
+<?php include 'footer.html'?>
 </html>

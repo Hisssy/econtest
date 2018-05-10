@@ -18,10 +18,10 @@ if ($_POST["check"] == $_SESSION["check"]) {
     } else {
         echo "<script language=\"JavaScript\">
     window.alert('账号或密码错误');
-    window.location.href='login.html';</script>";
+    window.location.href=login.php</script>";
     }
 } else {
     echo "<script language=\"JavaScript\">
   window.alert('验证码错误');
-  window.location.href='login.html';</script>";
+  window.location.href='login.php';</script>";
 }
