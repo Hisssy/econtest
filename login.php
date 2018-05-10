@@ -17,6 +17,7 @@
             background-color: #5cce99;
             font-weight: 500;
             box-shadow: 0 0 4px #50a074;
+            cursor: pointer;
         }
 
         .loginButton:hover {
