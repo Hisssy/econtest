@@ -17,7 +17,7 @@ if($_GET["status"]==1)
     else
     {
         $id=$_GET["id"];
-        $name=$_GET["name"];
+        $name=urldecode($_GET["name"]);//解码
         $sql2="insert into contest_hot values('$id','$name')";
         $result2=mysqli_query($hand,$sql2);
         echo "<script language=\"JavaScript\">
@@ -26,7 +26,7 @@ if($_GET["status"]==1)
 }
 else if($_GET["status"]==2)
 {
-    $name=$_GET["name"];
+    $name=urldecode($_GET["name"]);
     $sql="delete form contest_hot where name=$name";
     $result=mysqli_query($hand,$sql);
     echo "<script language=\"JavaScript\">
