@@ -25,8 +25,7 @@ if ($captcha != $_SESSION["check"]) {
     mysqli_select_db($conn, "$db_name") or die('数据库无此库');
     $user = $_SESSION["user"];
     $query2 = "SELECT uid FROM account_user where user='$user'";
-    $r2 = mysqli_query($conn, $query2);//反查用户id
-    $a2 = mysqli_fetch_array($r2, MYSQLI_ASSOC);
+    $a2 =$conn->query($query2)->fetch_array(MYSQLI_ASSOC);
     $aid = $a2["uid"];
     $created = intval(time());//时间戳
     $last_reply = $created;
