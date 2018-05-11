@@ -1,5 +1,5 @@
 <?php
-include '../needauth.php';
+include 'needAuth.php';
 $hand = mysqli_connect("$db_host", "$db_user", "$db_pwd") or die('数据库连接失败');
 mysqli_select_db($hand, "$db_name") or die('数据库无此库');
 $sql = "select a.name,a.id from contest_list a,contest_hot b where a.status=1 and a.name!=b.name";
