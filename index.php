@@ -2,7 +2,7 @@
 include 'session.php';
 session_start();
 $hand = mysqli_connect("$db_host", "$db_user", "$db_pwd") or die('数据库连接失败');
-mysqli_select_db($hand, "$db_name") or die('数据库无此库');
+$hand->select_db("$db_name") or die('数据库无此库');
 ?>
 
 <!DOCTYPE html>
@@ -18,26 +18,26 @@ mysqli_select_db($hand, "$db_name") or die('数据库无此库');
 <body style="">
 <div id="modal1">
     <div class="mbox">
-        <div style="height: 10%"><span onclick="modalClose()" style="height:40px;float: right;font-size: 40px;cursor: pointer ">×</span></div>
+        <div style="height: 10%"><span onclick="modalClose()"
+                                       style="height:40px;float: right;font-size: 40px;cursor: pointer ">×</span></div>
         <div style="height:90%;align-items: center;display: flex;justify-content: center">
             <form id="tform" style="line-height: 30px;width: 70%;">
                 <label for="sel1">选择比赛</label>
                 <select id="sel1" name="cid">
-                    <?php $sql4 = "SELECT name,id FROM contest_list";
-                    $query = mysqli_query($hand, $sql4) ?>
-                    <?php while ($row = mysqli_fetch_assoc($query)) : ?>
+                    <?php $query = $hand->query("SELECT name,id FROM contest_list");
+                    while ($row = $query->fetch_assoc()) : ?>
                         <option value="<?php echo $row['id'] ?>"><?php echo $row['name'] ?></option>
                     <?php endwhile; ?>
                 </select>
                 <br>
                 <label for="input1">队伍名</label>
-                <input id="input1" placeholder="黄桷垭通信施工队" name="name" required>
+                <input id="input1" placeholder="15字以内" name="name" required>
                 <br>
                 <label for="input2">所需人数</label>
                 <input id="input2" name="num" onkeyup="value=value.replace(/[^\d]/g,'')" placeholder="请输入数字" required>
                 <br>
                 <label for="input3">队伍介绍</label>
-                <textarea id="input3" placeholder="接各种通信管线维修，没有中间商赚差价" name="intro" required></textarea>
+                <textarea id="input3" placeholder="介绍一下队伍" name="intro" required></textarea>
                 <br>
                 <button type="button" style="
     margin-left: 28%;
@@ -47,8 +47,7 @@ mysqli_select_db($hand, "$db_name") or die('数据库无此库');
         </div>
     </div>
 </div>
-<!-- 加队伍验证  -->
-<?php include 'header.html'?>
+<?php include 'header.html' ?>
 <div class="container">
     <br>
     <p style="font-weight: bold;color: #000000;font-size: 18px;cursor: pointer;margin: 0;">首页&gt;&gt;赛事专区</p>
@@ -79,33 +78,24 @@ mysqli_select_db($hand, "$db_name") or die('数据库无此库');
                 </ul>
             </div>
             <div class="xiala1">
-                <?php
-                $sql = "SELECT tcid,cid,peoplenum,name FROM contest_team";
-                $q = mysqli_query($hand, $sql);
-                while ($obj = mysqli_fetch_assoc($q)) {
-                    $l = $obj['tcid'];
-                    $sql1 = "SELECT user FROM account_user where uid=$l";
-                    $r1 = mysqli_query($hand, $sql1);
-                    $obj1 = mysqli_fetch_assoc($r1);
-                    $c = $obj['cid'];
-                    $sql2 = "SELECT name FROM contest_list where id=$c";
-                    $r2 = mysqli_query($hand, $sql2);
-                    $obj2 = mysqli_fetch_assoc($r2);
-                    echo "<div class=\"xialatiao1\">
-                    <img src=\"images/tu.png\" class=\"xialatiao_image\">
-                    <div class=\"example\">
-                        <h4 class=\"title\">队名：<span>$obj[name]</span></h4>
-                        <div class=\"ec\">
-                            <p>队长：<span>$obj1[user]</span></p> 
-                            <p>赛事：<span>$obj2[name]</span></p>
-                            <p>人数：<span>$obj[peoplenum]</span></p>
-                            <p>加入</p>
-                            <p>关注</p>
+                <?php $query = $hand->query("SELECT tcid,cid,peoplenum,name FROM contest_team");
+                while ($objTeam = $query->fetch_assoc()) : ?>
+                    <?php $objUser = $hand->query("SELECT user FROM account_user where uid=$objTeam[tcid]")->fetch_assoc();//面向对象实现
+                    $objContest = $hand->query("SELECT name FROM contest_list where id=$objTeam[cid]")->fetch_assoc(); ?>
+                    <div class="xialatiao1">
+                        <img src="images/tu.png" class="xialatiao_image">
+                        <div class="example">
+                            <h4 class="title">队名：<span><?php echo $objTeam['name'] ?></span></h4>
+                            <div class="ec">
+                                <p>队长：<span><?php echo $objUser['user'] ?></span></p>
+                                <p>赛事：<span><?php echo $objContest['name'] ?></span></p>
+                                <p>人数：<span><?php echo $objTeam['peoplenum'] ?></span></p>
+                                <p>加入</p>
+                                <p>关注</p>
+                            </div>
                         </div>
                     </div>
-                </div>";
-                }
-                ?>
+                <?php endwhile; ?>
             </div>
         </div>
         <div class="right1">
@@ -162,8 +152,8 @@ mysqli_select_db($hand, "$db_name") or die('数据库无此库');
     <div class="main2">
         <div class="left2">
 
-            <?php $sql3 = "SELECT name,intro,begin,stop,imagesrc FROM contest_list where status=1";
-            $query = mysqli_query($hand, $sql3) ?>
+            <?php $sqlContestInfo = "SELECT name,intro,begin,stop,imagesrc FROM contest_list where status=1";
+            $query = $hand->query($sqlContestInfo) ?>
             <?php while ($row = mysqli_fetch_assoc($query)) : ?>
                 <div class="example1">
 
@@ -234,10 +224,10 @@ mysqli_select_db($hand, "$db_name") or die('数据库无此库');
                         <li><a href="#">这一页最后一个问题辣？</a><span>回答（0）</span></li>
                     </ul>
                     <div class="pagination">
-                        <div style="    justify-content: space-between; width: 30%;display: flex;">
-                        <button>上一页</button>
-                      1/5
-                        <button>下一页</button>
+                        <div style="justify-content: space-between; width: 30%;display: flex;">
+                            <button>上一页</button>
+                            1/5
+                            <button>下一页</button>
                         </div>
                     </div>
                 </div>
@@ -259,5 +249,5 @@ mysqli_select_db($hand, "$db_name") or die('数据库无此库');
         </div>
     </div>
 </div>
-<?php include 'footer.html'?>
+<?php include 'footer.html' ?>
 </html>

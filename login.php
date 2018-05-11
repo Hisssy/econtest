@@ -94,7 +94,7 @@
         <div class="loginSection">
             <div class="loginSectionBox">
                 <div style="width: 100%;display: flex">
-                    <img src="images/loginhead.png" style="height: 30%;margin: auto">
+                    <img src="images/loginhead.png" style="margin: auto">
                 </div>
                 <form action="check.php" method="post"
                       style="height:65%;display:flex;flex-direction:column;justify-content:space-between">
