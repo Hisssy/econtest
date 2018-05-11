@@ -220,18 +220,6 @@ mysqli_select_db($hand, "$db_name") or die('数据库无此库');
     </div>
     <div class="main3">
         <div class="lv">
-            <div class="lv_left">
-                <div class="lt" onmouseover="a('.lt')" onmouseout="b('.lt')" style="">
-                    <img src="" style="opacity: 1;">
-                    <p style="text-align: center; opacity: 0; transition: transform 1s; transform: translate(0px, 240%);">
-                        比赛论坛</p>
-                </div>
-                <div class="wt" onmouseover="a('.wt')" onmouseout="b('.wt')" style="">
-                    <img src="" style="opacity: 1;">
-                    <p style="text-align: center; opacity: 0; transition: transform 1s; transform: translate(0px, 240%);">
-                        我的问题</p>
-                </div>
-            </div>
             <div class="lv_right">
                 <div class="wd">
                     <h3 style="
@@ -245,15 +233,11 @@ mysqli_select_db($hand, "$db_name") or die('数据库无此库');
                         <li><a href="#">我这个问题啊，描述起来比较麻烦，所以要用好多字来说，写都写不...</a><span>回答（0）</span></li>
                         <li><a href="#">这一页最后一个问题辣？</a><span>回答（0）</span></li>
                     </ul>
-                    <div style="width: 40%">
-                        <div class="syy" style="width: 22%">
-                            <a href="#">上一页</a>
-                        </div>
-                        <div class="ys">
-                            1/5
-                        </div>
-                        <div class="xyy" style="width: 22%">
-                            <a href="#">下一页</a>
+                    <div class="pagination">
+                        <div style="    justify-content: space-between; width: 30%;display: flex;">
+                        <button>上一页</button>
+                      1/5
+                        <button>下一页</button>
                         </div>
                     </div>
                 </div>

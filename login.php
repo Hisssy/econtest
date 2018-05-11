@@ -55,24 +55,27 @@
             width: 50%;
         }
 
-        .inputLine input{
+        .inputLine input {
             color: #404040;
             margin-top: 1%;
             height: 30px;
             width: 100%;
+            font-size: 20px;
         }
 
         .loginCaptchaArea {
             display: flex;
         }
 
-        .loginCaptchaArea input{
+        .loginCaptchaArea input {
             color: #404040;
             margin-top: 1%;
             height: 30px;
             width: 90%;
+            font-size: 20px;
         }
-        .bottomBar{
+
+        .bottomBar {
             display: flex;
             justify-content: flex-end;
         }
@@ -82,7 +85,8 @@
 <?php include 'header.html' ?>
 <div class="container" style="overflow: visible">
     <br>
-    <p style="font-weight: bold;color: #000000;font-size: 18px;cursor: pointer;margin: 0;">首页&gt;&gt;赛事专区>>登录</p><br>
+    <p style="font-weight: bold;color: #000000;font-size: 18px;cursor: pointer;margin: 0;"><a href="..">首页</a>&gt;&gt;<a
+                href="index.php">赛事专区</a>>>登录</p><br>
     <div class="loginBox">
         <div class="loginImage">
             <img style="width: 100%;max-height:100% " src="images/loginleft.png">
@@ -108,7 +112,8 @@
                             <label for="input-3">验证码<span style="color: gray;font-size: x-small">(不区分大小写)</span></label>
                             <input type="text" id="input-3" name="check" required>
                         </div>
-                        <img onclick="reload('captcha')" src="verification.php" alt="验证码" id="captcha" style="height: 100%;width: 40%">
+                        <img onclick="reload('captcha')" src="verification.php" alt="验证码" id="captcha"
+                             style="height: 100%;width: 40%">
                     </div>
                     <div style="text-align: center">
                         <button type="submit" class="loginButton">登录</button>
