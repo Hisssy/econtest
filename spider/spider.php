@@ -19,8 +19,8 @@ while(!feof($myfile))
   while($match[0][$i])
   {
       $num='000000';//初始密码
-      $user=$match[0][$i+1];//学号
-      $nickname=$match[0][$i+2]//姓名
+      $user=strip_tags($match[0][$i+1]);//学号
+      $nickname=strip_tags($match[0][$i+2]);//姓名
       $password=md5($num);
       $sql="insert into account_user (`user`,`email`, `nickname`,`password`,`priv`) values('$user','0','$nickname','$password',1)";//邮箱初始为0
       $result = mysqli_query($hand, $sql);
