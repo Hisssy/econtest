@@ -11,6 +11,7 @@ $hand->select_db("$db_name") or die('数据库无此库');
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link type="text/css" rel="stylesheet" href="css/index.css">
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
     <script src="js/index.js"></script>
     <title>重邮e站</title>
@@ -128,12 +129,12 @@ $hand->select_db("$db_name") or die('数据库无此库');
                             ?></span></h4>
                     <h4 style="color: #043745;padding-left: 5%"></h4>
                 </div>
-                <div id="dimg" style="
-    margin: 2%;
+                <div style="
     width: 28%;
-    height: 60%;
+    height: 100%;
+    display: flex;
 ">
-                    <img src="images/userhead.png" class="touxiang">
+                    <i class="fa fa-user" style="font-size: 6em;margin: auto"  aria-hidden="true"></i>
                 </div>
             </div>
             <div class="block_btn">
@@ -237,9 +238,9 @@ $hand->select_db("$db_name") or die('数据库无此库');
                     </ul>
                     <div class="pagination">
                         <div style="justify-content: space-between; width: 30%;display: flex;">
-                            <button>上一页</button>
+                            <button><i class="fa fa-arrow-left" aria-hidden="true"></i>上一页</button>
                             1/5
-                            <button>下一页</button>
+                            <button>下一页<i class="fa fa-arrow-right" aria-hidden="true"></i></button>
                         </div>
                     </div>
                 </div>

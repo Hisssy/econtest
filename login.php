@@ -14,6 +14,7 @@ if($_SESSION['user']){
     <meta charset="utf-8">
     <title>登录</title>
     <link type="text/css" rel="stylesheet" href="css/index.css">
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
     <script src="js/index.js"></script>
     <script>
@@ -69,8 +70,8 @@ if($_SESSION['user']){
             margin-bottom: 100px;
         }
 
-        .loginImage {
-            width: 30%;
+        .container {
+            min-width: 300px;
         }
 
         .loginSection {
@@ -78,6 +79,10 @@ if($_SESSION['user']){
             width: 70%;
             display: flex;
             flex-direction: column;
+        }
+
+        .loginImage {
+            width: 30%;
         }
 
         .loginSectionBox {
@@ -113,14 +118,42 @@ if($_SESSION['user']){
             display: flex;
             justify-content: flex-end;
         }
+
+        .topNav{
+            font-weight: bold;
+            color: #000000;
+            font-size: 18px;
+            cursor: pointer;
+            margin-top: 2%;
+            margin-bottom: 2%;
+        }
+
+        @media handheld, only screen and (max-width: 768px) {
+            .loginBox{
+                margin:0;
+            }
+            .loginImage {
+                display: none;
+            }
+            .loginSection {
+                width: 100%;
+            }
+            .loginSectionBox{
+                width: 90%;
+            }
+            .topNav{
+                margin-top: 3%;
+                display: none;
+            }
+        }
     </style>
 </head>
 <body>
 <?php include 'header.html' ?>
 <div class="container" style="overflow: visible">
-    <br>
-    <p style="font-weight: bold;color: #000000;font-size: 18px;cursor: pointer;margin: 0;"><a href="..">首页</a>&gt;&gt;<a
-                href="index.php">赛事专区</a>>>登录</p><br>
+
+    <p class="topNav"><a href="..">首页</a>&gt;&gt;<a
+                href="index.php">赛事专区</a>>>登录</p>
     <div class="loginBox">
         <div class="loginImage">
             <img style="width: 100%;max-height:100% " src="images/loginleft.png">
@@ -150,7 +183,7 @@ if($_SESSION['user']){
                              style="height: 100%;width: 40%;cursor: pointer">
                     </div>
                     <div style="text-align: center">
-                        <button type="button" class="loginButton" onclick="ajaxLoginPost('check.php','loginForm')">登录</button>
+                        <button type="button" class="loginButton" onclick="ajaxLoginPost('check.php','loginForm')"><i class="fa fa-sign-in" aria-hidden="true"></i> 登录</button>
                     </div>
                 </form>
             </div>
@@ -171,7 +204,7 @@ if($_SESSION['user']){
                     </div>
 
                     <div style="text-align: center">
-                        <button type="submit" class="loginButton" onclick="">提交</button>
+                        <button type="submit" class="loginButton" onclick=""><i class="fa fa-check" aria-hidden="true"></i> 提交</button>
                     </div>
                 </form>
             </div>

@@ -36,7 +36,6 @@
 }
 
 .daohang li {
-    list-style: none;
     float: left;
 }
 
@@ -88,7 +87,7 @@ body {
     width: 100%;
     overflow: hidden;
     margin: 0 auto;
-    min-width: 850px;
+    min-width: 300px;
     box-sizing: border-box;
 }
 
@@ -118,8 +117,11 @@ body {
     font-size: 11px;
 }
 
+.searchIcon{
+    width: 30px;
+}
 .fangdajing2 {
-    cursor: pointer;
+    width: 38px;
 }
 
 .fenlei {
@@ -171,8 +173,8 @@ p {
 }
 
 .touxiang {
-    float: right;
-    height: 100%;
+    /* float: right; */
+    /* height: 100%; */
 }
 
 .block_btn {
