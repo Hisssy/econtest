@@ -47,6 +47,7 @@ $hand->select_db("$db_name") or die('数据库无此库');
         </div>
     </div>
 </div>
+
 <?php include 'header.html' ?>
 <div class="container">
     <br>
@@ -101,18 +102,29 @@ $hand->select_db("$db_name") or die('数据库无此库');
         <div class="right1">
             <div class="denglu">
                 <div class="info" style="
-    width: 60%;
+    width: 70%;
 ">
-                    <h4 style="color: #000000;padding-top: 7%;padding-left: 5%;">状态：
+                    <h4 style="color: #000000;padding-top: 3%;padding-left: 5%;">状态：
                         <?php
                         if (isset($_SESSION["user"]))
                             echo "<span style='color: green'>已登录</span>";
                         else echo "未登录";
                         ?></h4>
-                    <h4 style="color: #000000;padding-left: 5%">ID：<span>
+                    <h4 style="color: #000000;padding-left: 5%">姓名：<span>
                             <?php
                             if (isset($_SESSION["user"]))
-                                echo $_SESSION["user"];
+                                echo "$_SESSION[name]";
+                            ?></span></h4>
+                    <h4 style="color: #043745;padding-left: 5%"></h4>
+                    <h4 style="color: #000000;padding-left: 5%">邮箱：<span>
+                            <?php
+
+                            if (isset($_SESSION["user"]))
+                            {
+                                global $hand;
+                                $result=$hand->query("SELECT email FROM account_user WHERE user='$_SESSION[user]'")->fetch_assoc();
+                                echo "$result[email]";
+                            }
                             ?></span></h4>
                     <h4 style="color: #043745;padding-left: 5%"></h4>
                 </div>

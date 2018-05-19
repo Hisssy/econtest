@@ -1,3 +1,13 @@
+<?php
+include 'session.php';
+include 'configure.php';
+session_set_save_handler($handler, true);
+session_start();
+error_reporting(0);
+if($_SESSION['user']){
+    echo "<script>alert('您已登录！返回主页中...');window.location.href='index.php';</script>";
+}
+?>
 <!doctype html>
 <html>
 <head>
@@ -6,6 +16,30 @@
     <link type="text/css" rel="stylesheet" href="css/index.css">
     <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
     <script src="js/index.js"></script>
+    <script>
+        function verifyInfo1(pwd) {
+            let obj=document.getElementById('input-rePwd').value;
+            let obj2=document.getElementById('reInputPass');
+            if (pwd!==obj){
+                obj2.innerHTML="";
+                obj2.append("密码输入不一致");
+            }
+            else {
+                obj2.innerHTML="";
+            }
+        }
+        function verifyInfo(pwd) {
+            let obj=document.getElementById('input-pwd').value;
+            let obj2=document.getElementById('reInputPass');
+            if (pwd!==obj){
+                obj2.innerHTML="";
+                obj2.append("密码输入不一致");
+            }
+            else {
+                obj2.innerHTML="";
+            }
+        }
+    </script>
     <style>
         .loginButton {
             height: 50px;
@@ -92,11 +126,11 @@
             <img style="width: 100%;max-height:100% " src="images/loginleft.png">
         </div>
         <div class="loginSection">
-            <div class="loginSectionBox">
+            <div class="loginSectionBox" id="sectionBoxLogin" >
                 <div style="width: 100%;display: flex">
                     <img src="images/loginhead.png" style="margin: auto">
                 </div>
-                <form action="check.php" method="post"
+                <form id="loginForm"
                       style="height:65%;display:flex;flex-direction:column;justify-content:space-between">
                     <div class="inputLine">
                         <label for="input-1">学号</label>
@@ -113,13 +147,33 @@
                             <input type="text" id="input-3" name="check" required>
                         </div>
                         <img onclick="reload('captcha')" src="verification.php" alt="验证码" id="captcha"
-                             style="height: 100%;width: 40%">
+                             style="height: 100%;width: 40%;cursor: pointer">
                     </div>
                     <div style="text-align: center">
-                        <button type="submit" class="loginButton">登录</button>
+                        <button type="button" class="loginButton" onclick="ajaxLoginPost('check.php','loginForm')">登录</button>
                     </div>
                 </form>
+            </div>
+            <div class="loginSectionBox" id="sectionBoxInfo" style="display: none;justify-content: center">
+                <form action="userInfoModify.php" method="post"
+                      style="height:65%;display:flex;flex-direction:column;justify-content:space-between">
+                    <div class="inputLine">
+                        <label for="input-pwd">新密码</label>
+                        <input type="password" id="input-pwd" name="pwd" onkeyup="verifyInfo1(this.value)" required>
+                    </div>
+                    <div class="inputLine">
+                        <label for="input-rePwd">重复密码<span style="float: right;color: red;font-size: small" id="reInputPass"></span></label>
+                        <input type="password" id="input-rePwd" onkeyup="verifyInfo(this.value)" required>
+                    </div>
+                    <div class="inputLine">
+                        <label for="input-email">邮箱</label>
+                        <input type="text" id="input-email" name="email" required>
+                    </div>
 
+                    <div style="text-align: center">
+                        <button type="submit" class="loginButton" onclick="">提交</button>
+                    </div>
+                </form>
             </div>
             <div class="bottomBar"><span style="font-size: smaller;color: gray">忘记密码？</span></div>
         </div>

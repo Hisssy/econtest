@@ -29,6 +29,40 @@ function ajaxPost(url) {
     })
 }
 
+function ajaxLoginPost(url,documentId) {
+    $.ajax({
+        type: "POST",
+        dataType: "JSON",
+        url: url,
+        data: $('#'+documentId).serialize(),
+        success: function (result) {
+            if(result.msgCode==='0'){
+                alert('初次登录，请完善个人信息！');
+                switchLoginBox();
+            }
+            else if (result.msgCode === '1') {
+                alert("登录成功！");
+                window.location.href='index.php';
+            }
+            else if (result.msgCode === '2'){
+                alert("密码错误，请重新输入");
+                reload('captcha');
+            }
+            else if (result.msgCode === '3') {
+                alert('验证码错误，请重新输入');
+                reload('captcha');
+            }
+            else
+                alert("服务器错误！");
+        }
+    })
+}
+
+function switchLoginBox() {
+    $('#sectionBoxLogin').hide();
+    $('#sectionBoxInfo').show();
+}
+
 function modalOpen() {
     let obj = document.getElementById('modal1');
     obj.style.display = 'block';
