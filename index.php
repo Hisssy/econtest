@@ -71,13 +71,6 @@ $hand->select_db("$db_name") or die('数据库无此库');
                         <img src="images/search2.png" class="fangdajing2" onclick="search('search.php')">
                     </form>
                 </div>
-                <ul class="fenlei">
-                    <li>分类：</li>
-                    <li><a href="#" style="text-decoration: none">不限</a></li>
-                    <li><a href="#" style="text-decoration: none">正在报名</a></li>
-                    <li><a href="#" style="text-decoration: none">报名结束</a></li>
-                    <li><a href="#" style="text-decoration: none">即将报名</a></li>
-                </ul>
             </div>
             <div class="xiala1">
                 <?php $query = $hand->query("SELECT tcid,cid,peoplenum,name FROM contest_team");

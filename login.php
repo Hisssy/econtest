@@ -189,7 +189,7 @@ if($_SESSION['user']){
             </div>
             <div class="loginSectionBox" id="sectionBoxInfo" style="display: none;justify-content: center">
                 <form action="userInfoModify.php" method="post"
-                      style="height:65%;display:flex;flex-direction:column;justify-content:space-between">
+                      style="height:75%;display:flex;flex-direction:column;justify-content:space-between">
                     <div class="inputLine">
                         <label for="input-pwd">新密码</label>
                         <input type="password" id="input-pwd" name="pwd" onkeyup="verifyInfo1(this.value)" required>
@@ -197,6 +197,10 @@ if($_SESSION['user']){
                     <div class="inputLine">
                         <label for="input-rePwd">重复密码<span style="float: right;color: red;font-size: small" id="reInputPass"></span></label>
                         <input type="password" id="input-rePwd" onkeyup="verifyInfo(this.value)" required>
+                    </div>
+                    <div class="inputLine">
+                        <label for="input-qq">QQ号<span style="float: right;color: red;font-size: small" id="reInputPass"></span></label>
+                        <input type="password" id="input-qq" name="qq" required>
                     </div>
                     <div class="inputLine">
                         <label for="input-email">邮箱</label>
