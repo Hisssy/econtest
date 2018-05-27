@@ -21,8 +21,10 @@ while(!feof($myfile))
       $num='000000';//初始密码
       $user=strip_tags($match[0][$i+1]);//学号
       $nickname=strip_tags($match[0][$i+2]);//姓名
+      $major=strip_tags($match[0][$i+6]);//专业
+      $school=strip_tags($match[0][$i+7]);//学院
       $password=md5($num);
-      $sql="insert into account_user (`user`,`email`, `nickname`,`password`,`priv`) values('$user','0','$nickname','$password',1)";//邮箱初始为0
+      $sql="insert into account_user (`user`,`email`, `nickname`,`major`,`school`,`password`,`priv`) values('$user','0','$nickname','$major','$school','$password',1)";//邮箱初始为0
       $result = mysqli_query($hand, $sql);
       $i=$i+10;
   }
