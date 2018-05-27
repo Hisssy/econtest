@@ -13,7 +13,7 @@ while(!feof($myfile))
   $url = "http://jwzx.cqupt.edu.cn/jwzxtmp/showBjStu.php?bj="."$class";//bj为班级编号，可以替换
   $contents = file_get_contents($url);
   //如果出现中文乱码使用下面代码
-  //$getcontent = iconv("gb2312", "utf-8",$contents);
+  $getcontent = iconv("gb2312", "utf-8",$contents);
   preg_match_all("/<td>(.*?)<\/td>/",$contents,$match);
   $i=10;
   while($match[0][$i])
@@ -24,8 +24,10 @@ while(!feof($myfile))
       $major=strip_tags($match[0][$i+6]);//专业
       $school=strip_tags($match[0][$i+7]);//学院
       $password=md5($num);
-      $sql="insert into account_user (`user`,`email`, `nickname`,`major`,`school`,`password`,`priv`) values('$user','0','$nickname','$major','$school','$password',1)";//邮箱初始为0
-      $result = mysqli_query($hand, $sql);
+      echo $major;
+      $sql="insert into account_user (`user`,`email`, `nickname`,`school`,`major`,`phone`,`qq`, `password`,`priv`) values('$user','0','$nickname','$school','$major','0','0','$password',1)";//邮箱初始为0
+      $result= mysqli_query($hand, $sql);
+      echo $result;
       $i=$i+10;
   }
 }

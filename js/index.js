@@ -103,20 +103,20 @@ function search(url) {
         url: url,
         data: $('#sform').serialize(),
         success: function (result) {
-            function htm(tcname, contest, peoplenum) {
-                return '                <div class="xialatiao1">\n' +
-                    '                    <img src="images/tu.png" class="xialatiao_image">\n' +
-                    '                    <div class="example">\n' +
-                    '                        <h4 class="title">队长：<span>' + tcname + '</span></h4>\n' +
-                    '                        <div class="ec">\n' +
-                    '                            <p>赛事名称：<span>' + contest + '</span></p>\n' +
-                    '                            <p>成员数目：<span>' + peoplenum + '</span></p>\n' +
-                    '                            <p>加入队伍</p>\n' +
-                    '                            <p>关注队伍</p>\n' +
-                    '                        </div>\n' +
-                    '                    </div>\n' +
-                    '                </div>';
-            }
+                function htm(tcname, contest, peoplenum) {
+                    return '                <div class="xialatiao1">\n' +
+                        '                    <img src="images/tu.png" class="xialatiao_image">\n' +
+                        '                    <div class="example">\n' +
+                        '                        <h4 class="title">队长：<span>' + tcname + '</span></h4>\n' +
+                        '                        <div class="ec">\n' +
+                        '                            <p>赛事名称：<span>' + contest + '</span></p>\n' +
+                        '                            <p>成员数目：<span>' + peoplenum + '</span></p>\n' +
+                        '                            <p>加入队伍</p>\n' +
+                        '                            <p>关注队伍</p>\n' +
+                        '                        </div>\n' +
+                        '                    </div>\n' +
+                        '                </div>';
+                }
 
             if (result[0] == false) {
                 alert('没有找到相关信息！');
