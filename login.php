@@ -200,7 +200,7 @@ if($_SESSION['user']){
                     </div>
                     <div class="inputLine">
                         <label for="input-qq">QQ号<span style="float: right;color: red;font-size: small" id="reInputPass"></span></label>
-                        <input type="password" id="input-qq" name="qq" required>
+                        <input type="text" id="input-qq" name="qq" required>
                     </div>
                     <div class="inputLine">
                         <label for="input-email">邮箱</label>
