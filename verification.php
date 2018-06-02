@@ -1,7 +1,7 @@
 <?php
 include 'session.php';
 include 'configure.php';
-include 'class/RandomNum.class.php'
+include 'class/RandomNum.class.php';
 session_set_save_handler($handler, true);
 session_start();
 $ver=new RandomNum;

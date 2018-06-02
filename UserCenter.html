@@ -36,8 +36,8 @@
     width: 20%;
     display: flex;
 " id="upForm">
-                <input type="file" name="pic" id="btn_file" onchange="fileChange(this);" style="display: none" >
-                <input type="button" value="上传头像" class="post" id="post" style="
+            <input type="file" name="pic" id="btn_file" onchange="fileChange(this);" style="display: none">
+            <input type="button" value="上传头像" class="post" id="post" style="
     margin: auto;
 ">
         </form>
@@ -46,21 +46,24 @@
     <div class="information">
         <div class="infoDetail">
             <div class="left">
-                <div class="infor1"><p>ID:<span class="change1">xxxxx</span></p></div>
-                <div class="infor3"><p>电话:<span class="change3">xxxxxxxxx</span></p></div>
-                <div class="infor5"><p>邮箱:<span class="change5">xxxxxxxx@xx.com</span></p></div>
-                <div class="infor7"><p>QQ:<span class="change7">xxxxxxxxxx</span></p></div>
+                <div class="infor1"><p>ID:<span>xxxxx</span></p></div>
+                <form id="cForm">
+                    <div class="infor3"><p>电话:<span class="changeable">xxxxxxxxx</span></p></div>
+                    <div class="infor5"><p>邮箱:<span class="changeable">xxxxxxxx@xx.com</span></p></div>
+                    <div class="infor7"><p>QQ:<span class="changeable">xxxxxxxxxx</span></p></div>
+                </form>
             </div>
             <div class="right">
-                <div class="infor2"><p>姓名:<span class="change2">xxx</span></p></div>
-                <div class="infor4"><p>学号:<span class="change4">xxxxxxxxxx</span></p></div>
-                <div class="infor6"><p>学院:<span class="change6">xxxxxx</span></p></div>
-                <div class="infor8"><p>专业:<span class="change8">xxxxxx</span></p></div>
+                <div class="infor2"><p>姓名:<span>xxx</span></p></div>
+                <div class="infor4"><p>学号:<span>xxxxxxxxxx</span></p></div>
+                <div class="infor6"><p>学院:<span>xxxxxx</span></p></div>
+                <div class="infor8"><p>专业:<span>xxxxxx</span></p></div>
             </div>
         </div>
         <div class="infor0" style="
     width: 90%;
-"><span style="vertical-align: top">个人简介:</span><span class="change0">xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</span></div>
+"><span style="vertical-align: top">个人简介:</span><span class="changeable change0">xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</span>
+        </div>
     </div>
     <div class="end">
         <input type="button" value="编辑资料" class="endButton">

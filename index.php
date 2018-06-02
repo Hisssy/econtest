@@ -135,7 +135,7 @@ $hand->select_db("$db_name") or die('数据库无此库');
                     <button class="dec" style="margin-bottom: 1.5%;background-color: #f6868b;width: 100%;"
                             onclick="modalOpen()">创建队伍
                     </button>
-                    <button class="dec" style="background-color: #f6bd80;width: 100%;">管理队伍</button>
+                    <button class="dec" onclick="getCenter()" style="background-color: #f6bd80;width: 100%;">管理队伍</button>
                 </div>
                 <div class="btn">
                     <button onclick="window.location.href='<?php

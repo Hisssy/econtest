@@ -5,7 +5,7 @@
  * Date: 2018/4/30
  * Time: 9:37
  */
-
+//增加contest_join
 include 'needauth.php';
 $hand = mysqli_connect("$db_host", "$db_user", "$db_pwd") or die('数据库连接失败');
 mysqli_select_db($hand, "$db_name") or die('数据库无此库');

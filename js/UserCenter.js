@@ -1,52 +1,39 @@
 // JavaScript Document
 
-let button = document.getElementsByClassName("endButton");
-let newInput0 = $('<input type="text" />');
-let newInput3 = $('<input type="text"/>');
-let newInput5 = $('<input type="text"/>');
-let newInput7 = $('<input type="text"/>');
-let temp = 0;
+let newInput7 = $('<input type="text" name="phone"/>');
+let newInput3 = $('<input type="text" name="email" />');
+let newInput5 = $('<input type="text"  name="qq"/>');
+let newInput0 = $('<input form="cForm" type="text" style="width: 40%" name="info" />');
 
-//此处还有bug
 $(document).ready(function () {
     $("#post").click(function () {
         $("#btn_file").click();
     });
     $('.endButton').click(function () {
-        if (temp === 0) {
-            $(".endButton").val("提交资料");
-            let sp = $("span");
-            sp.remove(".change3");
-            sp.remove(".change5");
-            sp.remove(".change7");
-            sp.remove(".change0");
-            $(".infor3 p").append(newInput3);
-            $(".infor5 p").append(newInput5);
-            $(".infor7 p").append(newInput7);
-            $(".infor0").append(newInput0);
-            newInput3.addClass("form3");
-            newInput5.addClass("form5");
-            newInput7.addClass("form7");
-            newInput0.addClass("form0");
-            temp = 1;
-        } else {
+        let btn=$(".endButton");
+        let tmp = btn.val();
+        if (tmp === "提交资料") {
             $.ajax({
                 url: 'centerModify.php?action=infoModify',
-                data: {
-                    phone: $("form3").val(),
-                    email: $("form5").val(),
-                    qq: $("form7").val(),
-                    info: $("form0").val()
-                },
                 type: 'POST',
+                data: $("#cForm").serialize(),
                 dataType: 'json',
                 success: function (json) {
-                    if(json.MsgCode=1)
+                    if (json.MsgCode = 1)
                         alert('成功');
                     else
                         alert('失败');
                 }
             });
+        }
+        else {
+            btn.val("提交资料");
+            let sp = $(".changeable");
+            sp.remove();
+            $(".infor3 p").append(newInput3);
+            $(".infor5 p").append(newInput5);
+            $(".infor7 p").append(newInput7);
+            $(".infor0").append(newInput0);
         }
     });
 });
@@ -78,7 +65,7 @@ function fileChange(target) {
         xhr.send(form);
 
         xhr.onreadystatechange = function () {
-            if(xhr.readyState === 4 && xhr.status === 200) {
+            if (xhr.readyState === 4 && xhr.status === 200) {
                 //
             }
         };
