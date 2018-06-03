@@ -12,11 +12,12 @@ switch ($_GET['action']) {
 }
 function loadAllTeam()
 {
+    global $hand;
     $user=$_SESSION["user"];
     $sql_id="select uid from account_user where user='$user'";
     $result_id = mysqli_query($hand, $sql_id);
     $row_id = mysqli_fetch_array($result_id);
-    $uid=$row["uid"];
+    $uid=$row_id["uid"];
     $sql_team="select a.tid,a.cid,b.name,b.stop,c.created,c.peoplenum from contest_join a,contest_list b,contest_team c where a.uid='$uid' and a.tid=c.tid and a.cid=b.id";
     $result_team = mysqli_query($hand, $sql_team);
     $count=0;
@@ -39,6 +40,7 @@ function loadAllTeam()
 }
 function expandTeam()
 {
+    global $hand;
     $tid=$_POST["TeamId"];
     $sql="select uid,status from contest_join where tid='$tid'";
     $result = mysqli_query($hand, $sql);
