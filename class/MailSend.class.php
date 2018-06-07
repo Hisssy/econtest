@@ -17,6 +17,7 @@ class MailSend{
     }
     function send()
     {
+        ob_start();
         $mail = new PHPMailer\PHPMailer\PHPMailer();
         $mail->IsSMTP();
 
@@ -45,5 +46,6 @@ class MailSend{
             $mail->Send();
         } catch (\PHPMailer\PHPMailer\Exception $e) {
         }
+         ob_end_clean();
     }
 }
