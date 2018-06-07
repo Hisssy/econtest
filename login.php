@@ -12,35 +12,12 @@ if($_SESSION['user']){
 <html>
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge，chrome=1">
     <title>登录</title>
     <link type="text/css" rel="stylesheet" href="css/index.css">
     <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
-    <script src="js/index.js"></script>
-    <script>
-        function verifyInfo1(pwd) {
-            let obj=document.getElementById('input-rePwd').value;
-            let obj2=document.getElementById('reInputPass');
-            if (pwd!==obj){
-                obj2.innerHTML="";
-                obj2.append("密码输入不一致");
-            }
-            else {
-                obj2.innerHTML="";
-            }
-        }
-        function verifyInfo(pwd) {
-            let obj=document.getElementById('input-pwd').value;
-            let obj2=document.getElementById('reInputPass');
-            if (pwd!==obj){
-                obj2.innerHTML="";
-                obj2.append("密码输入不一致");
-            }
-            else {
-                obj2.innerHTML="";
-            }
-        }
-    </script>
+
     <style>
         .loginButton {
             height: 50px;
@@ -119,15 +96,6 @@ if($_SESSION['user']){
             justify-content: flex-end;
         }
 
-        .topNav{
-            font-weight: bold;
-            color: #000000;
-            font-size: 18px;
-            cursor: pointer;
-            margin-top: 2%;
-            margin-bottom: 2%;
-        }
-
         @media handheld, only screen and (max-width: 768px) {
             .loginBox{
                 margin:0;
@@ -149,11 +117,7 @@ if($_SESSION['user']){
     </style>
 </head>
 <body>
-<?php include 'header.html' ?>
 <div class="container" style="overflow: visible">
-
-    <p class="topNav"><a href="..">首页</a>&gt;&gt;<a
-                href="index.php">赛事专区</a>>>登录</p>
     <div class="loginBox">
         <div class="loginImage">
             <img style="width: 100%;max-height:100% " src="images/loginleft.png">
@@ -212,10 +176,29 @@ if($_SESSION['user']){
                     </div>
                 </form>
             </div>
-            <div class="bottomBar"><span style="font-size: smaller;color: gray">忘记密码？</span></div>
+            <div class="loginSectionBox" id="sectionBoxFindBack" style="display: none;">
+                <form id="aForm">
+                <div class="inputLine">
+                    <label for="input-code">请输入学号</label>
+                    <input type="tel" id="input-code" name="user">
+                </div>
+                    <div style="text-align: center">
+                        <button type="button" onclick="return false" class="loginButton" id="findBackBtn"><i class="fa fa-arrow-right" aria-hidden="true"></i>下一步</button>
+                    </div>
+                </form>
+            </div>
+            <div class="loginSectionBox" id="sectionBoxFindBack2" style="display: none;">
+                <div class="inputLine">
+                    <label for="input-c">请输入发到您邮箱的验证码</label>
+                    <input type="tel" id="input-c" name="user">
+                </div>
+            </div>
+            <div class="bottomBar"><span onclick="findBackPwd()" style="cursor: pointer; font-size: smaller;color: gray">忘记密码？</span></div>
         </div>
     </div>
 </div>
-<?php include 'footer.html' ?>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="js/index.js"></script>
+<script src="js/login.js"></script>
 </body>
 </html>

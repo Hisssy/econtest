@@ -16,6 +16,39 @@ $hand->select_db("$db_name") or die('数据库无此库');
     <link rel="stylesheet" type="text/css" href="css/contest.css">
 </head>
 <body>
+
+<div id="modal1">
+    <div class="mbox">
+        <div style="height: 10%"><span onclick="modalClose()"
+                                       style="height:40px;float: right;font-size: 40px;cursor: pointer ">×</span></div>
+        <div style="height:90%;align-items: center;display: flex;justify-content: center">
+            <form id="tform" style="line-height: 30px;width: 70%;">
+                <label for="sel1">选择比赛</label>
+                <select id="sel1" name="cid">
+                    <?php $query = $hand->query("SELECT name,id FROM contest_list");
+                    while ($row = $query->fetch_assoc()) : ?>
+                        <option value="<?php echo $row['id'] ?>"><?php echo $row['name'] ?></option>
+                    <?php endwhile; ?>
+                </select>
+                <br>
+                <label for="input1">队伍名</label>
+                <input id="input1" placeholder="15字以内" name="name" required>
+                <br>
+                <label for="input2">所需人数</label>
+                <input id="input2" name="num" onkeyup="value=value.replace(/[^\d]/g,'')" placeholder="请输入数字" required>
+                <br>
+                <label for="input3">队伍介绍</label>
+                <textarea id="input3" placeholder="介绍一下队伍" name="intro" required></textarea>
+                <br>
+                <button type="button" style="
+    margin-left: 28%;
+" onclick="ajaxPost('newteam.php')">提交
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
 <div id="sai_header">
     <div class="topUserSection">
         <div class="ren_img">
@@ -41,12 +74,12 @@ $hand->select_db("$db_name") or die('数据库无此库');
         </div>
         <div class="jie_right" style="">
 
-            <div class="topUserBar"><img src="images/center.png"><span style="">个人中心</span></div>
-            <div class="topUserBar" style="
-    /* position: relative; */
-"><img src="images/team.png"><span style="">我的队伍</span></div>
-            <div class="topUserBar"><img src="images/create.png"><span style="">创建队伍</span></div>
-
+            <div class="topUserBar"><img src="images/center.png" onclick="
+            <?php if (!isset($_SESSION['user'])) echo "window.location.href='login.php'"; else  echo "window.location.href='user_center.html'";?>"><span style="">个人中心</span></div>
+            <?php if (isset($_SESSION['user'])) echo '<div class="topUserBar"><img onclick="window.location.href=\'team_manage.html\'" src="images/team.png"><span style="">我的队伍</span></div>
+            <div class="topUserBar"><img src="images/create.png" onclick="modalOpen()"><span style="">创建队伍</span></div>
+            <div class="topUserBar"><img src="images/logout.png" onclick="window.location.href=\'logout.php\'"><span style="">退出登录</span>' ?>
+            </div>
         </div>
     </div>
 </div>
@@ -1040,6 +1073,6 @@ $hand->select_db("$db_name") or die('数据库无此库');
 <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
 <script src="https://cdn.bootcss.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="js/Pagination.js"></script>
-
+<script src="js/index.js"></script>
 </body>
 </html>

@@ -11,9 +11,6 @@ switch ($_GET['action']) {
     case 'check_captcha':
         check_captcha();
         break;
-    case 'update_password':
-        update_password();
-        break;
 }
 function check_user()
 {
@@ -68,6 +65,7 @@ function check_captcha()
     }
     else {
         $dan["msgCode"]='1';
+        update_password();
     }
     echo json_encode($dan);
 }
