@@ -36,7 +36,7 @@ function check_user()
             $result_c = mysqli_query($hand, $sql_c);
             $captcha='你的验证码是：'.$captcha;
             $mail=new MailSend($row_mail["email"],'重邮e站验证码',$captcha);
-            $mail->send();
+            $mail->send($unspoken);
         }
         else
         {
@@ -45,7 +45,7 @@ function check_user()
             $result_c = mysqli_query($hand, $sql_c);
             $captcha='你的验证码是：'.$captcha;
             $mail=new MailSend($row_mail["email"],'重邮e站验证码',$captcha);
-            $mail->send();
+            $mail->send($unspoken);
         }
         $dan["msgCode"]='1';
         echo json_encode($dan);
