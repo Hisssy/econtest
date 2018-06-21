@@ -7,19 +7,55 @@ $('.sai_detail').mouseleave(function () {
     $(this).css('background-color', '#fff');
 });
 
+//获取比赛信息
+//init
+$(document).ready(function(){
+    function genCHtml(name,intro,pic){
+        let html='                            <div class="sai_detail">\n' +
+            '                                <div class="sai_detail_img">\n' +
+            '                                    <img src="images/'+pic+'">\n' +
+            '                                </div>\n' +
+            '                                <div class="sai_detail_right">\n' +
+            '                                    <div class="sai_detail_name">\n' +
+            '                                        <p>\n' +name+
+            '</p>\n' +
+            '                                    </div>\n' +
+            '                                    <div class="sai_detail_jie">\n' +
+            '                                            <span>\n' +intro+
+            '</span>\n' +
+            '                                    </div>\n' +
+            '                                    <a href="#" class="sai_detail_url">查看详情...'+
+            '</a>\n' +
+            '                                </div>\n' +
+            '                            </div>';
+        $('.sai_xin_main2').append(html);
+    }
+    $.ajax({
+        url:'contest_list.php',
+        dataType:'json',
+        type:'post',
+        data:{c_page:1},
+        success:function (data) {
+            $('#c_total_num').val(data.allnum);
+            console.log(data);
+            $.each(data, function (index, objVal) {
+                genCHtml(objVal.name,objVal.intro,objVal.pic);
+            })
+        }
+    })
+});
 
 //-------------------------------------------比赛 翻页---------------------------------------
 let saiMain = document.getElementsByClassName('sai_xin_main');
 let page = document.getElementsByClassName('page');
-var sai_detail = document.getElementsByClassName('sai_detail');
-var i = 0;
+let sai_detail = document.getElementsByClassName('sai_detail');
+let i = 0;
 pageHidden(sai_detail);
 
 function pageShow() {
     for (let n = i * 5; n < i * 5 + 5 && n < sai_detail.length; n++) {
         sai_detail[n].style.display = 'block';
     }
-
     page[i].getElementsByTagName('input')[0].style.fontWeight = 'bold';
 }
 
@@ -36,7 +72,6 @@ function pageClick(x) {
             x[i].style.display = 'none';
         }
         $('.page input').css('font-weight', 'normal');
-
         i++;
         if (i === Math.ceil(x.length / 5)) {
             i = 0;
@@ -132,9 +167,9 @@ document.getElementsByClassName('sai_submit')[0].onclick = function () {
 
 
 //-----------------------------------------队伍搜索---------------------------------------------
-var teamInfoAfterSearch = document.getElementsByClassName('teamInfoCardSearch');
-var flag2 = 0;
-var str = "<div class='teamInfoCardSearch'>\n" +
+let teamInfoAfterSearch = document.getElementsByClassName('teamInfoCardSearch');
+let flag2 = 0;
+let str = "<div class='teamInfoCardSearch'>\n" +
     "                <div class='teamInfoCardImageSearch'></div>\n" +
     "                <div class='teamInfoCardTextSearch'></div>\n" +
     "                </div>";
@@ -213,9 +248,9 @@ document.getElementsByClassName('searchPic')[0].onclick = function () {
 };
 
 //-----------------------------------轮播---------------------------------
-var teamInfoPaint = document.getElementsByClassName('teamInfoPaint');
-var flag = 0;
-var times;
+let teamInfoPaint = document.getElementsByClassName('teamInfoPaint');
+let flag = 0;
+let times;
 teamInfoPaint[0].style.backgroundColor = "#8c8d8d";
 
 function teamInfoCardPlay() {

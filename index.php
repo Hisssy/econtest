@@ -6,88 +6,114 @@ $hand->select_db("$db_name") or die('数据库无此库');
 ?>
 
 <!DOCTYPE HTML>
-<html lang="zh">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge，chrome=1">
-    <title>赛事专区</title>
-    <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="css/contest.css">
-</head>
-<body>
+<html lang="zh-cmn">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge，chrome=1">
+        <title>赛事专区</title>
+        <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="css/contest.css">
+    </head>
+    <body>
 
-<div id="modal1">
-    <div class="mbox">
-        <div style="height: 10%"><span onclick="modalClose()"
-                                       style="height:40px;float: right;font-size: 40px;cursor: pointer ">×</span></div>
-        <div style="height:90%;align-items: center;display: flex;justify-content: center">
-            <form id="tform" style="line-height: 30px;width: 70%;">
-                <label for="sel1">选择比赛</label>
-                <select id="sel1" name="cid">
-                    <?php $query = $hand->query("SELECT name,id FROM contest_list");
-                    while ($row = $query->fetch_assoc()) : ?>
-                        <option value="<?php echo $row['id'] ?>"><?php echo $row['name'] ?></option>
-                    <?php endwhile; ?>
-                </select>
-                <br>
-                <label for="input1">队伍名</label>
-                <input id="input1" placeholder="15字以内" name="name" required>
-                <br>
-                <label for="input2">所需人数</label>
-                <input id="input2" name="num" onkeyup="value=value.replace(/[^\d]/g,'')" placeholder="请输入数字" required>
-                <br>
-                <label for="input3">队伍介绍</label>
-                <textarea id="input3" placeholder="介绍一下队伍" name="intro" required></textarea>
-                <br>
-                <button type="button" style="
+    <nav class="navbar nav-static-top
+ navbar-expand-md navbar-light fixed-top bg-light">
+        <a class="navbar-brand" href="#">竞赛组队系统</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar"><span
+                    class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
+            <ul class="navbar-nav justify-content-end">
+                <li class="nav-item dropdown "><a class="nav-link dropdown-toggle text-center dropdown" href="#"
+                                                  data-toggle="dropdown"> 首页 </a>
+                    <div class="dropdown-menu tab-content">
+                        <a class="dropdown-item text-center" href="#section1">赛事信息</a>
+                        <a class="dropdown-item text-center" href="#section2">热门赛事</a>
+                        <a class="dropdown-item text-center" href="#section3">组队信息</a>
+                        <a class="dropdown-item text-center" href="#section4">问答</a>
+                    </div>
+                </li>
+                <li class="nav-item"><a class="nav-link w3ls-hover text-center" href="user_center.html">个人中心</a></li>
+                <li class="nav-item"><a class="nav-link w3ls-hover text-center" href="team_manage.html">我的组队</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="modal1">
+        <div class="mbox">
+            <div style="height: 10%"><span onclick="modalClose()"
+                                           style="height:40px;float: right;font-size: 40px;cursor: pointer ">×</span>
+            </div>
+            <div style="height:90%;align-items: center;display: flex;justify-content: center">
+                <form id="tform" style="line-height: 30px;width: 70%;">
+                    <label for="sel1">选择比赛</label>
+                    <select id="sel1" name="cid">
+                        <?php $query = $hand->query("SELECT name,id FROM contest_list");
+                        while ($row = $query->fetch_assoc()) : ?>
+                            <option value="<?php echo $row['id'] ?>"><?php echo $row['name'] ?></option>
+                        <?php endwhile; ?>
+                    </select>
+                    <br>
+                    <label for="input1">队伍名</label>
+                    <input id="input1" placeholder="15字以内" name="name" required>
+                    <br>
+                    <label for="input2">所需人数</label>
+                    <input id="input2" name="num" onkeyup="value=value.replace(/[^\d]/g,'')" placeholder="请输入数字"
+                           required>
+                    <br>
+                    <label for="input3">队伍介绍</label>
+                    <textarea id="input3" placeholder="介绍一下队伍" name="intro" required></textarea>
+                    <br>
+                    <button type="button" style="
     margin-left: 28%;
 " onclick="ajaxPost('newteam.php')">提交
-                </button>
-            </form>
+                    </button>
+                </form>
+            </div>
         </div>
     </div>
-</div>
 
-<div id="sai_header">
-    <div class="topUserSection">
-        <div class="ren_img">
-            <img class="img-fluid" src="images/head.png">
-        </div>
+    <div id="sai_header">
+        <div class="topUserSection">
+            <div class="ren_img">
+                <img class="img-fluid" src="images/head.png">
+            </div>
 
-        <div class="sai_ren" style="display: none;">
+            <div class="sai_ren" style="display: none;">
 
-            <!-- 头像 -->
-            <div style="
+                <!-- 头像 -->
+                <div style="
     margin: auto;
     height: 100%;
     width: 100%;
     display: inline-flex;
 ">
-                <div class="topUserInfoBtn">
-                    <img src="images/ID.png"
-                         style="position: absolute;padding-right: 10px;height: 40px;vertical-align: middle;">
-                    <span id="userId"
-                          style="margin: auto;vertical-align: middle;font-size: 27px;">2017210079</span>
+                    <div class="topUserInfoBtn">
+                        <img src="images/ID.png"
+                             style="position: absolute;padding-right: 10px;height: 40px;vertical-align: middle;">
+                        <span id="userId"
+                              style="margin: auto;vertical-align: middle;font-size: 27px;">2017210079</span>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="jie_right" style="">
-
-            <div class="topUserBar"><img src="images/center.png" onclick="
-            <?php if (!isset($_SESSION['user'])) echo "window.location.href='login.php'"; else  echo "window.location.href='user_center.html'";?>"><span style="">个人中心</span></div>
-            <?php if (isset($_SESSION['user'])) echo '<div class="topUserBar"><img onclick="window.location.href=\'team_manage.html\'" src="images/team.png"><span style="">我的队伍</span></div>
+            <div class="jie_right" style="">
+                <div class="topUserBar"><img src="images/center.png" onclick="
+            <?php if (!isset($_SESSION['user'])) echo "window.location.href='login.php'"; else  echo "window.location.href='user_center.html'"; ?>"><span
+                            style="">个人中心</span></div>
+                <?php if (isset($_SESSION['user'])) echo
+                '<div class="topUserBar"><img onclick="window.location.href=\'team_manage.html\'" src="images/team.png"><span style="">我的队伍</span></div>
             <div class="topUserBar"><img src="images/create.png" onclick="modalOpen()"><span style="">创建队伍</span></div>
-            <div class="topUserBar"><img src="images/logout.png" onclick="window.location.href=\'logout.php\'"><span style="">退出登录</span>' ?>
+            <div class="topUserBar"><img src="images/logout.png" onclick="window.location.href=\'logout.php\'"><span style="">退出登录</span></div>' ?>
             </div>
         </div>
     </div>
-</div>
+
+
 <div class="container">
 
     <div id="sai_content">
         <div class="saishi">
-            <div class="sai_left">
+            <div class="sai_left" id="section1">
                 <h3>赛事信息</h3>
                 <div class="sai_xin">
                     <div class="sai_xin_header">
@@ -97,494 +123,13 @@ $hand->select_db("$db_name") or die('数据库无此库');
                         </div>
                     </div>
 
+                    <div id="hidden_info" style="display: none"><input title="" id="c_total_num"></div>
+
                     <div class="sai_xin_main">
                         <div class="sai_xin_main2" style="
     margin-left: 1%;
     margin-right: 1%;
 ">
-                            <div class="sai_detail" style="background-color: rgb(255, 255, 255);">
-                                <div class="sai_detail_img">
-                                    <img src="images/test.png">
-                                </div>
-                                <div class="sai_detail_right">
-                                    <div class="sai_detail_name">
-                                        <p style="
-    color: #212121;
-">互联网+创新创业大赛</p>
-                                    </div>
-
-                                    <div class="sai_detail_jie">
-                                            <span style="
-    font-size: small;
-">
-第四届大赛要力争做到“有广度、有高度、有深度、有温度”，努力体现有突破、有特色、有新意。扩大参赛规模，实现区域、学校、学生类型全覆盖和国际赛道拓展；广泛实施“青年红色筑梦之旅”活动，培养有理想、有本领、有担当的热血青春力量；壮大创新创业生力军，服务创新驱动发展、“一带一路”建设、乡村振兴和脱贫攻坚等国家战略。                                            </span>
-                                    </div>
-                                    <a href="#" class="sai_detail_url" style="
-    text-align: end;
-    color: #757575;
-    font-size: 12px;
-">查看详情...</a>
-                                </div>
-                            </div>
-                            <div class="sai_detail" style="background-color: rgb(255, 255, 255);">
-                                <div class="sai_detail_img">
-                                    <img src="images/test.png">
-                                </div>
-                                <div class="sai_detail_right">
-                                    <div class="sai_detail_name">
-                                        <p style="
-    color: #212121;
-">互联网+创新创业大赛</p>
-                                    </div>
-
-                                    <div class="sai_detail_jie">
-                                            <span style="
-    font-size: small;
-">
-第四届大赛要力争做到“有广度、有高度、有深度、有温度”，努力体现有突破、有特色、有新意。扩大参赛规模，实现区域、学校、学生类型全覆盖和国际赛道拓展；广泛实施“青年红色筑梦之旅”活动，培养有理想、有本领、有担当的热血青春力量；壮大创新创业生力军，服务创新驱动发展、“一带一路”建设、乡村振兴和脱贫攻坚等国家战略。                                            </span>
-                                    </div>
-                                    <a href="#" class="sai_detail_url" style="
-    text-align: end;
-    color: #757575;
-    /* width: 10%; */
-    /* justify-self: end; */
-    font-size: 12px;
-">查看详情...</a>
-                                </div>
-                            </div>
-                            <div class="sai_detail" style="background-color: rgb(255, 255, 255);">
-                                <div class="sai_detail_img">
-                                    <img src="images/test.png">
-                                </div>
-                                <div class="sai_detail_right">
-                                    <div class="sai_detail_name">
-                                        <p style="
-    color: #212121;
-">xxxxxxxxxxxxxxxxxxxxxxxx大赛</p>
-                                    </div>
-                                    <div class="sai_detail_time">
-                                        报名时间：<span>xxxx--xxxx</span>
-                                    </div>
-                                    <div class="sai_detail_jie">
-                                        <p>
-                                            xxx
-                                        </p>
-                                    </div>
-                                    <!--<div class="sai_detail_more"><a href="#">查看详情</a></div>-->
-                                </div>
-                            </div>
-                            <div class="sai_detail" style="background-color: rgb(255, 255, 255);">
-                                <div class="sai_detail_img">
-                                    <img src="images/test.png">
-                                </div>
-                                <div class="sai_detail_right">
-                                    <div class="sai_detail_name">
-                                        <p style="
-    color: #212121;
-">xxxxxxxxxxxxxxxxxxxxxxxx大赛</p>
-                                    </div>
-                                    <div class="sai_detail_time">
-                                        报名时间：<span>xxxx--xxxx</span>
-                                    </div>
-                                    <div class="sai_detail_jie">
-                                        <p>
-                                            xxx
-                                        </p>
-                                    </div>
-                                    <!--<div class="sai_detail_more"><a href="#">查看详情</a></div>-->
-                                </div>
-                            </div>
-                            <div class="sai_detail" style="background-color: rgb(255, 255, 255);">
-                                <div class="sai_detail_img">
-                                    <img src="images/test.png">
-                                </div>
-                                <div class="sai_detail_right">
-                                    <div class="sai_detail_name">
-                                        <p style="
-    color: #212121;
-">xxxxxxxxxxxxxxxxxxxxxxxx大赛</p>
-                                    </div>
-                                    <div class="sai_detail_time">
-                                        报名时间：<span>xxxx--xxxx</span>
-                                    </div>
-                                    <div class="sai_detail_jie">
-                                        <p>
-                                            xxx
-                                        </p>
-                                    </div>
-                                    <!--<div class="sai_detail_more"><a href="#">查看详情</a></div>-->
-                                </div>
-                            </div>
-                            <div class="sai_detail" style="background-color: rgb(255, 255, 255);">
-                                <div class="sai_detail_img">
-                                    <img src="images/test.png">
-                                </div>
-                                <div class="sai_detail_right">
-                                    <div class="sai_detail_name">
-                                        <p style="
-    color: #212121;
-">xxxxxxxxxxxxxxxxxxxxxxxx大赛</p>
-                                    </div>
-                                    <div class="sai_detail_time">
-                                        报名时间：<span>xxxx--xxxx</span>
-                                    </div>
-                                    <div class="sai_detail_jie">
-                                        <p>
-                                            xxx
-                                        </p>
-                                    </div>
-                                    <!--<div class="sai_detail_more"><a href="#">查看详情</a></div>-->
-                                </div>
-                            </div>
-
-                            <div class="sai_detail" style="background-color: rgb(255, 255, 255);">
-                                <div class="sai_detail_img">
-                                    <img src="images/test.png">
-                                </div>
-                                <div class="sai_detail_right">
-                                    <div class="sai_detail_name">
-                                        <p style="
-    color: #212121;
-">互联网+创新创业大赛</p>
-                                    </div>
-
-                                    <div class="sai_detail_jie">
-                                            <span style="
-    font-size: small;
-">
-第四届大赛要力争做到“有广度、有高度、有深度、有温度”，努力体现有突破、有特色、有新意。扩大参赛规模，实现区域、学校、学生类型全覆盖和国际赛道拓展；广泛实施“青年红色筑梦之旅”活动，培养有理想、有本领、有担当的热血青春力量；壮大创新创业生力军，服务创新驱动发展、“一带一路”建设、乡村振兴和脱贫攻坚等国家战略。                                            </span>
-                                    </div>
-                                    <a href="#" class="sai_detail_url" style="
-    text-align: end;
-    color: #757575;
-    /* width: 10%; */
-    /* justify-self: end; */
-    font-size: 12px;
-">查看详情...</a>
-                                </div>
-                            </div>
-                            <div class="sai_detail" style="background-color: rgb(255, 255, 255);">
-                                <div class="sai_detail_img">
-                                    <img src="images/test.png">
-                                </div>
-                                <div class="sai_detail_right">
-                                    <div class="sai_detail_name">
-                                        <p style="
-    color: #212121;
-">互联网+创新创业大赛</p>
-                                    </div>
-
-                                    <div class="sai_detail_jie">
-                                            <span style="
-    font-size: small;
-">
-第四届大赛要力争做到“有广度、有高度、有深度、有温度”，努力体现有突破、有特色、有新意。扩大参赛规模，实现区域、学校、学生类型全覆盖和国际赛道拓展；广泛实施“青年红色筑梦之旅”活动，培养有理想、有本领、有担当的热血青春力量；壮大创新创业生力军，服务创新驱动发展、“一带一路”建设、乡村振兴和脱贫攻坚等国家战略。                                            </span>
-                                    </div>
-                                    <a href="#" class="sai_detail_url" style="
-    text-align: end;
-    color: #757575;
-    /* width: 10%; */
-    /* justify-self: end; */
-    font-size: 12px;
-">查看详情...</a>
-                                </div>
-                            </div>
-                            <div class="sai_detail" style="background-color: rgb(255, 255, 255);">
-                                <div class="sai_detail_img">
-                                    <img src="images/test.png">
-                                </div>
-                                <div class="sai_detail_right">
-                                    <div class="sai_detail_name">
-                                        <p style="
-    color: #212121;
-">xxxxxxxxxxxxxxxxxxxxxxxx大赛</p>
-                                    </div>
-                                    <div class="sai_detail_time">
-                                        报名时间：<span>xxxx--xxxx</span>
-                                    </div>
-                                    <div class="sai_detail_jie">
-                                        <p>
-                                            xxx
-                                        </p>
-                                    </div>
-                                    <!--<div class="sai_detail_more"><a href="#">查看详情</a></div>-->
-                                </div>
-                            </div>
-                            <div class="sai_detail" style="background-color: rgb(255, 255, 255);">
-                                <div class="sai_detail_img">
-                                    <img src="images/test.png">
-                                </div>
-                                <div class="sai_detail_right">
-                                    <div class="sai_detail_name">
-                                        <p style="
-    color: #212121;
-">xxxxxxxxxxxxxxxxxxxxxxxx大赛</p>
-                                    </div>
-                                    <div class="sai_detail_time">
-                                        报名时间：<span>xxxx--xxxx</span>
-                                    </div>
-                                    <div class="sai_detail_jie">
-                                        <p>
-                                            xxx
-                                        </p>
-                                    </div>
-                                    <!--<div class="sai_detail_more"><a href="#">查看详情</a></div>-->
-                                </div>
-                            </div>
-                            <div class="sai_detail" style="background-color: rgb(255, 255, 255);">
-                                <div class="sai_detail_img">
-                                    <img src="images/test.png">
-                                </div>
-                                <div class="sai_detail_right">
-                                    <div class="sai_detail_name">
-                                        <p style="
-    color: #212121;
-">xxxxxxxxxxxxxxxxxxxxxxxx大赛</p>
-                                    </div>
-                                    <div class="sai_detail_time">
-                                        报名时间：<span>xxxx--xxxx</span>
-                                    </div>
-                                    <div class="sai_detail_jie">
-                                        <p>
-                                            xxx
-                                        </p>
-                                    </div>
-                                    <!--<div class="sai_detail_more"><a href="#">查看详情</a></div>-->
-                                </div>
-                            </div>
-                            <div class="sai_detail" style="background-color: rgb(255, 255, 255);">
-                                <div class="sai_detail_img">
-                                    <img src="images/test.png">
-                                </div>
-                                <div class="sai_detail_right">
-                                    <div class="sai_detail_name">
-                                        <p style="
-    color: #212121;
-">xxxxxxxxxxxxxxxxxxxxxxxx大赛</p>
-                                    </div>
-                                    <div class="sai_detail_time">
-                                        报名时间：<span>xxxx--xxxx</span>
-                                    </div>
-                                    <div class="sai_detail_jie">
-                                        <p>
-                                            xxx
-                                        </p>
-                                    </div>
-                                    <!--<div class="sai_detail_more"><a href="#">查看详情</a></div>-->
-                                </div>
-                            </div>
-
-                            <div class="sai_detail" style="background-color: rgb(255, 255, 255);">
-                                <div class="sai_detail_img">
-                                    <img src="images/test.png">
-                                </div>
-                                <div class="sai_detail_right">
-                                    <div class="sai_detail_name">
-                                        <p style="
-    color: #212121;
-">互联网+创新创业大赛</p>
-                                    </div>
-
-                                    <div class="sai_detail_jie">
-                                            <span style="
-    font-size: small;
-">
-第四届大赛要力争做到“有广度、有高度、有深度、有温度”，努力体现有突破、有特色、有新意。扩大参赛规模，实现区域、学校、学生类型全覆盖和国际赛道拓展；广泛实施“青年红色筑梦之旅”活动，培养有理想、有本领、有担当的热血青春力量；壮大创新创业生力军，服务创新驱动发展、“一带一路”建设、乡村振兴和脱贫攻坚等国家战略。                                            </span>
-                                    </div>
-                                    <a href="#" class="sai_detail_url" style="
-    text-align: end;
-    color: #757575;
-    /* width: 10%; */
-    /* justify-self: end; */
-    font-size: 12px;
-">查看详情...</a>
-                                </div>
-                            </div>
-                            <div class="sai_detail" style="background-color: rgb(255, 255, 255);">
-                                <div class="sai_detail_img">
-                                    <img src="images/test.png">
-                                </div>
-                                <div class="sai_detail_right">
-                                    <div class="sai_detail_name">
-                                        <p style="
-    color: #212121;
-">互联网+创新创业大赛</p>
-                                    </div>
-
-                                    <div class="sai_detail_jie">
-                                            <span style="
-    font-size: small;
-">
-第四届大赛要力争做到“有广度、有高度、有深度、有温度”，努力体现有突破、有特色、有新意。扩大参赛规模，实现区域、学校、学生类型全覆盖和国际赛道拓展；广泛实施“青年红色筑梦之旅”活动，培养有理想、有本领、有担当的热血青春力量；壮大创新创业生力军，服务创新驱动发展、“一带一路”建设、乡村振兴和脱贫攻坚等国家战略。                                            </span>
-                                    </div>
-                                    <a href="#" class="sai_detail_url" style="
-    text-align: end;
-    color: #757575;
-    /* width: 10%; */
-    /* justify-self: end; */
-    font-size: 12px;
-">查看详情...</a>
-                                </div>
-                            </div>
-                            <div class="sai_detail" style="background-color: rgb(255, 255, 255);">
-                                <div class="sai_detail_img">
-                                    <img src="images/test.png">
-                                </div>
-                                <div class="sai_detail_right">
-                                    <div class="sai_detail_name">
-                                        <p style="
-    color: #212121;
-">xxxxxxxxxxxxxxxxxxxxxxxx大赛</p>
-                                    </div>
-                                    <div class="sai_detail_time">
-                                        报名时间：<span>xxxx--xxxx</span>
-                                    </div>
-                                    <div class="sai_detail_jie">
-                                        <p>
-                                            xxx
-                                        </p>
-                                    </div>
-                                    <!--<div class="sai_detail_more"><a href="#">查看详情</a></div>-->
-                                </div>
-                            </div>
-                            <div class="sai_detail" style="background-color: rgb(255, 255, 255);">
-                                <div class="sai_detail_img">
-                                    <img src="images/test.png">
-                                </div>
-                                <div class="sai_detail_right">
-                                    <div class="sai_detail_name">
-                                        <p style="
-    color: #212121;
-">xxxxxxxxxxxxxxxxxxxxxxxx大赛</p>
-                                    </div>
-                                    <div class="sai_detail_time">
-                                        报名时间：<span>xxxx--xxxx</span>
-                                    </div>
-                                    <div class="sai_detail_jie">
-                                        <p>
-                                            xxx
-                                        </p>
-                                    </div>
-                                    <!--<div class="sai_detail_more"><a href="#">查看详情</a></div>-->
-                                </div>
-                            </div>
-                            <div class="sai_detail" style="background-color: rgb(255, 255, 255);">
-                                <div class="sai_detail_img">
-                                    <img src="images/test.png">
-                                </div>
-                                <div class="sai_detail_right">
-                                    <div class="sai_detail_name">
-                                        <p style="
-    color: #212121;
-">xxxxxxxxxxxxxxxxxxxxxxxx大赛</p>
-                                    </div>
-                                    <div class="sai_detail_time">
-                                        报名时间：<span>xxxx--xxxx</span>
-                                    </div>
-                                    <div class="sai_detail_jie">
-                                        <p>
-                                            xxx
-                                        </p>
-                                    </div>
-                                    <!--<div class="sai_detail_more"><a href="#">查看详情</a></div>-->
-                                </div>
-                            </div>
-                            <div class="sai_detail" style="background-color: rgb(255, 255, 255);">
-                                <div class="sai_detail_img">
-                                    <img src="images/test.png">
-                                </div>
-                                <div class="sai_detail_right">
-                                    <div class="sai_detail_name">
-                                        <p style="
-    color: #212121;
-">xxxxxxxxxxxxxxxxxxxxxxxx大赛</p>
-                                    </div>
-                                    <div class="sai_detail_time">
-                                        报名时间：<span>xxxx--xxxx</span>
-                                    </div>
-                                    <div class="sai_detail_jie">
-                                        <p>
-                                            xxx
-                                        </p>
-                                    </div>
-                                    <!--<div class="sai_detail_more"><a href="#">查看详情</a></div>-->
-                                </div>
-                            </div>
-
-                            <div class="sai_detail" style="background-color: rgb(255, 255, 255);">
-                                <div class="sai_detail_img">
-                                    <img src="images/test.png">
-                                </div>
-                                <div class="sai_detail_right">
-                                    <div class="sai_detail_name">
-                                        <p style="
-    color: #212121;
-">互联网+创新创业大赛</p>
-                                    </div>
-
-                                    <div class="sai_detail_jie">
-                                            <span style="
-    font-size: small;
-">
-第四届大赛要力争做到“有广度、有高度、有深度、有温度”，努力体现有突破、有特色、有新意。扩大参赛规模，实现区域、学校、学生类型全覆盖和国际赛道拓展；广泛实施“青年红色筑梦之旅”活动，培养有理想、有本领、有担当的热血青春力量；壮大创新创业生力军，服务创新驱动发展、“一带一路”建设、乡村振兴和脱贫攻坚等国家战略。                                            </span>
-                                    </div>
-                                    <a href="#" class="sai_detail_url" style="
-    text-align: end;
-    color: #757575;
-    /* width: 10%; */
-    /* justify-self: end; */
-    font-size: 12px;
-">查看详情...</a>
-                                </div>
-                            </div>
-                            <div class="sai_detail" style="background-color: rgb(255, 255, 255);">
-                                <div class="sai_detail_img">
-                                    <img src="images/test.png">
-                                </div>
-                                <div class="sai_detail_right">
-                                    <div class="sai_detail_name">
-                                        <p style="
-    color: #212121;
-">互联网+创新创业大赛</p>
-                                    </div>
-
-                                    <div class="sai_detail_jie">
-                                            <span style="
-    font-size: small;
-">
-第四届大赛要力争做到“有广度、有高度、有深度、有温度”，努力体现有突破、有特色、有新意。扩大参赛规模，实现区域、学校、学生类型全覆盖和国际赛道拓展；广泛实施“青年红色筑梦之旅”活动，培养有理想、有本领、有担当的热血青春力量；壮大创新创业生力军，服务创新驱动发展、“一带一路”建设、乡村振兴和脱贫攻坚等国家战略。                                            </span>
-                                    </div>
-                                    <a href="#" class="sai_detail_url" style="
-    text-align: end;
-    color: #757575;
-    /* width: 10%; */
-    /* justify-self: end; */
-    font-size: 12px;
-">查看详情...</a>
-                                </div>
-                            </div>
-                            <div class="sai_detail" style="background-color: rgb(255, 255, 255);">
-                                <div class="sai_detail_img">
-                                    <img src="images/test.png">
-                                </div>
-                                <div class="sai_detail_right">
-                                    <div class="sai_detail_name">
-                                        <p style="
-    color: #212121;
-">xxxxxxxxxxxxxxxxxxxxxxxx大赛</p>
-                                    </div>
-                                    <div class="sai_detail_time">
-                                        报名时间：<span>xxxx--xxxx</span>
-                                    </div>
-                                    <div class="sai_detail_jie">
-                                        <p>
-                                            xxx
-                                        </p>
-                                    </div>
-                                    <!--<div class="sai_detail_more"><a href="#">查看详情</a></div>-->
-                                </div>
-                            </div>
-
 
                         </div>
                     </div>
@@ -609,7 +154,7 @@ $hand->select_db("$db_name") or die('数据库无此库');
                 </div>
 
             </div>
-            <div class="sai_right">
+            <div class="sai_right" id="section2">
                 <h3>热门赛事</h3>
                 <div class="contestRight">
                     <div class="sai_hot">
@@ -722,7 +267,7 @@ $hand->select_db("$db_name") or die('数据库无此库');
         </div>
     </div>
 
-    <div class="container third">
+    <div class="container third" id="section3">
 
         <h3>组队信息</h3>
         <form class="thirdHead" id="sForm" onsubmit="return false">
@@ -840,7 +385,7 @@ $hand->select_db("$db_name") or die('数据库无此库');
             </div>
         </div>
     </div>
-    <div class="container fouth" style=>
+    <div class="container fouth" id="section4" style=>
         <div class="fouthOne">
             <h3>问答</h3>
             <div class="answerOut">

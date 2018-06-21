@@ -258,7 +258,7 @@ body {
     width: 100%;
     height: 96px;
     margin-bottom: 1%;
-    background-color: #F5F5F5;
+    background-color: #ffffff;
     overflow: hidden;
     cursor: pointer;
     border-radius: 2px;
@@ -266,6 +266,11 @@ body {
     transition: box-shadow 200ms cubic-bezier(0.4, 0.0, 0.2, 1);
 }
 
+.sai_detail_url{
+    text-align: end;
+    color: #757575;
+    font-size: 12px;
+}
 .sai_detail_img, .sai_detail_img_search {
     float: left;
     width: 100px;

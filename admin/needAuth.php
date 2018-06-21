@@ -12,8 +12,12 @@ include '../session.php';
 include '../configure.php';
 session_set_save_handler($handler, true);
 session_start();
-if (!$_SESSION["user"]) {
-    echo "<script language=\"JavaScript\">
+$a=$_SESSION["user"];
+$sql="select user from account_admin where user='$a'";
+$row=mysqli_fetch_array($handle->query($sql));
+
+if (!$row) {
+    echo "<script>
   window.alert('请登陆');
   window.location.href='login.html';</script>";
 }
