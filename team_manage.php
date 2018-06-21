@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>我的组队</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/team_manage.css">
     <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 </head>
 <script>
 
@@ -92,7 +94,7 @@
 
 </script>
 <body>
-
+<?php require 'nav.html'?>
 <div id="main">
     <div class="zu_header">
         <p>

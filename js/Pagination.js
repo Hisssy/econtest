@@ -31,7 +31,7 @@ $(document).ready(function(){
         $('.sai_xin_main2').append(html);
     }
     $.ajax({
-        url:'contest_list.php',
+        url:'contest_list.php?action=contest',
         dataType:'json',
         type:'post',
         data:{c_page:1},

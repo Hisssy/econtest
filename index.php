@@ -17,27 +17,7 @@ $hand->select_db("$db_name") or die('数据库无此库');
     </head>
     <body>
 
-    <nav class="navbar nav-static-top
- navbar-expand-md navbar-light fixed-top bg-light">
-        <a class="navbar-brand" href="#">竞赛组队系统</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar"><span
-                    class="navbar-toggler-icon"></span></button>
-        <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
-            <ul class="navbar-nav justify-content-end">
-                <li class="nav-item dropdown "><a class="nav-link dropdown-toggle text-center dropdown" href="#"
-                                                  data-toggle="dropdown"> 首页 </a>
-                    <div class="dropdown-menu tab-content">
-                        <a class="dropdown-item text-center" href="#section1">赛事信息</a>
-                        <a class="dropdown-item text-center" href="#section2">热门赛事</a>
-                        <a class="dropdown-item text-center" href="#section3">组队信息</a>
-                        <a class="dropdown-item text-center" href="#section4">问答</a>
-                    </div>
-                </li>
-                <li class="nav-item"><a class="nav-link w3ls-hover text-center" href="user_center.html">个人中心</a></li>
-                <li class="nav-item"><a class="nav-link w3ls-hover text-center" href="team_manage.html">我的组队</a></li>
-            </ul>
-        </div>
-    </nav>
+
 
     <div id="modal1">
         <div class="mbox">
@@ -98,10 +78,10 @@ $hand->select_db("$db_name") or die('数据库无此库');
             </div>
             <div class="jie_right" style="">
                 <div class="topUserBar"><img src="images/center.png" onclick="
-            <?php if (!isset($_SESSION['user'])) echo "window.location.href='login.php'"; else  echo "window.location.href='user_center.html'"; ?>"><span
+            <?php if (!isset($_SESSION['user'])) echo "window.location.href='login.php'"; else  echo "window.location.href='user_center.php'"; ?>"><span
                             style="">个人中心</span></div>
                 <?php if (isset($_SESSION['user'])) echo
-                '<div class="topUserBar"><img onclick="window.location.href=\'team_manage.html\'" src="images/team.png"><span style="">我的队伍</span></div>
+                '<div class="topUserBar"><img onclick="window.location.href=teteam_manage.phprc="images/team.png"><span style="">我的队伍</span></div>
             <div class="topUserBar"><img src="images/create.png" onclick="modalOpen()"><span style="">创建队伍</span></div>
             <div class="topUserBar"><img src="images/logout.png" onclick="window.location.href=\'logout.php\'"><span style="">退出登录</span></div>' ?>
             </div>
@@ -281,76 +261,13 @@ $hand->select_db("$db_name") or die('数据库无此库');
         <div class="teamInfoSection0">
             <div class="teamInfoSection">
                 <div class="teamInfoCard">
-                    <div class="teamInfoCardImage">11111111111111</div>
-                    <div class="teamInfoCardText"></div>
-                </div>
-                <div class="teamInfoCard">
                     <div class="teamInfoCardImage"></div>
-                    <div class="teamInfoCardText"></div>
-                </div>
-                <div class="teamInfoCard">
-                    <div class="teamInfoCardImage"></div>
-                    <div class="teamInfoCardText"></div>
-                </div>
-                <div class="teamInfoCard">
-                    <div class="teamInfoCardImage"></div>
-                    <div class="teamInfoCardText"></div>
-                </div>
-
-                <div class="teamInfoCard">
-                    <div class="teamInfoCardImage">222222222222</div>
-                    <div class="teamInfoCardText"></div>
-                </div>
-                <div class="teamInfoCard">
-                    <div class="teamInfoCardImage"></div>
-                    <div class="teamInfoCardText"></div>
-                </div>
-                <div class="teamInfoCard">
-                    <div class="teamInfoCardImage"></div>
-                    <div class="teamInfoCardText"></div>
-                </div>
-                <div class="teamInfoCard">
-                    <div class="teamInfoCardImage"></div>
-                    <div class="teamInfoCardText"></div>
-                </div>
-
-                <div class="teamInfoCard">
-                    <div class="teamInfoCardImage">333333333333333333</div>
-                    <div class="teamInfoCardText"></div>
-                </div>
-                <div class="teamInfoCard">
-                    <div class="teamInfoCardImage"></div>
-                    <div class="teamInfoCardText"></div>
-                </div>
-                <div class="teamInfoCard">
-                    <div class="teamInfoCardImage"></div>
-                    <div class="teamInfoCardText"></div>
-                </div>
-                <div class="teamInfoCard">
-                    <div class="teamInfoCardImage"></div>
-                    <div class="teamInfoCardText"></div>
-                </div>
-
-                <div class="teamInfoCard">
-                    <div class="teamInfoCardImage">444444444444444444444444</div>
-                    <div class="teamInfoCardText"></div>
-                </div>
-                <div class="teamInfoCard">
-                    <div class="teamInfoCardImage"></div>
-                    <div class="teamInfoCardText"></div>
-                </div>
-                <div class="teamInfoCard">
-                    <div class="teamInfoCardImage"></div>
-                    <div class="teamInfoCardText"></div>
-                </div>
-                <div class="teamInfoCard">
-                    <div class="teamInfoCardImage"></div>
-                    <div class="teamInfoCardText"></div>
-                </div>
-
-                <div class="teamInfoCard">
-                    <div class="teamInfoCardImage">55555555555555</div>
-                    <div class="teamInfoCardText"></div>
+                    <div class="teamInfoCardText">
+                        <div class="cardWrapper">
+                            <div class="teamInfoCardTextTitle"><span class="title">V字仇杀队</span></div>
+                            <div class="cardTextEntry">队长：Guy Fawkes</div>
+                        </div>
+                    </div>
                 </div>
                 <div class="teamInfoCard">
                     <div class="teamInfoCardImage"></div>
