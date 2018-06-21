@@ -1,10 +1,11 @@
 <?php
-require("../PHPMailer/src/PHPMailer.php");
-require("../PHPMailer/src/SMTP.php");
-require("../PHPMailer/src/Exception.php");
+define('Root_Path',dirname(__FILE__));
+require(Root_Path."\..\PHPMailer\src\PHPMailer.php");
+require(Root_Path."\..\PHPMailer\src\SMTP.php");
+require(Root_Path."\..\PHPMailer\src\Exception.php");
+require(Root_Path."\password.php");
 class MailSend{
     private $username="397053880@qq.com";
-    private $password="zkcqefipcsqmcahh";
     var $address;
     var $title;
     var $body;
@@ -14,8 +15,9 @@ class MailSend{
         $this->title = $par2;
         $this->body =$par3;
     }
-    function send()
+    function send($unspoken)
     {
+        ob_start();
         $mail = new PHPMailer\PHPMailer\PHPMailer();
         $mail->IsSMTP();
 
@@ -30,13 +32,20 @@ class MailSend{
 
         //Authentication
         $mail->Username = $this->username;//发件邮箱
-        $mail->Password = $this->password;
+        $mail->Password = $unspoken;
 
         //Set Params
-        $mail->SetFrom($this->username,"重邮微校");//发件邮箱
+        try {
+            $mail->SetFrom($this->username, "重邮微校");
+        } catch (\PHPMailer\PHPMailer\Exception $e) {
+        }//发件邮箱
         $mail->AddAddress($this->address);//收件邮箱
         $mail->Subject = $this->title;//标题
         $mail->Body = $this->body;//正文
-        $mail->Send();
+        try {
+            $mail->Send();
+        } catch (\PHPMailer\PHPMailer\Exception $e) {
+        }
+         ob_end_clean();
     }
 }

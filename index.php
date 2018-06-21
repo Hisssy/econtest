@@ -5,18 +5,18 @@ $hand = mysqli_connect("$db_host", "$db_user", "$db_pwd") or die('数据库连�
 $hand->select_db("$db_name") or die('数据库无此库');
 ?>
 
-<!DOCTYPE html>
-<html>
+<!DOCTYPE HTML>
+<html lang="zh">
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link type="text/css" rel="stylesheet" href="css/index.css">
-    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
-    <script src="js/index.js"></script>
-    <title>重邮e站</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge，chrome=1">
+    <title>赛事专区</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/contest.css">
 </head>
-<body style="">
+<body>
+
 <div id="modal1">
     <div class="mbox">
         <div style="height: 10%"><span onclick="modalClose()"
@@ -49,211 +49,1030 @@ $hand->select_db("$db_name") or die('数据库无此库');
     </div>
 </div>
 
-<?php include 'header.html' ?>
-<div class="container">
-    <br>
-    <p style="font-weight: bold;color: #000000;font-size: 18px;cursor: pointer;margin: 0;">首页&gt;&gt;赛事专区</p>
-    <br>
-    <div class="main1">
-        <div class="left1">
-            <div class="search2">
-                <div class="sleft" style="
-    display:  flex;
-    padding-left: 10px;
-    height: 70%;
-">
-                    <form id="sform" style="display:flex;" onsubmit="return false">
-                        <input type="text" title="" class="search1" placeholder="请输入比赛或队伍关键词" name="content" required>
-                        <select title="" size="1" class="select1" name="method">
-                            <option value="1">比赛</option>
-                            <option value="2">队伍</option>
-                        </select>
-                        <img src="images/search2.png" class="fangdajing2" onclick="search('search.php')">
-                    </form>
-                </div>
-            </div>
-            <div class="xiala1">
-                <?php $query = $hand->query("SELECT tcid,cid,peoplenum,name FROM contest_team");
-                while ($objTeam = $query->fetch_assoc()) : ?>
-                    <?php $objUser = $hand->query("SELECT user FROM account_user where uid=$objTeam[tcid]")->fetch_assoc();//面向对象实现
-                    $objContest = $hand->query("SELECT name FROM contest_list where id=$objTeam[cid]")->fetch_assoc(); ?>
-                    <div class="xialatiao1">
-                        <img src="images/tu.png" class="xialatiao_image">
-                        <div class="example">
-                            <h4 class="title">队名：<span><?php echo $objTeam['name'] ?></span></h4>
-                            <div class="ec">
-                                <p>队长：<span><?php echo $objUser['user'] ?></span></p>
-                                <p>赛事：<span><?php echo $objContest['name'] ?></span></p>
-                                <p>人数：<span><?php echo $objTeam['peoplenum'] ?></span></p>
-                                <p>加入</p>
-                                <p>关注</p>
-                            </div>
-                        </div>
-                    </div>
-                <?php endwhile; ?>
-            </div>
+<div id="sai_header">
+    <div class="topUserSection">
+        <div class="ren_img">
+            <img class="img-fluid" src="images/head.png">
         </div>
-        <div class="right1">
-            <div class="denglu">
-                <div class="info" style="
-    width: 70%;
-">
-                    <h4 style="color: #000000;padding-top: 3%;padding-left: 5%;">状态：
-                        <?php
-                        if (isset($_SESSION["user"]))
-                            echo "<span style='color: green'>已登录</span>";
-                        else echo "未登录";
-                        ?></h4>
-                    <h4 style="color: #000000;padding-left: 5%">姓名：<span>
-                            <?php
-                            if (isset($_SESSION["user"]))
-                                echo "$_SESSION[name]";
-                            ?></span></h4>
-                    <h4 style="color: #043745;padding-left: 5%"></h4>
-                    <h4 style="color: #000000;padding-left: 5%">邮箱：<span>
-                            <?php
 
-                            if (isset($_SESSION["user"]))
-                            {
-                                global $hand;
-                                $result=$hand->query("SELECT email FROM account_user WHERE user='$_SESSION[user]'")->fetch_assoc();
-                                echo "$result[email]";
-                            }
-                            ?></span></h4>
-                    <h4 style="color: #043745;padding-left: 5%"></h4>
-                </div>
-                <div style="
-    width: 28%;
+        <div class="sai_ren" style="display: none;">
+
+            <!-- 头像 -->
+            <div style="
+    margin: auto;
     height: 100%;
-    display: flex;
+    width: 100%;
+    display: inline-flex;
 ">
-                    <i class="fa fa-user" style="font-size: 6em;margin: auto"  aria-hidden="true"></i>
+                <div class="topUserInfoBtn">
+                    <img src="images/ID.png"
+                         style="position: absolute;padding-right: 10px;height: 40px;vertical-align: middle;">
+                    <span id="userId"
+                          style="margin: auto;vertical-align: middle;font-size: 27px;">2017210079</span>
                 </div>
             </div>
-            <div class="block_btn">
-                <div class="btn">
-                    <button class="dec" style="margin-bottom: 1.5%;background-color: #f6868b;width: 100%;"
-                            onclick="modalOpen()">创建队伍
-                    </button>
-                    <button class="dec" onclick="getCenter()" style="background-color: #f6bd80;width: 100%;">管理队伍</button>
-                </div>
-                <div class="btn">
-                    <button onclick="window.location.href='<?php
-                    if (isset($_SESSION["user"]))
-                        echo "logout.php";
-                    else echo "login.php";
-                    ?>'" class="dec" style="margin-bottom: 1.5%;background-color: #458df9;">
-                        <?php
-                        if (isset($_SESSION["user"]))
-                            echo "退出";
-                        else echo "登录";
-                        ?></button>
-                    <button class="dec" style="background-color: #8dd16f;">个人<br>中心</button>
-                    <button class="dec" style="background-color: #999999; ">找回<br>密码</button>
-                    <button class="dec" style="background-color: #c2dc49;">关于<br>我们</button>
-                </div>
+        </div>
+        <div class="jie_right" style="">
+
+            <div class="topUserBar"><img src="images/center.png" onclick="
+            <?php if (!isset($_SESSION['user'])) echo "window.location.href='login.php'"; else  echo "window.location.href='user_center.html'";?>"><span style="">个人中心</span></div>
+            <?php if (isset($_SESSION['user'])) echo '<div class="topUserBar"><img onclick="window.location.href=\'team_manage.html\'" src="images/team.png"><span style="">我的队伍</span></div>
+            <div class="topUserBar"><img src="images/create.png" onclick="modalOpen()"><span style="">创建队伍</span></div>
+            <div class="topUserBar"><img src="images/logout.png" onclick="window.location.href=\'logout.php\'"><span style="">退出登录</span>' ?>
             </div>
         </div>
     </div>
-    <div class="main2">
-        <div class="left2">
+</div>
+<div class="container">
 
-            <?php $sqlContestInfo = "SELECT name,intro,begin,stop,imagesrc FROM contest_list where status=1";
-            $query = $hand->query($sqlContestInfo) ?>
-            <?php while ($row = mysqli_fetch_assoc($query)) : ?>
-                <div class="example1">
-
-                    <img src="admin/pic/<?php echo $row['imagesrc'] ?>" style="width: 30%" class="image">
-                    <div class="information">
-                        <p style="color: #000000;font-size: 18px;padding: 1%;margin-top:0">
-                            大赛名称：<span><?php echo $row['name'] ?></span></p>
-                        <p style="overflow: hidden;
-    height: 40%;
-    color: #000000;
-    font-size: 18px;
-    padding: 1%;
-    margin-right: 3%;">大赛主题：<span id="intro"><?php echo $row['intro'] ?></span></p>
-                        <p style="color: #000000;font-size: 18px;padding: 1%;margin-right: 3%">
-                            报名时间：<span><?php echo $row['begin'] . "到" . $row['stop'] ?></span></p>
-                        <p style="float: right;margin-right: 4%;color: #000000">更多信息...</p>
-
-                    </div>
-                </div>
-            <?php endwhile; ?>
-        </div>
-        <div class="right2">
-            <!--     我加入的队伍       -->
-            <div class="friends">
-            </div>
-            <div class="redian">
-                <div style="margin-top: 2%">
-                    <h3 style="
-    margin-left: 5%;
-">热点赛事</h3>
-
-                    <ol style="
-    padding-right: 15px;
-">
-                        <li>2018中国旅游商品大赛<a href="#" style="
-    float: right;
-">了解更多</a></li>
-                        <li>2018中国旅游商品大赛<a href="#" style="
-    float: right;
-">了解更多</a></li>
-                        <li>2018中国旅游商品大赛<a href="#" style="
-    float: right;
-">了解更多</a></li>
-                        <li>2018中国旅游商品大赛<a href="#" style="
-    float: right;
-">了解更多</a></li>
-                        <li>2018中国旅游商品大赛<a href="#" style="
-    float: right;
-">了解更多</a></li>
-                    </ol>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="main3">
-        <div class="lv">
-            <div class="lv_right">
-                <div class="wd">
-                    <h3 style="
-    margin-top: 0;
-">问答区</h3>
-                    <ul style="list-style: none;margin-bottom: 3px;padding-left: 0;margin-top: 0">
-                        <li><a href="#">这个ACM比赛是怎么回事？</a><span>回答（0）</span></li>
-                        <li><a href="#">摄影作品在此，有人来交流的吗？</a><span>回答（0）</span></li>
-                        <li><a href="#">创新创业大赛有那些人感兴趣的？</a><span>回答（0）</span></li>
-                        <li><a href="#">卖竹鼠，3元1只,10元3只谁要？</a><span>回答（0）</span></li>
-                        <li><a href="#">我这个问题啊，描述起来比较麻烦，所以要用好多字来说，写都写不...</a><span>回答（0）</span></li>
-                        <li><a href="#">这一页最后一个问题辣？</a><span>回答（0）</span></li>
-                    </ul>
-                    <div class="pagination">
-                        <div style="justify-content: space-between; width: 30%;display: flex;">
-                            <button><i class="fa fa-arrow-left" aria-hidden="true"></i>上一页</button>
-                            1/5
-                            <button>下一页<i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+    <div id="sai_content">
+        <div class="saishi">
+            <div class="sai_left">
+                <h3>赛事信息</h3>
+                <div class="sai_xin">
+                    <div class="sai_xin_header">
+                        <div class="sai_search">
+                            <input class="sai_text" type="text" id="match" placeholder="请输入比赛关键字">
+                            <img class="sai_submit" src="images/search.png">
                         </div>
                     </div>
-                </div>
-                <div class="tw">
-                    <h3 style="margin-top: 0;">提问</h3>
-                    <form id="tw1">
-                        <input placeholder="标题" name="title" width="50%">
-                        <textarea class="ban" style="margin-top: -2%" title="" name="content"></textarea>
-                        <div class="fb">
-                            <div style="width: 30%;display: flex">
-                                <img src="verification.php" onclick="reload('captcha')" id="captcha" alt="验证码">
-                                <input title="" name="captcha" required="">
+
+                    <div class="sai_xin_main">
+                        <div class="sai_xin_main2" style="
+    margin-left: 1%;
+    margin-right: 1%;
+">
+                            <div class="sai_detail" style="background-color: rgb(255, 255, 255);">
+                                <div class="sai_detail_img">
+                                    <img src="images/test.png">
+                                </div>
+                                <div class="sai_detail_right">
+                                    <div class="sai_detail_name">
+                                        <p style="
+    color: #212121;
+">互联网+创新创业大赛</p>
+                                    </div>
+
+                                    <div class="sai_detail_jie">
+                                            <span style="
+    font-size: small;
+">
+第四届大赛要力争做到“有广度、有高度、有深度、有温度”，努力体现有突破、有特色、有新意。扩大参赛规模，实现区域、学校、学生类型全覆盖和国际赛道拓展；广泛实施“青年红色筑梦之旅”活动，培养有理想、有本领、有担当的热血青春力量；壮大创新创业生力军，服务创新驱动发展、“一带一路”建设、乡村振兴和脱贫攻坚等国家战略。                                            </span>
+                                    </div>
+                                    <a href="#" class="sai_detail_url" style="
+    text-align: end;
+    color: #757575;
+    font-size: 12px;
+">查看详情...</a>
+                                </div>
                             </div>
-                            <button onclick="bbsPost('bbs_thread.php')" type="button" class="btn2">发布</button>
+                            <div class="sai_detail" style="background-color: rgb(255, 255, 255);">
+                                <div class="sai_detail_img">
+                                    <img src="images/test.png">
+                                </div>
+                                <div class="sai_detail_right">
+                                    <div class="sai_detail_name">
+                                        <p style="
+    color: #212121;
+">互联网+创新创业大赛</p>
+                                    </div>
+
+                                    <div class="sai_detail_jie">
+                                            <span style="
+    font-size: small;
+">
+第四届大赛要力争做到“有广度、有高度、有深度、有温度”，努力体现有突破、有特色、有新意。扩大参赛规模，实现区域、学校、学生类型全覆盖和国际赛道拓展；广泛实施“青年红色筑梦之旅”活动，培养有理想、有本领、有担当的热血青春力量；壮大创新创业生力军，服务创新驱动发展、“一带一路”建设、乡村振兴和脱贫攻坚等国家战略。                                            </span>
+                                    </div>
+                                    <a href="#" class="sai_detail_url" style="
+    text-align: end;
+    color: #757575;
+    /* width: 10%; */
+    /* justify-self: end; */
+    font-size: 12px;
+">查看详情...</a>
+                                </div>
+                            </div>
+                            <div class="sai_detail" style="background-color: rgb(255, 255, 255);">
+                                <div class="sai_detail_img">
+                                    <img src="images/test.png">
+                                </div>
+                                <div class="sai_detail_right">
+                                    <div class="sai_detail_name">
+                                        <p style="
+    color: #212121;
+">xxxxxxxxxxxxxxxxxxxxxxxx大赛</p>
+                                    </div>
+                                    <div class="sai_detail_time">
+                                        报名时间：<span>xxxx--xxxx</span>
+                                    </div>
+                                    <div class="sai_detail_jie">
+                                        <p>
+                                            xxx
+                                        </p>
+                                    </div>
+                                    <!--<div class="sai_detail_more"><a href="#">查看详情</a></div>-->
+                                </div>
+                            </div>
+                            <div class="sai_detail" style="background-color: rgb(255, 255, 255);">
+                                <div class="sai_detail_img">
+                                    <img src="images/test.png">
+                                </div>
+                                <div class="sai_detail_right">
+                                    <div class="sai_detail_name">
+                                        <p style="
+    color: #212121;
+">xxxxxxxxxxxxxxxxxxxxxxxx大赛</p>
+                                    </div>
+                                    <div class="sai_detail_time">
+                                        报名时间：<span>xxxx--xxxx</span>
+                                    </div>
+                                    <div class="sai_detail_jie">
+                                        <p>
+                                            xxx
+                                        </p>
+                                    </div>
+                                    <!--<div class="sai_detail_more"><a href="#">查看详情</a></div>-->
+                                </div>
+                            </div>
+                            <div class="sai_detail" style="background-color: rgb(255, 255, 255);">
+                                <div class="sai_detail_img">
+                                    <img src="images/test.png">
+                                </div>
+                                <div class="sai_detail_right">
+                                    <div class="sai_detail_name">
+                                        <p style="
+    color: #212121;
+">xxxxxxxxxxxxxxxxxxxxxxxx大赛</p>
+                                    </div>
+                                    <div class="sai_detail_time">
+                                        报名时间：<span>xxxx--xxxx</span>
+                                    </div>
+                                    <div class="sai_detail_jie">
+                                        <p>
+                                            xxx
+                                        </p>
+                                    </div>
+                                    <!--<div class="sai_detail_more"><a href="#">查看详情</a></div>-->
+                                </div>
+                            </div>
+                            <div class="sai_detail" style="background-color: rgb(255, 255, 255);">
+                                <div class="sai_detail_img">
+                                    <img src="images/test.png">
+                                </div>
+                                <div class="sai_detail_right">
+                                    <div class="sai_detail_name">
+                                        <p style="
+    color: #212121;
+">xxxxxxxxxxxxxxxxxxxxxxxx大赛</p>
+                                    </div>
+                                    <div class="sai_detail_time">
+                                        报名时间：<span>xxxx--xxxx</span>
+                                    </div>
+                                    <div class="sai_detail_jie">
+                                        <p>
+                                            xxx
+                                        </p>
+                                    </div>
+                                    <!--<div class="sai_detail_more"><a href="#">查看详情</a></div>-->
+                                </div>
+                            </div>
+
+                            <div class="sai_detail" style="background-color: rgb(255, 255, 255);">
+                                <div class="sai_detail_img">
+                                    <img src="images/test.png">
+                                </div>
+                                <div class="sai_detail_right">
+                                    <div class="sai_detail_name">
+                                        <p style="
+    color: #212121;
+">互联网+创新创业大赛</p>
+                                    </div>
+
+                                    <div class="sai_detail_jie">
+                                            <span style="
+    font-size: small;
+">
+第四届大赛要力争做到“有广度、有高度、有深度、有温度”，努力体现有突破、有特色、有新意。扩大参赛规模，实现区域、学校、学生类型全覆盖和国际赛道拓展；广泛实施“青年红色筑梦之旅”活动，培养有理想、有本领、有担当的热血青春力量；壮大创新创业生力军，服务创新驱动发展、“一带一路”建设、乡村振兴和脱贫攻坚等国家战略。                                            </span>
+                                    </div>
+                                    <a href="#" class="sai_detail_url" style="
+    text-align: end;
+    color: #757575;
+    /* width: 10%; */
+    /* justify-self: end; */
+    font-size: 12px;
+">查看详情...</a>
+                                </div>
+                            </div>
+                            <div class="sai_detail" style="background-color: rgb(255, 255, 255);">
+                                <div class="sai_detail_img">
+                                    <img src="images/test.png">
+                                </div>
+                                <div class="sai_detail_right">
+                                    <div class="sai_detail_name">
+                                        <p style="
+    color: #212121;
+">互联网+创新创业大赛</p>
+                                    </div>
+
+                                    <div class="sai_detail_jie">
+                                            <span style="
+    font-size: small;
+">
+第四届大赛要力争做到“有广度、有高度、有深度、有温度”，努力体现有突破、有特色、有新意。扩大参赛规模，实现区域、学校、学生类型全覆盖和国际赛道拓展；广泛实施“青年红色筑梦之旅”活动，培养有理想、有本领、有担当的热血青春力量；壮大创新创业生力军，服务创新驱动发展、“一带一路”建设、乡村振兴和脱贫攻坚等国家战略。                                            </span>
+                                    </div>
+                                    <a href="#" class="sai_detail_url" style="
+    text-align: end;
+    color: #757575;
+    /* width: 10%; */
+    /* justify-self: end; */
+    font-size: 12px;
+">查看详情...</a>
+                                </div>
+                            </div>
+                            <div class="sai_detail" style="background-color: rgb(255, 255, 255);">
+                                <div class="sai_detail_img">
+                                    <img src="images/test.png">
+                                </div>
+                                <div class="sai_detail_right">
+                                    <div class="sai_detail_name">
+                                        <p style="
+    color: #212121;
+">xxxxxxxxxxxxxxxxxxxxxxxx大赛</p>
+                                    </div>
+                                    <div class="sai_detail_time">
+                                        报名时间：<span>xxxx--xxxx</span>
+                                    </div>
+                                    <div class="sai_detail_jie">
+                                        <p>
+                                            xxx
+                                        </p>
+                                    </div>
+                                    <!--<div class="sai_detail_more"><a href="#">查看详情</a></div>-->
+                                </div>
+                            </div>
+                            <div class="sai_detail" style="background-color: rgb(255, 255, 255);">
+                                <div class="sai_detail_img">
+                                    <img src="images/test.png">
+                                </div>
+                                <div class="sai_detail_right">
+                                    <div class="sai_detail_name">
+                                        <p style="
+    color: #212121;
+">xxxxxxxxxxxxxxxxxxxxxxxx大赛</p>
+                                    </div>
+                                    <div class="sai_detail_time">
+                                        报名时间：<span>xxxx--xxxx</span>
+                                    </div>
+                                    <div class="sai_detail_jie">
+                                        <p>
+                                            xxx
+                                        </p>
+                                    </div>
+                                    <!--<div class="sai_detail_more"><a href="#">查看详情</a></div>-->
+                                </div>
+                            </div>
+                            <div class="sai_detail" style="background-color: rgb(255, 255, 255);">
+                                <div class="sai_detail_img">
+                                    <img src="images/test.png">
+                                </div>
+                                <div class="sai_detail_right">
+                                    <div class="sai_detail_name">
+                                        <p style="
+    color: #212121;
+">xxxxxxxxxxxxxxxxxxxxxxxx大赛</p>
+                                    </div>
+                                    <div class="sai_detail_time">
+                                        报名时间：<span>xxxx--xxxx</span>
+                                    </div>
+                                    <div class="sai_detail_jie">
+                                        <p>
+                                            xxx
+                                        </p>
+                                    </div>
+                                    <!--<div class="sai_detail_more"><a href="#">查看详情</a></div>-->
+                                </div>
+                            </div>
+                            <div class="sai_detail" style="background-color: rgb(255, 255, 255);">
+                                <div class="sai_detail_img">
+                                    <img src="images/test.png">
+                                </div>
+                                <div class="sai_detail_right">
+                                    <div class="sai_detail_name">
+                                        <p style="
+    color: #212121;
+">xxxxxxxxxxxxxxxxxxxxxxxx大赛</p>
+                                    </div>
+                                    <div class="sai_detail_time">
+                                        报名时间：<span>xxxx--xxxx</span>
+                                    </div>
+                                    <div class="sai_detail_jie">
+                                        <p>
+                                            xxx
+                                        </p>
+                                    </div>
+                                    <!--<div class="sai_detail_more"><a href="#">查看详情</a></div>-->
+                                </div>
+                            </div>
+
+                            <div class="sai_detail" style="background-color: rgb(255, 255, 255);">
+                                <div class="sai_detail_img">
+                                    <img src="images/test.png">
+                                </div>
+                                <div class="sai_detail_right">
+                                    <div class="sai_detail_name">
+                                        <p style="
+    color: #212121;
+">互联网+创新创业大赛</p>
+                                    </div>
+
+                                    <div class="sai_detail_jie">
+                                            <span style="
+    font-size: small;
+">
+第四届大赛要力争做到“有广度、有高度、有深度、有温度”，努力体现有突破、有特色、有新意。扩大参赛规模，实现区域、学校、学生类型全覆盖和国际赛道拓展；广泛实施“青年红色筑梦之旅”活动，培养有理想、有本领、有担当的热血青春力量；壮大创新创业生力军，服务创新驱动发展、“一带一路”建设、乡村振兴和脱贫攻坚等国家战略。                                            </span>
+                                    </div>
+                                    <a href="#" class="sai_detail_url" style="
+    text-align: end;
+    color: #757575;
+    /* width: 10%; */
+    /* justify-self: end; */
+    font-size: 12px;
+">查看详情...</a>
+                                </div>
+                            </div>
+                            <div class="sai_detail" style="background-color: rgb(255, 255, 255);">
+                                <div class="sai_detail_img">
+                                    <img src="images/test.png">
+                                </div>
+                                <div class="sai_detail_right">
+                                    <div class="sai_detail_name">
+                                        <p style="
+    color: #212121;
+">互联网+创新创业大赛</p>
+                                    </div>
+
+                                    <div class="sai_detail_jie">
+                                            <span style="
+    font-size: small;
+">
+第四届大赛要力争做到“有广度、有高度、有深度、有温度”，努力体现有突破、有特色、有新意。扩大参赛规模，实现区域、学校、学生类型全覆盖和国际赛道拓展；广泛实施“青年红色筑梦之旅”活动，培养有理想、有本领、有担当的热血青春力量；壮大创新创业生力军，服务创新驱动发展、“一带一路”建设、乡村振兴和脱贫攻坚等国家战略。                                            </span>
+                                    </div>
+                                    <a href="#" class="sai_detail_url" style="
+    text-align: end;
+    color: #757575;
+    /* width: 10%; */
+    /* justify-self: end; */
+    font-size: 12px;
+">查看详情...</a>
+                                </div>
+                            </div>
+                            <div class="sai_detail" style="background-color: rgb(255, 255, 255);">
+                                <div class="sai_detail_img">
+                                    <img src="images/test.png">
+                                </div>
+                                <div class="sai_detail_right">
+                                    <div class="sai_detail_name">
+                                        <p style="
+    color: #212121;
+">xxxxxxxxxxxxxxxxxxxxxxxx大赛</p>
+                                    </div>
+                                    <div class="sai_detail_time">
+                                        报名时间：<span>xxxx--xxxx</span>
+                                    </div>
+                                    <div class="sai_detail_jie">
+                                        <p>
+                                            xxx
+                                        </p>
+                                    </div>
+                                    <!--<div class="sai_detail_more"><a href="#">查看详情</a></div>-->
+                                </div>
+                            </div>
+                            <div class="sai_detail" style="background-color: rgb(255, 255, 255);">
+                                <div class="sai_detail_img">
+                                    <img src="images/test.png">
+                                </div>
+                                <div class="sai_detail_right">
+                                    <div class="sai_detail_name">
+                                        <p style="
+    color: #212121;
+">xxxxxxxxxxxxxxxxxxxxxxxx大赛</p>
+                                    </div>
+                                    <div class="sai_detail_time">
+                                        报名时间：<span>xxxx--xxxx</span>
+                                    </div>
+                                    <div class="sai_detail_jie">
+                                        <p>
+                                            xxx
+                                        </p>
+                                    </div>
+                                    <!--<div class="sai_detail_more"><a href="#">查看详情</a></div>-->
+                                </div>
+                            </div>
+                            <div class="sai_detail" style="background-color: rgb(255, 255, 255);">
+                                <div class="sai_detail_img">
+                                    <img src="images/test.png">
+                                </div>
+                                <div class="sai_detail_right">
+                                    <div class="sai_detail_name">
+                                        <p style="
+    color: #212121;
+">xxxxxxxxxxxxxxxxxxxxxxxx大赛</p>
+                                    </div>
+                                    <div class="sai_detail_time">
+                                        报名时间：<span>xxxx--xxxx</span>
+                                    </div>
+                                    <div class="sai_detail_jie">
+                                        <p>
+                                            xxx
+                                        </p>
+                                    </div>
+                                    <!--<div class="sai_detail_more"><a href="#">查看详情</a></div>-->
+                                </div>
+                            </div>
+                            <div class="sai_detail" style="background-color: rgb(255, 255, 255);">
+                                <div class="sai_detail_img">
+                                    <img src="images/test.png">
+                                </div>
+                                <div class="sai_detail_right">
+                                    <div class="sai_detail_name">
+                                        <p style="
+    color: #212121;
+">xxxxxxxxxxxxxxxxxxxxxxxx大赛</p>
+                                    </div>
+                                    <div class="sai_detail_time">
+                                        报名时间：<span>xxxx--xxxx</span>
+                                    </div>
+                                    <div class="sai_detail_jie">
+                                        <p>
+                                            xxx
+                                        </p>
+                                    </div>
+                                    <!--<div class="sai_detail_more"><a href="#">查看详情</a></div>-->
+                                </div>
+                            </div>
+
+                            <div class="sai_detail" style="background-color: rgb(255, 255, 255);">
+                                <div class="sai_detail_img">
+                                    <img src="images/test.png">
+                                </div>
+                                <div class="sai_detail_right">
+                                    <div class="sai_detail_name">
+                                        <p style="
+    color: #212121;
+">互联网+创新创业大赛</p>
+                                    </div>
+
+                                    <div class="sai_detail_jie">
+                                            <span style="
+    font-size: small;
+">
+第四届大赛要力争做到“有广度、有高度、有深度、有温度”，努力体现有突破、有特色、有新意。扩大参赛规模，实现区域、学校、学生类型全覆盖和国际赛道拓展；广泛实施“青年红色筑梦之旅”活动，培养有理想、有本领、有担当的热血青春力量；壮大创新创业生力军，服务创新驱动发展、“一带一路”建设、乡村振兴和脱贫攻坚等国家战略。                                            </span>
+                                    </div>
+                                    <a href="#" class="sai_detail_url" style="
+    text-align: end;
+    color: #757575;
+    /* width: 10%; */
+    /* justify-self: end; */
+    font-size: 12px;
+">查看详情...</a>
+                                </div>
+                            </div>
+                            <div class="sai_detail" style="background-color: rgb(255, 255, 255);">
+                                <div class="sai_detail_img">
+                                    <img src="images/test.png">
+                                </div>
+                                <div class="sai_detail_right">
+                                    <div class="sai_detail_name">
+                                        <p style="
+    color: #212121;
+">互联网+创新创业大赛</p>
+                                    </div>
+
+                                    <div class="sai_detail_jie">
+                                            <span style="
+    font-size: small;
+">
+第四届大赛要力争做到“有广度、有高度、有深度、有温度”，努力体现有突破、有特色、有新意。扩大参赛规模，实现区域、学校、学生类型全覆盖和国际赛道拓展；广泛实施“青年红色筑梦之旅”活动，培养有理想、有本领、有担当的热血青春力量；壮大创新创业生力军，服务创新驱动发展、“一带一路”建设、乡村振兴和脱贫攻坚等国家战略。                                            </span>
+                                    </div>
+                                    <a href="#" class="sai_detail_url" style="
+    text-align: end;
+    color: #757575;
+    /* width: 10%; */
+    /* justify-self: end; */
+    font-size: 12px;
+">查看详情...</a>
+                                </div>
+                            </div>
+                            <div class="sai_detail" style="background-color: rgb(255, 255, 255);">
+                                <div class="sai_detail_img">
+                                    <img src="images/test.png">
+                                </div>
+                                <div class="sai_detail_right">
+                                    <div class="sai_detail_name">
+                                        <p style="
+    color: #212121;
+">xxxxxxxxxxxxxxxxxxxxxxxx大赛</p>
+                                    </div>
+                                    <div class="sai_detail_time">
+                                        报名时间：<span>xxxx--xxxx</span>
+                                    </div>
+                                    <div class="sai_detail_jie">
+                                        <p>
+                                            xxx
+                                        </p>
+                                    </div>
+                                    <!--<div class="sai_detail_more"><a href="#">查看详情</a></div>-->
+                                </div>
+                            </div>
+
+
                         </div>
-                    </form>
+                    </div>
+
+                    <div class="saiPage">
+                        <div class="pager">
+                            <div class="page_left">
+                                <img src="images/Previous.png">
+                            </div>
+                            <div class="page"><input type="button" value="1" style="font-weight: bold;"></div>
+                            <div class="page"><input type="button" value="2"></div>
+                            <div class="page"><input type="button" value="3"></div>
+                            <div class="page"><input type="button" value="4"></div>
+                            <div class="page"><input type="button" value="5"></div>
+                            <div class="page_right">
+                                <img src="images/Next.png">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="saiAfterSearch">
+                    </div>
+                </div>
+
+            </div>
+            <div class="sai_right">
+                <h3>热门赛事</h3>
+                <div class="contestRight">
+                    <div class="sai_hot">
+                        <div class="sai_hot_bg">
+
+                            <div class="aaa">
+                                <div class="sai_hot_detail">
+                                    <div class="sai_hot_detail0">
+                                        <button class="sai_hot_num">1
+
+                                        </button>
+                                        <div>
+                                            <a href="#">哈哈哈哈哈哈哈哈哈</a>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="sai_hot_detail">
+                                    <div class="sai_hot_detail0">
+                                        <button class="sai_hot_num">2
+                                        </button>
+                                        <div>
+                                            <a href="#">哈哈哈哈哈哈哈哈哈</a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="sai_hot_detail">
+                                    <div class="sai_hot_detail0">
+                                        <button class="sai_hot_num">3</button>
+                                        <div>
+                                            <a href="#">哈哈哈哈哈哈哈哈哈</a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="sai_hot_detail">
+                                    <div class="sai_hot_detail0">
+                                        <button class="sai_hot_num">4</button>
+                                        <div>
+                                            <a href="#">哈哈哈哈哈哈哈哈哈</a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="sai_hot_detail">
+                                    <div class="sai_hot_detail0">
+                                        <button class="sai_hot_num">5</button>
+                                        <div>
+                                            <a href="#">哈哈哈哈哈哈哈哈哈</a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="sai_hot_detail">
+                                    <div class="sai_hot_detail0">
+                                        <button class="sai_hot_num">6</button>
+                                        <div>
+                                            <a href="#">哈哈哈哈哈哈哈哈哈</a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="sai_hot_detail">
+                                    <div class="sai_hot_detail0">
+                                        <button class="sai_hot_num">7</button>
+                                        <div>
+                                            <a href="#">哈哈哈哈哈哈哈哈哈</a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="sai_hot_detail">
+                                    <div class="sai_hot_detail0">
+                                        <button class="sai_hot_num">8</button>
+                                        <div>
+                                            <a href="#">哈哈哈哈哈哈哈哈哈</a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="sai_hot_detail">
+                                    <div class="sai_hot_detail0">
+                                        <button class="sai_hot_num">9</button>
+                                        <div>
+                                            <a href="#">哈哈哈哈哈哈哈哈哈</a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="sai_hot_detail">
+                                    <div class="sai_hot_detail0">
+                                        <button class="sai_hot_num">10</button>
+                                        <div>
+                                            <a href="#">哈哈哈哈哈哈哈哈哈</a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sai_img">
+                        <img src="images/aaa.png">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container third">
+
+        <h3>组队信息</h3>
+        <form class="thirdHead" id="sForm" onsubmit="return false">
+            <input type="text" id="organize" placeholder="请输入比赛或队伍关键字" name="content" class="search">
+            <select title="" name="method" class="select1" size="1">
+                <option value="1">比赛</option>
+                <option value="2">队伍</option>
+            </select>
+            <img src="images/search.png" class="searchPic">
+        </form>
+        <div class="teamInfoSection0">
+            <div class="teamInfoSection">
+                <div class="teamInfoCard">
+                    <div class="teamInfoCardImage">11111111111111</div>
+                    <div class="teamInfoCardText"></div>
+                </div>
+                <div class="teamInfoCard">
+                    <div class="teamInfoCardImage"></div>
+                    <div class="teamInfoCardText"></div>
+                </div>
+                <div class="teamInfoCard">
+                    <div class="teamInfoCardImage"></div>
+                    <div class="teamInfoCardText"></div>
+                </div>
+                <div class="teamInfoCard">
+                    <div class="teamInfoCardImage"></div>
+                    <div class="teamInfoCardText"></div>
+                </div>
+
+                <div class="teamInfoCard">
+                    <div class="teamInfoCardImage">222222222222</div>
+                    <div class="teamInfoCardText"></div>
+                </div>
+                <div class="teamInfoCard">
+                    <div class="teamInfoCardImage"></div>
+                    <div class="teamInfoCardText"></div>
+                </div>
+                <div class="teamInfoCard">
+                    <div class="teamInfoCardImage"></div>
+                    <div class="teamInfoCardText"></div>
+                </div>
+                <div class="teamInfoCard">
+                    <div class="teamInfoCardImage"></div>
+                    <div class="teamInfoCardText"></div>
+                </div>
+
+                <div class="teamInfoCard">
+                    <div class="teamInfoCardImage">333333333333333333</div>
+                    <div class="teamInfoCardText"></div>
+                </div>
+                <div class="teamInfoCard">
+                    <div class="teamInfoCardImage"></div>
+                    <div class="teamInfoCardText"></div>
+                </div>
+                <div class="teamInfoCard">
+                    <div class="teamInfoCardImage"></div>
+                    <div class="teamInfoCardText"></div>
+                </div>
+                <div class="teamInfoCard">
+                    <div class="teamInfoCardImage"></div>
+                    <div class="teamInfoCardText"></div>
+                </div>
+
+                <div class="teamInfoCard">
+                    <div class="teamInfoCardImage">444444444444444444444444</div>
+                    <div class="teamInfoCardText"></div>
+                </div>
+                <div class="teamInfoCard">
+                    <div class="teamInfoCardImage"></div>
+                    <div class="teamInfoCardText"></div>
+                </div>
+                <div class="teamInfoCard">
+                    <div class="teamInfoCardImage"></div>
+                    <div class="teamInfoCardText"></div>
+                </div>
+                <div class="teamInfoCard">
+                    <div class="teamInfoCardImage"></div>
+                    <div class="teamInfoCardText"></div>
+                </div>
+
+                <div class="teamInfoCard">
+                    <div class="teamInfoCardImage">55555555555555</div>
+                    <div class="teamInfoCardText"></div>
+                </div>
+                <div class="teamInfoCard">
+                    <div class="teamInfoCardImage"></div>
+                    <div class="teamInfoCardText"></div>
+                </div>
+                <div class="teamInfoCard">
+                    <div class="teamInfoCardImage"></div>
+                    <div class="teamInfoCardText"></div>
+                </div>
+                <div class="teamInfoCard">
+                    <div class="teamInfoCardImage"></div>
+                    <div class="teamInfoCardText"></div>
+                </div>
+            </div>
+            <div class="teamInfoPage">
+                <div class="teamInfoPaint"></div>
+                <div class="teamInfoPaint"></div>
+                <div class="teamInfoPaint"></div>
+                <div class="teamInfoPaint"></div>
+                <div class="teamInfoPaint"></div>
+            </div>
+        </div>
+
+        <div class="teamInfoAfterSearch0">
+            <div class="teamInfoAfterSearch">
+                <div class="teamInfoAfterSearchLeft">
+                    <img src="images/left.png">
+                </div>
+                <div class="teamInfoAfterSearchRight">
+                    <img src="images/right.png">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container fouth" style=>
+        <div class="fouthOne">
+            <h3>问答</h3>
+            <div class="answerOut">
+                <div>
+                    <div class="answer1">
+                        <div><p><span class="answerLeft">最后一个板块啦啦啦啦啦</span><span
+                                        class="answerRight">问答【<span>0</span>】</span>
+                            </p></div>
+                        <div><p><span class="answerLeft">最后一个板块啦啦啦啦啦</span><span
+                                        class="answerRight">问答【<span>0</span>】</span>
+                            </p></div>
+                        <div><p><span class="answerLeft">最后一个板块啦啦啦啦啦</span><span
+                                        class="answerRight">问答【<span>0</span>】</span>
+                            </p></div>
+                        <div><p><span class="answerLeft">最后一个板块啦啦啦啦啦</span><span
+                                        class="answerRight">问答【<span>0</span>】</span>
+                            </p></div>
+                        <div><p><span class="answerLeft">最后一个板块啦啦啦啦啦</span><span
+                                        class="answerRight">问答【<span>0</span>】</span>
+                            </p></div>
+                        <div><p><span class="answerLeft">最后一个板块啦啦啦啦啦</span><span
+                                        class="answerRight">问答【<span>0</span>】</span>
+                            </p></div>
+                        <div><p><span class="answerLeft">最后一个板块啊啊啊啊啊</span><span
+                                        class="answerRight">问答【<span>0</span>】</span>
+                            </p></div>
+                    </div>
+                    <div class="answer2" style="display: none;">
+                        <div><p><span class="answerLeft">最后一个板块啊啊啊啊啊</span><span
+                                        class="answerRight">问答【<span>0</span>】</span>
+                            </p></div>
+                        <div><p><span class="answerLeft">最后一个板块啊啊啊啊啊</span><span
+                                        class="answerRight">问答【<span>0</span>】</span>
+                            </p></div>
+                        <div><p><span class="answerLeft">最后一个板块啊啊啊啊啊</span><span
+                                        class="answerRight">问答【<span>0</span>】</span>
+                            </p></div>
+                        <div><p><span class="answerLeft">最后一个板块啊啊啊啊啊</span><span
+                                        class="answerRight">问答【<span>0</span>】</span>
+                            </p></div>
+                        <div><p><span class="answerLeft">最后一个板块啊啊啊啊啊</span><span
+                                        class="answerRight">问答【<span>0</span>】</span>
+                            </p></div>
+                        <div><p><span class="answerLeft">最后一个板块啊啊啊啊啊</span><span
+                                        class="answerRight">问答【<span>0</span>】</span>
+                            </p></div>
+                        <div><p><span class="answerLeft">最后一个板块啊啊啊啊啊</span><span
+                                        class="answerRight">问答【<span>0</span>】</span>
+                            </p></div>
+                    </div>
+                    <div class="answer3" style="display: none;">
+                        <div><p><span class="answerLeft">这是第三页啊</span><span
+                                        class="answerRight">问答【<span>0</span>】</span></p></div>
+                        <div><p><span class="answerLeft">最后一个板块啊啊啊啊啊</span><span
+                                        class="answerRight">问答【<span>0</span>】</span>
+                            </p></div>
+                        <div><p><span class="answerLeft">最后一个板块啊啊啊啊啊</span><span
+                                        class="answerRight">问答【<span>0</span>】</span>
+                            </p></div>
+                        <div><p><span class="answerLeft">最后一个板块啊啊啊啊啊</span><span
+                                        class="answerRight">问答【<span>0</span>】</span>
+                            </p></div>
+                        <div><p><span class="answerLeft">最后一个板块啊啊啊啊啊</span><span
+                                        class="answerRight">问答【<span>0</span>】</span>
+                            </p></div>
+                        <div><p><span class="answerLeft">最后一个板块啊啊啊啊啊</span><span
+                                        class="answerRight">问答【<span>0</span>】</span>
+                            </p></div>
+                        <div><p><span class="answerLeft">最后一个板块啊啊啊啊啊</span><span
+                                        class="answerRight">问答【<span>0</span>】</span>
+                            </p></div>
+                    </div>
+                    <div class="answer4" style="display: none;">
+                        <div><p><span class="answerLeft">这是第四页</span><span class="answerRight">问答【<span>0</span>】</span>
+                            </p></div>
+                        <div><p><span class="answerLeft">最后一个板块啊啊啊啊啊</span><span
+                                        class="answerRight">问答【<span>0</span>】</span>
+                            </p></div>
+                        <div><p><span class="answerLeft">最后一个板块啊啊啊啊啊</span><span
+                                        class="answerRight">问答【<span>0</span>】</span>
+                            </p></div>
+                        <div><p><span class="answerLeft">最后一个板块啊啊啊啊啊</span><span
+                                        class="answerRight">问答【<span>0</span>】</span>
+                            </p></div>
+                        <div><p><span class="answerLeft">最后一个板块啊啊啊啊啊</span><span
+                                        class="answerRight">问答【<span>0</span>】</span>
+                            </p></div>
+                        <div><p><span class="answerLeft">最后一个板块啊啊啊啊啊</span><span
+                                        class="answerRight">问答【<span>0</span>】</span>
+                            </p></div>
+                        <div><p><span class="answerLeft">最后一个板块啊啊啊啊啊</span><span
+                                        class="answerRight">问答【<span>0</span>】</span>
+                            </p></div>
+                    </div>
+                    <div class="answer5" style="display: none;">
+                        <div><p><span class="answerLeft">这是第五页</span><span class="answerRight">问答【<span>0</span>】</span>
+                            </p></div>
+                        <div><p><span class="answerLeft">最后一个板块啊啊啊啊啊</span><span
+                                        class="answerRight">问答【<span>0</span>】</span>
+                            </p></div>
+                        <div><p><span class="answerLeft">最后一个板块啊啊啊啊啊</span><span
+                                        class="answerRight">问答【<span>0</span>】</span>
+                            </p></div>
+                        <div><p><span class="answerLeft">最后一个板块啊啊啊啊啊</span><span
+                                        class="answerRight">问答【<span>0</span>】</span>
+                            </p></div>
+                        <div><p><span class="answerLeft">最后一个板块啊啊啊啊啊</span><span
+                                        class="answerRight">问答【<span>0</span>】</span>
+                            </p></div>
+                        <div><p><span class="answerLeft">最后一个板块啊啊啊啊啊</span><span
+                                        class="answerRight">问答【<span>0</span>】</span>
+                            </p></div>
+                        <div><p><span class="answerLeft">最后一个板块啊啊啊啊啊</span><span
+                                        class="answerRight">问答【<span>0</span>】</span>
+                            </p></div>
+                    </div>
+                </div>
+                <div class="answerTurn">
+                    <div class="pager"><input type="button" value="1"><input type="button" value="2"><input
+                                type="button" value="3"><input type="button" value="4"><input type="button"
+                                                                                              value="5"></div>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="fouthTwo">
+            <h3>我的问题</h3>
+            <div class="myQuestionOut">
+                <div class="myQuestion1" style="">
+                    <div><p><span class="myQuestionLeft" id="question1">我们要提什么问题呢</span><span
+                                    class="myQuestionRight">问答【<span>0</span>】</span>
+                        </p></div>
+                    <div><p><span class="myQuestionLeft">我们要提什么问题呢</span><span
+                                    class="myQuestionRight">问答【<span>0</span>】</span>
+                        </p></div>
+                    <div><p><span class="myQuestionLeft">我们要提什么问题呢</span><span
+                                    class="myQuestionRight">问答【<span>0</span>】</span>
+                        </p></div>
+                    <div><p><span class="myQuestionLeft">我们要提什么问题呢</span><span
+                                    class="myQuestionRight">问答【<span>0</span>】</span>
+                        </p></div>
+                    <div><p><span class="myQuestionLeft">我们要提什么问题呢</span><span
+                                    class="myQuestionRight">问答【<span>0</span>】</span>
+                        </p></div>
+                </div>
+                <div class="myQuestion2" style="display: none;">
+                    <div><p><span class="myQuestionLeft">我们要提什么问题呢2</span><span
+                                    class="myQuestionRight">问答【<span>0</span>】</span></p></div>
+                    <div><p><span class="myQuestionLeft">我们要提什么问题呢</span><span
+                                    class="myQuestionRight">问答【<span>0</span>】</span>
+                        </p></div>
+                    <div><p><span class="myQuestionLeft">我们要提什么问题呢</span><span
+                                    class="myQuestionRight">问答【<span>0</span>】</span>
+                        </p></div>
+                    <div><p><span class="myQuestionLeft">我们要提什么问题呢</span><span
+                                    class="myQuestionRight">问答【<span>0</span>】</span>
+                        </p></div>
+                    <div><p><span class="myQuestionLeft">我们要提什么问题呢</span><span
+                                    class="myQuestionRight">问答【<span>0</span>】</span>
+                        </p></div>
+                </div>
+                <div class="myQuestion3" style="display: none;">
+                    <div><p><span class="myQuestionLeft">我们要提什么问题呢3</span><span
+                                    class="myQuestionRight">问答【<span>0</span>】</span></p></div>
+                    <div><p><span class="myQuestionLeft">我们要提什么问题呢</span><span
+                                    class="myQuestionRight">问答【<span>0</span>】</span>
+                        </p></div>
+                    <div><p><span class="myQuestionLeft">我们要提什么问题呢</span><span
+                                    class="myQuestionRight">问答【<span>0</span>】</span>
+                        </p></div>
+                    <div><p><span class="myQuestionLeft">我们要提什么问题呢</span><span
+                                    class="myQuestionRight">问答【<span>0</span>】</span>
+                        </p></div>
+                    <div><p><span class="myQuestionLeft">我们要提什么问题呢</span><span
+                                    class="myQuestionRight">问答【<span>0</span>】</span>
+                        </p></div>
+                </div>
+                <div class="myQuestion4" style="display: none;">
+                    <div><p><span class="myQuestionLeft">我们要提什么问题呢4</span><span
+                                    class="myQuestionRight">问答【<span>0</span>】</span></p></div>
+                    <div><p><span class="myQuestionLeft">我们要提什么问题呢</span><span
+                                    class="myQuestionRight">问答【<span>0</span>】</span>
+                        </p></div>
+                    <div><p><span class="myQuestionLeft">我们要提什么问题呢</span><span
+                                    class="myQuestionRight">问答【<span>0</span>】</span>
+                        </p></div>
+                    <div><p><span class="myQuestionLeft">我们要提什么问题呢</span><span
+                                    class="myQuestionRight">问答【<span>0</span>】</span>
+                        </p></div>
+                    <div><p><span class="myQuestionLeft">我们要提什么问题呢</span><span
+                                    class="myQuestionRight">问答【<span>0</span>】</span>
+                        </p></div>
+                </div>
+                <div class="myQuestion5" style="display: none;">
+                    <div><p><span class="myQuestionLeft">我们要提什么问题呢5</span><span
+                                    class="myQuestionRight">问答【<span>0</span>】</span></p></div>
+                    <div><p><span class="myQuestionLeft">我们要提什么问题呢</span><span
+                                    class="myQuestionRight">问答【<span>0</span>】</span>
+                        </p></div>
+                    <div><p><span class="myQuestionLeft">我们要提什么问题呢</span><span
+                                    class="myQuestionRight">问答【<span>0</span>】</span>
+                        </p></div>
+                    <div><p><span class="myQuestionLeft">我们要提什么问题呢</span><span
+                                    class="myQuestionRight">问答【<span>0</span>】</span>
+                        </p></div>
+                    <div><p><span class="myQuestionLeft">我们要提什么问题呢</span><span
+                                    class="myQuestionRight">问答【<span>0</span>】</span>
+                        </p></div>
+                </div>
+                <div class="myQuestionTurn">
+                    <div class="pager"><input type="button" value="1"><input type="button" value="2"><input
+                                type="button" value="3"><input type="button" value="4"><input type="button"
+                                                                                              value="5"></div>
+
+
+                </div>
+                <div class="discuss">
+                    <div>
+                        <input type="text" class="disleft1" placeholder="请输入问题...">
+                        <textarea placeholder="请输入问题...." class="disleft2" rows="3" cols="35"></textarea></div>
+                    <button type="submit" class="disright"><img src="images/send.png"> 发送</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<?php include 'footer.html' ?>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="js/Pagination.js"></script>
+<script src="js/index.js"></script>
+</body>
 </html>
