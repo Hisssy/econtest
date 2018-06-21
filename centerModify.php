@@ -23,6 +23,9 @@ switch ($_GET['action']) {
     case 'check_user':
         check_user();
         break;
+    case 'initInfo':
+        Infoinit();
+        break;
 }
 
 function infoModify()
@@ -76,9 +79,28 @@ function portraitUpload()
     }else
         echo "文件格式错误";
 }
+
+function infoInit()
+{
+    global $hand;
+    $sql=$hand->query("SELECT * FROM contest.account_user WHERE user='$_SESSION[user]'");
+    $result=$sql->fetch_array();
+    echo json_encode(array(
+        'id'=>$result['uid'],
+       	'use'=>$result['user'],
+        'email'=>$result['email'],
+        'name'=>$result['nickname'],
+        'school'=>$result['school'] ,
+        'major'=>$result['major'],
+        'phone'=>$result['phone'],
+        'qq'=>$result['qq'],
+        'info'=>$result['info']));
+}
+
 function check_user()
 {
     global $hand;
+    global $unspoken;
     $user=$_SESSION["user"];
     $mail=$_POST["mail"];
     $num=new RandomNum();

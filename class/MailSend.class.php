@@ -1,9 +1,9 @@
 <?php
 define('Root_Path',dirname(__FILE__));
-require(Root_Path."\..\PHPMailer\src\PHPMailer.php");
-require(Root_Path."\..\PHPMailer\src\SMTP.php");
-require(Root_Path."\..\PHPMailer\src\Exception.php");
-require(Root_Path."\password.php");
+require(Root_Path."/../PHPMailer/src/PHPMailer.php");
+require(Root_Path."/../PHPMailer/src/SMTP.php");
+require(Root_Path."/../PHPMailer/src/Exception.php");
+require(Root_Path."/password.php");
 class MailSend{
     private $username="397053880@qq.com";
     var $address;

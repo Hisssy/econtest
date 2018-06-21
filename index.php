@@ -17,7 +17,7 @@ $hand->select_db("$db_name") or die('数据库无此库');
     </head>
     <body>
 
-
+<?php require 'nav.html'?>
 
     <div id="modal1">
         <div class="mbox">
@@ -81,7 +81,7 @@ $hand->select_db("$db_name") or die('数据库无此库');
             <?php if (!isset($_SESSION['user'])) echo "window.location.href='login.php'"; else  echo "window.location.href='user_center.php'"; ?>"><span
                             style="">个人中心</span></div>
                 <?php if (isset($_SESSION['user'])) echo
-                '<div class="topUserBar"><img onclick="window.location.href=teteam_manage.phprc="images/team.png"><span style="">我的队伍</span></div>
+                '<div class="topUserBar"><img onclick="window.location.href=\'team_manage.php\'" src="images/team.png"><span style="">我的队伍</span></div>
             <div class="topUserBar"><img src="images/create.png" onclick="modalOpen()"><span style="">创建队伍</span></div>
             <div class="topUserBar"><img src="images/logout.png" onclick="window.location.href=\'logout.php\'"><span style="">退出登录</span></div>' ?>
             </div>

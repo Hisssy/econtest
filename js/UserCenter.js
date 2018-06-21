@@ -73,5 +73,24 @@ function fileChange(target) {
     }
 }
 
-function
-
+$(document).ready(function () {
+    userInfoInit();
+});
+function userInfoInit(){
+    $.ajax({
+        url:'centerModify.php?action=initInfo',
+        type:'GET',
+        dataType:'JSON',
+        success:function (data) {
+            $('.infor1 span').html(data.id);
+            $('.infor3 span').html(data.phone);
+            $('.infor5 span').html(data.email);
+            $('.infor7 span').html(data.qq);
+            $('.infor2 span').html(data.name);
+            $('.infor4 span').html(data.use);
+            $('.infor6 span').html(data.school);
+            $('.infor8 span').html(data.major);
+            $('.infor0 .change0').html(data.info);
+        }
+    })
+}
