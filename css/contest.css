@@ -1,0 +1,856 @@
+a {
+    text-decoration: none;
+    color: #000;
+}
+
+.saiPage {
+    display: flex;
+    height: 8%;
+}
+
+.topUserHead {
+    width: 80%;
+    display: flex;
+    margin: auto;
+}
+
+.contestRight {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.topUserBar {
+    width: 60px;
+    color: #000;
+    cursor: pointer;
+}
+
+h3 {
+    font-weight: 300;
+}
+
+img {
+    border: 0;
+}
+
+.jie_left li {
+    display: flex;
+    list-style: none;
+    height: 45%;
+}
+
+input {
+    outline: none;
+}
+
+body {
+    /* min-width: 1024px; */
+    background: #f5f5f5;
+}
+
+.main {
+    width: 80%;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.container {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+#sai_header {
+    display: flex;
+    width: 100%;
+    height: 400px;
+    background-image: url(../images/header_bg.png);
+    background-size: 100% 100%;
+}
+
+.pager {
+    height: 34px;
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    margin: auto;
+}
+
+.pager input {
+    color: white;
+    cursor: pointer;
+    width: 34px;
+    border: none;
+    border-radius: 50%;
+    background-color: #747474;
+}
+
+.sai_header_zi {
+    display: none;
+    padding-top: 44px;
+    font-size: 16px;
+    color: #fff;
+}
+
+.sai_ren {
+    background-color: #FFF;
+    display: flex;
+    width: 80%;
+    height: 40px;
+    border-radius: 4em;
+    box-sizing: content-box;
+    justify-content: space-between;
+    margin: auto;
+}
+
+.ren_img {
+    margin-right: auto;
+    margin-left: auto;
+    display: flex;
+    height: 120px;
+    width: 120px;
+    background-color: #e7eef9;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.ren_img img {
+    max-height: 60%;
+    max-width: 60%;
+    text-align: center;
+    margin: auto;
+}
+
+.ren_jie {
+    width: 50%;
+    height: 20%;
+    display: flex;
+    justify-content: space-between;
+    margin: auto;
+}
+
+.jie_left {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    color: #000;
+    line-height: 20px;
+    margin: auto;
+}
+
+.jie_left li img {
+    padding-right: 5%;
+}
+
+.jie_right {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    height: 60px;
+    font-size: 14px;
+    margin: auto;
+}
+
+.jie_right span {
+    color: #FFF;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+}
+
+.build {
+    color: #000;
+    cursor: pointer;
+    width: 120px;
+}
+
+#sai_content {
+    margin-bottom: 4%;
+    margin-top: 4%;
+    width: 100%;
+    height: auto;
+}
+
+.saishi {
+    display: flex;
+    justify-content: space-between;
+    height: 660px;
+    background-color: #f5f5f5;
+}
+
+.sai_left {
+    width: 74.666%;
+    height: 100%;
+    font-size: 18px;
+    display: flex;
+    flex-direction: column;
+}
+
+.sai_xin {
+    height: 100%;
+    width: 100%;
+    background-color: #cccccc;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.sai_xin_header {
+    display: flex;
+    height: 10%;
+}
+
+.sai_search {
+    display: inline-flex;
+    width: 100%;
+    height: 44px;
+    box-sizing: unset;
+    margin: auto 1%;
+}
+
+.sai_search .sai_text {
+    width: 100%;
+    background-color: #fff;
+    vertical-align: top;
+    border-radius: 2px;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
+    transition: box-shadow 200ms cubic-bezier(0.4, 0.0, 0.2, 1);
+    height: 100%;
+    border: none;
+    font-size: 14px;
+    color: #212121;
+}
+
+.sai_search .sai_submit {
+    width: 44px;
+    height: 100%;
+    background-size: 100% 100%;
+    cursor: pointer;
+    border: none;
+    vertical-align: top;
+    border-radius: 2px;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
+    transition: box-shadow 200ms cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.sai_xin_main {
+    height: 82%;
+    overflow: hidden;
+}
+
+.saiAfterSearch {
+    width: 99.9%;
+    height: 90%;
+    overflow-y: scroll;
+    box-shadow: 0 5px 10px #9ea09c;
+    display: none;
+}
+
+.sai_xin_main .sai_detail:hover, .sai_detail_search:hover {
+    transition: .2s;
+    box-shadow: 0 2px 4px 1px #767d90;
+}
+
+.sai_detail, .sai_detail_search {
+    width: 100%;
+    height: 96px;
+    margin-bottom: 1%;
+    background-color: #ffffff;
+    overflow: hidden;
+    cursor: pointer;
+    border-radius: 2px;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
+    transition: box-shadow 200ms cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.sai_detail_url{
+    text-align: end;
+    color: #757575;
+    font-size: 12px;
+}
+.sai_detail_img, .sai_detail_img_search {
+    float: left;
+    width: 100px;
+    height: 100%;
+    background: #616161;
+}
+
+.sai_detail_img img, .sai_detail_img_search img {
+    width: 100%;
+    height: 100%;
+    display: none;
+    background-color: #aaa;
+}
+
+.sai_detail_right, .sai_detail_right_search {
+    padding-right: 1%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    height: 100%;
+    width: 84%;
+    float: right;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.sai_detail_name, .sai_detail_name_search {
+    width: 50%;
+    height: 20px;
+    font-size: 16px;
+    float: left;
+}
+
+.sai_detail_time, .sai_detail_time_search {
+    color: #757575;
+    width: 50%;
+    height: 20px;
+    font-size: 14px;
+}
+
+.sai_detail_jie, .sai_detail_jie_search {
+    width: 96%;
+    height: auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #757575;
+    font-size: 15px;
+}
+
+.sai_detail_jie p, .sai_detail_jie_search p {
+    line-height: 100%;
+    padding-top: 6px;
+}
+
+.sai_page {
+    width: 100%;
+    height: 8%;
+    display: flex;
+    justify-content: center;
+}
+
+.page_left, .page_right {
+    width: 3.5%;
+    height: 100%;
+    cursor: pointer;
+    margin: 0 1%;
+}
+
+.page {
+    display: flex;
+    height: 100%;
+    width: 34px;
+    border-radius: 100%;
+    background-color: #f5f5f5;
+    cursor: pointer;
+}
+
+.sai_right {
+    width: 24%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.sai_hot {
+    width: 100%;
+    height: 50%;
+    font-size: 18px;
+}
+
+.sai_img {
+    width: 100%;
+    height: 48.666%;
+    background-color: #92bced;
+}
+
+.aaa {
+    background-color: #cccccc;
+    height: 100%;
+    overflow: hidden;
+    padding: 6% 10%;
+}
+
+.sai_hot_detail {
+    height: 10%;
+    overflow: hidden;
+    font-size: 14px;
+    margin-bottom: 0;
+}
+
+.searchPic {
+    width: 44px;
+    cursor: pointer;
+}
+
+.sai_hot .sai_hot_num {
+    color: white;
+    margin-right: 4%;
+    border: none;
+    background-color: #737373;
+    width: 20.8px;
+    border-radius: 50%;
+    padding: 0;
+}
+
+.sai_hot_num img {
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+}
+
+.sai_hot_detail a {
+    color: #212121;
+}
+
+.sai_hot_detail a:hover {
+    color: #021388;
+}
+
+.teamInfoSection {
+    width: 100%;
+    height: 400px;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 1%;
+    justify-content: space-between;
+}
+
+.teamInfoAfterSearch0 {
+    display: none;
+}
+
+.teamInfoAfterSearch {
+    width: 100%;
+    height: 400px;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 1%;
+    justify-content: space-between;
+    position: relative;
+}
+
+.teamInfoAfterSearchLeft, .teamInfoAfterSearchRight {
+    width: 50px;
+    height: 50px;
+    opacity: 0.5;
+    cursor: pointer;
+    display: none;
+}
+
+.teamInfoAfterSearchLeft:hover, .teamInfoAfterSearchRight:hover {
+    opacity: 1;
+}
+
+.teamInfoAfterSearchLeft {
+    position: absolute;
+    top: 55%;
+    left: 0;
+}
+
+.teamInfoAfterSearchRight {
+    position: absolute;
+    top: 55%;
+    right: 0;
+}
+
+.teamInfoCard, .teamInfoCardSearch {
+    cursor: pointer;
+    height: 100%;
+    width: 24%;
+    background-color: #FFF;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.teamInfoCard:hover, .teamInfoCardSearch:hover {
+    box-shadow: 0 2px 4px 1px #767d90;
+    transition: .2s;
+}
+
+.teamInfoCardImage, .teamInfoCardImageSearch {
+    background-color: #757575;
+    height: 50%;
+    color: #fff;
+}
+
+.teamInfoCardText, .teamInfoCardTextSearch {
+    height: 50%;
+    padding: 2%;
+}
+
+.teamInfoPage {
+    width: 100%;
+    height: 20px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.teamInfoPaint {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid #8c8d8d;
+    cursor: pointer;
+    margin: 0 20px;
+}
+
+.search {
+    color: #212121;
+    width: 30%;
+    line-height: 24px;
+}
+
+.thirdHead .search, .thirdHead select, .thirdHead img {
+    border: none;
+    background-color: #fff;
+    height: 44px;
+    vertical-align: top;
+    border-radius: 2px;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
+    transition: box-shadow 200ms cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.topUserSection {
+    display: flex;
+    flex-direction: column;
+    height: 70%;
+    width: 40%;
+    margin: auto auto 0;
+}
+
+.topUserInfoBtn {
+    width: 100%;
+    height: 100%;
+    border-radius: 5em;
+    box-sizing: unset;
+    display: flex;
+    vertical-align: middle;
+}
+
+.third {
+    height: 570px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: #f5f5f5;
+}
+
+.thirdMain {
+    width: 80%;
+    min-width: 800px;
+    margin: auto;
+}
+
+.thirdHead {
+    height: 44px;
+    display: flex;
+}
+
+.thirdOut {
+    margin-top: 2%;
+    height: 500px;
+}
+
+.thirdInfor {
+    width: 24%;
+    height: 28%;
+    background-color: #FCFCFC;
+    min-width: 170px;
+    cursor: pointer;
+    border: 1px solid #BDBDBD;
+}
+
+.thirdInfor:hover {
+    transition: .2s;
+    box-shadow: 0 2px 4px 1px #767d90;
+    border-color: #000;
+}
+
+.thirdS {
+    display: flex;
+    justify-content: center;
+    margin-top: 5%;
+}
+
+.thirdL {
+    width: 30%;
+    background-color: #aec3d8;
+}
+
+.thirdR {
+    margin-left: 5%;
+    width: 50%;
+    display: flex;
+    font-size: 10px;
+    flex-direction: column;
+}
+
+.thirdX {
+    float: right;
+    color: #EB373A;
+    font-size: 10px;
+    width: 30%;
+    margin: auto;
+}
+
+.fouth {
+    display: flex;
+    justify-content: space-between;
+    height: 500px;
+}
+
+.answerOut {
+    display: flex;
+    height: 80%;
+    background-color: #cccccc;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.answer1 {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    align-content: space-between;
+    justify-content: center;
+    margin: auto;
+}
+
+.myQuestionOut {
+    height: 80%;
+    background-color: #cccccc;
+    display: flex;
+    flex-direction: column;
+}
+
+.discuss {
+    display: flex;
+    height: 30%;
+    width: 90%;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin: 2% auto auto;
+}
+
+.disleft1 {
+    width: 50%;
+    border: none;
+    background-color: #fff;
+    vertical-align: top;
+    border-radius: 2px;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
+    transition: box-shadow 200ms cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.disleft2 {
+    width: 95%;
+    margin-top: 12px;
+    border: none;
+    background-color: #fff;
+    height: 60px;
+    vertical-align: top;
+    border-radius: 2px;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
+    transition: box-shadow 200ms cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.disright {
+    border: none;
+    color: #FFF;
+    background-color: #03A9F4;
+    font-size: 16px;
+    height: 30px;
+    width: 20%;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.disright img {
+    height: 70%;
+}
+
+.end {
+    width: 100%;
+    background-color: #6d7489;
+}
+
+.endMain {
+    display: flex;
+    width: 60%;
+    max-width: 1200px;
+    min-width: 300px;
+    justify-content: space-around;
+    margin: auto;
+}
+
+.jie_right img, .page_left img, .page_right img {
+    height: 100%;
+}
+
+.geRen, .myTeam {
+    width: 120px;
+    color: #000;
+    cursor: pointer;
+}
+
+.saishi .main, .sai_hot_detail0 {
+    display: flex;
+}
+
+.sai_hot_bg, .sai_img img, .teamInfoAfterSearchLeft img, .teamInfoAfterSearchRight img {
+    width: 100%;
+    height: 100%;
+}
+
+.jie_right span:hover + img, .jie_right img:hover {
+    /* filter:blur(5px); */
+    /* transition:.2s; */
+}
+
+.jie_right span:hover, .jie_right img:hover + span {
+    display: block;
+    transition: .2s;
+}
+
+.thirdInside1, .thirdInside2, .thirdInside3, .thirdInside4, .thirdInside5 {
+    display: flex;
+    height: 500px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.thirdTurn, .answerTurn, .myQuestionTurn {
+    display: flex;
+    justify-content: center;
+}
+
+.fouthOne, .fouthTwo {
+    width: 49.333%;
+    height: 90%;
+}
+
+.answer2, .answer3, .answer4, .answer5, .myQuestion1, .myQuestion2, .myQuestion3, .myQuestion4, .myQuestion5 {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin: auto;
+}
+
+.answerLeft, .myQuestionLeft {
+    float: left;
+    margin-top: 2%;
+    cursor: pointer;
+}
+
+.answerRight, .myQuestionRight {
+    float: right;
+    margin-top: 2%;
+}
+
+.endLeft, .endRight {
+    display: flex;
+    flex-direction: column;
+    color: #FFF;
+}
+
+#modal1 {
+    display: none;
+    background: rgba(0, 0, 0, 0.60);
+    z-index: 998;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+#modal1 .mbox {
+    z-index: 999;
+    background: white;
+    box-shadow: black;
+    border-radius: .5em;
+    max-width: 550px;
+    height: 300px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    justify-content: space-between;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 2%;
+}
+
+@media screen and (max-width: 992px) {
+    .saishi, .fouth {
+        flex-wrap: wrap;
+        height: auto;
+    }
+
+    .sai_left, .sai_right {
+        height: 660px;
+        width: 100%;
+        margin-bottom: 4%;
+    }
+
+    .sai_right {
+        height: 300px;
+        margin-bottom: 0;
+    }
+
+    .sai_hot {
+        height: 100%;
+    }
+
+    .aaa {
+        padding: 3% 5%;
+    }
+
+    .sai_img {
+        display: none;
+    }
+
+    .fouthOne, .fouthTwo {
+        height: 500px;
+        width: 100%;
+    }
+
+    .fouthOne {
+        margin-bottom: 4%;
+    }
+
+    .search {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .sai_detail_right {
+        padding-left: 1%;
+        width: 100%;
+    }
+
+    .third, .teamInfoSection {
+        height: auto;
+    }
+
+    .teamInfoCard {
+        height: 250px;
+        margin-bottom: 3%;
+        width: 48.666%;
+    }
+
+    .sai_detail_img {
+        display: none;
+    }
+
+    .topUserSection {
+        width: 300px;
+    }
+}

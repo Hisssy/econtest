@@ -27,7 +27,7 @@ class MySessionHandler implements SessionHandlerInterface
         if ($row) {
             return ($row['session_data']);
         } else {
-            return (false);
+            return ("false");
         }
     }
 
@@ -67,3 +67,4 @@ class MySessionHandler implements SessionHandlerInterface
 }
 
 $handler = new MySessionHandler();
+session_set_save_handler($handler,true);
