@@ -10,7 +10,7 @@ $(document).ready(function () {
         $("#btn_file").click();
     });
     $('.endButton').click(function () {
-        let btn=$(".endButton");
+        let btn = $(".endButton");
         let tmp = btn.val();
         if (tmp === "提交资料") {
             $.ajax({
@@ -72,4 +72,6 @@ function fileChange(target) {
 
     }
 }
+
+function
 

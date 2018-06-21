@@ -1,3 +1,6 @@
 /.idea/
 configure.php
 /admin/pic/
+/class/password.php
+media/
+pma/
