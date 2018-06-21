@@ -25,20 +25,38 @@ function findBackPwd() {
     $('#sectionBoxLogin').hide();
     $('#sectionBoxFindBack').show();
 }
-console.log($('#sectionBoxLogin'));
+
 $('#findBackBtn').click(function () {
 
+    if($('#input-code').val())
     $.ajax({
         type: "POST",
         dataType: "JSON",
         url: "PwdFind.php?action=check_user",
         data: $('#aForm').serialize(),
         success: function (result) {
-            $('#sectionBoxFindBack').hide();
-            $('#sectionBoxFindBack2').show();
-            if(result.msgCode===0){
-                alert("错误");
+            if(result.msgCode===1){
+                $('#sectionBoxFindBack').hide();
+                $('#sectionBoxFindBack2').show();
             }
+            else
+                alert("错误");
         }
     })
 });
+
+function reSend() {
+    if($('#input-code').val())
+        $.ajax({
+            type: "POST",
+            dataType: "JSON",
+            url: "PwdFind.php?action=check_user",
+            data: $('#aForm').serialize(),
+            success: function (result) {
+                if(result.msgCode===1){
+                }
+                else
+                    alert("错误");
+            }
+        })
+}

@@ -177,7 +177,7 @@ if($_SESSION['user']){
                 </form>
             </div>
             <div class="loginSectionBox" id="sectionBoxFindBack" style="display: none;">
-                <form id="aForm">
+                <form style="height: 100%; display: flex;flex-direction: column;justify-content: space-around" id="aForm">
                 <div class="inputLine">
                     <label for="input-code">请输入学号</label>
                     <input type="tel" id="input-code" name="user">
@@ -189,8 +189,9 @@ if($_SESSION['user']){
             </div>
             <div class="loginSectionBox" id="sectionBoxFindBack2" style="display: none;">
                 <div class="inputLine">
-                    <label for="input-c">请输入发到您邮箱的验证码</label>
+                    <label for="input-c">我们已经把验证码发到您账号绑定的邮箱</label>
                     <input type="tel" id="input-c" name="user">
+                    <button class="loginButton" onclick="reSend()">重新发送</button>
                 </div>
             </div>
             <div class="bottomBar"><span onclick="findBackPwd()" style="cursor: pointer; font-size: smaller;color: gray">忘记密码？</span></div>
