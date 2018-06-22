@@ -15,11 +15,12 @@ if($_SESSION['user']){
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge，chrome=1">
     <title>登录</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.min.css">
     <link type="text/css" rel="stylesheet" href="css/index.css">
     <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
     <style>
-        .loginButton {
+        .loginButton,.loginButton-s{
             height: 50px;
             color: white;
             font-size: 25px;
@@ -32,10 +33,18 @@ if($_SESSION['user']){
             cursor: pointer;
         }
 
+
         .loginButton:hover {
             text-shadow: 0 0 2px black;
             background-color: #50a074;
             box-shadow: 0 0 8px #50a074;
+        }
+
+        .loginButton-s{
+            height: 100%;
+            font-size: 16px;
+            width: 15%;
+            cursor: pointer;
         }
 
         .loginBox {
@@ -117,6 +126,7 @@ if($_SESSION['user']){
     </style>
 </head>
 <body>
+<?php require 'nav.html'?>
 <div class="container" style="overflow: visible">
     <div class="loginBox">
         <div class="loginImage">
@@ -188,10 +198,20 @@ if($_SESSION['user']){
                 </form>
             </div>
             <div class="loginSectionBox" id="sectionBoxFindBack2" style="display: none;">
-                <div class="inputLine">
-                    <label for="input-c">我们已经把验证码发到您账号绑定的邮箱</label>
-                    <input type="tel" id="input-c" name="user">
-                    <button class="loginButton" onclick="reSend()">重新发送</button>
+                <div class="inputLine" style="display: flex;flex-direction: column;justify-content: space-around;height: 50%">
+                    <div>
+                    <span>我们已经把验证码发到您账号绑定的邮箱</span>
+                    <label for="input-c">请输入验证码：</label>
+                        <div style="display: inline-flex;justify-content: space-between;width: 100%;height:40px;">
+                            <input type="text" id="input-c" name="captcha" style="width: 80%;height: 100%;margin-top:0">
+                            <button class="loginButton-s"  onclick="reSend()">重发</button>
+                        </div>
+                        <label for="input-new">请输入新密码</label>
+                        <input type="text" id="input-new" style="width: 80%;height: 40px;margin-top:0">
+                        <label for="input-new-re">请重复输入新密码</label>
+                        <input type="text" id="input-new-re" style="width: 80%;height: 40px;margin-top:0">
+                    </div>
+                    <button class="loginButton"  onclick="submitC()">提交</button>
                 </div>
             </div>
             <div class="bottomBar"><span onclick="findBackPwd()" style="cursor: pointer; font-size: smaller;color: gray">忘记密码？</span></div>
@@ -199,6 +219,7 @@ if($_SESSION['user']){
     </div>
 </div>
 <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="js/index.js"></script>
 <script src="js/login.js"></script>
 </body>

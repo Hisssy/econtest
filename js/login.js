@@ -42,7 +42,10 @@ $('#findBackBtn').click(function () {
             else
                 alert("错误");
         }
-    })
+    });
+    else{
+        $.alert('请输入学号！')
+    }
 });
 
 function reSend() {
@@ -58,5 +61,28 @@ function reSend() {
                 else
                     alert("错误");
             }
+        });
+}
+
+function submitC() {
+    let code=$('#input-c').val();
+    if(code){
+        $.ajax({
+            type: "POST",
+            dataType: "JSON",
+            url: "PwdFind.php?action=check_captcha",
+            data: {user:$('#input-code').val(),captcha:code,password:$('#input-new').val()},
+            success: function (result) {
+                if(result.msgCode===1){
+                    alert("成功！");
+                    location.reload();
+                }
+                else
+                    alert("错误");
+            }
         })
+    }
+    else{
+        $.alert('请输入验证码！')
+    }
 }
