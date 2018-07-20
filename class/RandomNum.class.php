@@ -2,11 +2,15 @@
 class RandomNum{
     function create($long)//生成随机数，输入值为随机数长度
     {
-        srand(microtime() * 100000);
-        for ($c_number = "", $i = 0; $i < $long; $i++) {
-            $c_number .= dechex(rand(0, 15));
+        $arr=array_merge(range('a','b'),range('A','B'),range('0','9'));
+        shuffle($arr);
+        $arr=array_flip($arr);
+        $arr=array_rand($arr,4);
+        $res='';
+        foreach ($arr as $v){
+            $res.=$v;
         }
-        return $c_number;
+        return $res;
     }
     function image($check)//生成图像，输入值为随机数
     {
