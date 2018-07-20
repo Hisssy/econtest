@@ -29,8 +29,8 @@ function check_user()
         $captcha=$num->create(6);
         $sql_find="select id from find_back_captcha where user='$user'";
         $result_find = mysqli_query($hand, $sql_find);
-        $row_find = mysqli_fetch_array($result_find);
-        if(!$row_find)
+        //$row_find = mysqli_fetch_array($result_find);
+        if(!$result_find)
         {
             $time=time()+300;
             $sql_c="insert into find_back_captcha(`captcha`,`generate_time`,`user`)values('$captcha','$time','$user')";

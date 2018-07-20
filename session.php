@@ -60,7 +60,7 @@ class MySessionHandler implements SessionHandlerInterface
     {
         global $handle;
         $lapse_time = time();
-        $sql = "delete form session where expiry_time<$lapse_time";
+        $sql = "delete from session where expiry_time<$lapse_time";
         $result = mysqli_query($handle, $sql);
         return ($result);
     }

@@ -11,90 +11,89 @@
 <script>
 
     $(document).ready(function () {
-        $.ajax({
-            type: "post",
-            url: 'try0.json',
-            dataType: 'JSON',
-            success: function (data) {
-                if (data.length) {
-                    for (let i = 0; i < data.length - 1; i++) {
-                        $('.f_zu_dui').prepend("<div class='zu_dui'>" + $('.zu_dui').html() + "</div>");
-                    }
 
-                    $('.zu_dui0').click(function () {
-                        getSpecTeamInfo($(this));
-                        $(this).children('.zu_mem').slideToggle("slow");
+        //     $.ajax({
+        //         type: "post",
+        //         url: 'try0.json',
+        //         dataType: 'JSON',
+        //         success: function (data) {
+        //             if (data.length) {
+        //                 for (let i = 0; i < data.length - 1; i++) {
+        //                     $('.f_zu_dui').prepend("<div class='zu_dui'>" + $('.zu_dui').html() + "</div>");
+        //                 }
+        //
+        //                 $('.zu_dui0').click(function () {
+        //                     getSpecTeamInfo($(this));
+        //                     $(this).children('.zu_mem').slideToggle("slow");
+        //                 });
+        //             }
+        //             let zu_name = document.getElementsByClassName('zu_name');
+        //             let zu_game = document.getElementsByClassName('zu_game');
+        //             let zu_time = document.getElementsByClassName('zu_time');
+        //             let zu_num = document.getElementsByClassName('zu_num');
+        //
+        //             for (let i = 0; i < data.length; i++) {
+        //                 zu_name[i].getElementsByTagName('p')[0].innerHTML = data[i]['TeamId'];
+        //                 zu_game[i].getElementsByTagName('p')[0].innerHTML = data[i]['ContestName'];
+        //                 zu_time[i].getElementsByTagName('p')[0].innerHTML = data[i]['TeamEnrollDate'];
+        //                 zu_num[i].getElementsByTagName('p')[0].innerHTML = data[i]['TeamPeopleNum'];
+        //             }
+        //         }
+        //     });
+        // });
+        // $.ajax({
+        //     type: 'get',
+        //     url: 'zudui.html',
+        //     dataType: 'html',
+        //     success:
+        //
+        //         //翻页做不出
+        //         if (x.length > 4) {
+        //             $('.zu_page p').css('display', 'block');
+        //         }
+        //     }
+        // })
+        $('.dui_header').click(
+            function (thisObj) {
+                if (thisObj.hasClass("active"))
+                    thisObj.removeClass("active");
+                else {
+                    thisObj.addClass('active');
+                    let name = thisObj[0].firstElementChild.children[0].children[0].innerHTML;
+                    $.ajax({
+                        type: "get",
+                        url: 'try1.json',
+                        dataType: 'JSON',
+                        data: {
+                            teamId: name
+                        },
+                        success: function (data) {
+                            let mem = thisObj[0].getElementsByClassName("mem_zi");
+                            let img = thisObj[0].getElementsByClassName("mem_img");
+                            let memData = data;
+                            // document.getElementsByClassName('zu_mem')[0].style.height=255*Math.ceil(memData.length/4)+'px';
+                            let jObj = $(thisObj[0].getElementsByClassName("zu_mem")[0]);
+                            let html1 = "<div class='mem1'>" + $('.mem1').html() + "</div>";
+                            jObj.empty();
+                            for (let i = 0; i < memData.length; i++) {
+                                jObj.prepend(html1);
+                            }
+                            for (let i = 0; i < memData.length; i++) {
+
+                                img[i].getElementsByTagName('img')[0].src = memData[i]['MemberPic'];
+                                mem[i].getElementsByTagName('p')[0].innerHTML = "ID：" + memData[i]['MemberName'];
+                                mem[i].getElementsByTagName('p')[1].innerHTML = "团队角色：" + memData[i]['MemberStatus'];
+                                mem[i].getElementsByTagName('p')[2].innerHTML = "QQ:" + memData[i]['MemberQQ'];
+                            }
+                        }
                     });
                 }
-                let zu_name = document.getElementsByClassName('zu_name');
-                let zu_game = document.getElementsByClassName('zu_game');
-                let zu_time = document.getElementsByClassName('zu_time');
-                let zu_num = document.getElementsByClassName('zu_num');
-
-                for (let i = 0; i < data.length; i++) {
-                    zu_name[i].getElementsByTagName('p')[0].innerHTML = data[i]['TeamId'];
-                    zu_game[i].getElementsByTagName('p')[0].innerHTML = data[i]['ContestName'];
-                    zu_time[i].getElementsByTagName('p')[0].innerHTML = data[i]['TeamEnrollDate'];
-                    zu_num[i].getElementsByTagName('p')[0].innerHTML = data[i]['TeamPeopleNum'];
-                }
-            }
-        });
-    });
-    // $.ajax({
-    //     type: 'get',
-    //     url: 'zudui.html',
-    //     dataType: 'html',
-    //     success:
-    //
-    //         //翻页做不出
-    //         if (x.length > 4) {
-    //             $('.zu_page p').css('display', 'block');
-    //         }
-    //     }
-    // })
-    function getSpecTeamInfo(thisObj) {
-        if (thisObj.hasClass("active"))
-            thisObj.removeClass("active");
-        else {
-            thisObj.addClass('active');
-            let name = thisObj[0].firstElementChild.children[0].children[0].innerHTML;
-            $.ajax({
-                type: "get",
-                url: 'try1.json',
-                dataType: 'JSON',
-                data: {
-                    teamName: name
-                },
-                success: function (data) {
-                    let mem = thisObj[0].getElementsByClassName("mem_zi");
-                    let img = thisObj[0].getElementsByClassName("mem_img");
-                    let memData = data;
-                    // document.getElementsByClassName('zu_mem')[0].style.height=255*Math.ceil(memData.length/4)+'px';
-                    let jObj = $(thisObj[0].getElementsByClassName("zu_mem")[0]);
-                    let html1 = "<div class='mem1'>" + $('.mem1').html() + "</div>";
-                    jObj.empty();
-                    for (let i = 0; i < memData.length; i++) {
-                        jObj.prepend(html1);
-                    }
-                    for (let i = 0; i < memData.length; i++) {
-
-                        img[i].getElementsByTagName('img')[0].src = memData[i]['MemberPic'];
-                        mem[i].getElementsByTagName('p')[0].innerHTML = "ID：" + memData[i]['MemberName'];
-                        mem[i].getElementsByTagName('p')[1].innerHTML = "团队角色：" + memData[i]['MemberStatus'];
-                        mem[i].getElementsByTagName('p')[2].innerHTML = "QQ:" + memData[i]['MemberQQ'];
-                    }
-
-                }
-
             });
-        }
-
-    }
 
 
 </script>
 <body>
-<?php require 'nav.html'?>
+<?php require 'nav.html' ?>
 <div id="main">
     <div class="zu_header">
         <p>
@@ -130,23 +129,7 @@
             <div class="zu_dui">
                 <div class="zu_dui0">
                     <!-- 点击 -->
-                    <div class="dui_header" onclick="zu_header()">
-                        <div class="zu_name">
-                            <p>居居居</p>
-                        </div>
-                        <div class="zu_game">
-                            <p>2018中国旅游商品大赛</p>
-                        </div>
-                        <div class="zu_time">
-                            <p>3月20日-5月15日</p>
-                        </div>
-                        <div class="zu_num">
-                            <p>3/10</p>
-                        </div>
-                        <div class="zu_action">
-                            <p>解散队伍</p>    <!-- ajax （队长）解散    （队员）退出 -->
-                        </div>
-                    </div>
+
                     <!-- JS显示 隐藏 -->
                     <div class="zu_mem">
                         <div class="mem1">
@@ -173,15 +156,37 @@
 </div>
 
 <script>
-    let p = 1;
-
-    function zu_header() {
-        let zu_name = document.getElementsByClassName('zu_name');
-        if (p) {
-
-            p = 0;
+    let genInfo = function (TeamId, ContestName, TeamEnrollDate, TeamPeopleNum) {
+        let html = '                    <div class="dui_header">\n' +
+            '                        <div class="zu_name">\n' +
+            '                            <p>' + TeamId + '</p>\n' +
+            '                        </div>\n' +
+            '                        <div class="zu_game">\n' +
+            '                            <p>' + ContestName + '</p>\n' +
+            '                        </div>\n' +
+            '                        <div class="zu_time">\n' +
+            '                            <p>' + TeamEnrollDate + '</p>\n' +
+            '                        </div>\n' +
+            '                        <div class="zu_num">\n' +
+            '                            <p>' + TeamPeopleNum + '</p>\n' +
+            '                        </div>\n' +
+            '                        <div class="zu_action">\n' +
+            '                            <p>解散队伍</p>\n' +
+            '                        </div>\n' +
+            '                    </div>';
+        $('.zu_dui0').prepend(html);
+    };
+    $.ajax({
+        url: "TeamCheck.php?action=loadAllTeam",
+        type: "GET",
+        dataType: "JSON",
+        success: function (data) {
+            $.each(data, function (index, objVal) {
+                genInfo(objVal.TeamId, objVal.ContestName, objVal.TeamEnrollDate, objVal.TeamPeopleNum);
+            })
         }
-    }
+    })
+
 </script>
 
 </body>

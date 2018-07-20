@@ -72,7 +72,7 @@ $hand->select_db("$db_name") or die('数据库无此库');
                         <img src="images/ID.png"
                              style="position: absolute;padding-right: 10px;height: 40px;vertical-align: middle;">
                         <span id="userId"
-                              style="margin: auto;vertical-align: middle;font-size: 27px;">2017210079</span>
+                              style="margin: auto;vertical-align: middle;font-size: 27px;"><?php echo $_SESSION['user']?></span>
                     </div>
                 </div>
             </div>
@@ -250,6 +250,7 @@ $hand->select_db("$db_name") or die('数据库无此库');
     <div class="container third" id="section3">
 
         <h3>组队信息</h3>
+
         <form class="thirdHead" id="sForm" onsubmit="return false">
             <input type="text" id="organize" placeholder="请输入比赛或队伍关键字" name="content" class="search">
             <select title="" name="method" class="select1" size="1">
@@ -258,29 +259,10 @@ $hand->select_db("$db_name") or die('数据库无此库');
             </select>
             <img src="images/search.png" class="searchPic">
         </form>
+        <div id="hidden_info" style="display: none"><input title="" id="t_total_num"></div>
         <div class="teamInfoSection0">
             <div class="teamInfoSection">
-                <div class="teamInfoCard">
-                    <div class="teamInfoCardImage"></div>
-                    <div class="teamInfoCardText">
-                        <div class="cardWrapper">
-                            <div class="teamInfoCardTextTitle"><span class="title">V字仇杀队</span></div>
-                            <div class="cardTextEntry">队长：Guy Fawkes</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="teamInfoCard">
-                    <div class="teamInfoCardImage"></div>
-                    <div class="teamInfoCardText"></div>
-                </div>
-                <div class="teamInfoCard">
-                    <div class="teamInfoCardImage"></div>
-                    <div class="teamInfoCardText"></div>
-                </div>
-                <div class="teamInfoCard">
-                    <div class="teamInfoCardImage"></div>
-                    <div class="teamInfoCardText"></div>
-                </div>
+
             </div>
             <div class="teamInfoPage">
                 <div class="teamInfoPaint"></div>

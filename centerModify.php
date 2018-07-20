@@ -33,14 +33,6 @@ function infoModify()
     global $hand;
     $captcha=$_POST["captcha"];
     $user=$_SESSION["user"];
-    $sql="select id from find_back_captcha where user='$user' and captcha='$captcha'";
-    $result = mysqli_query($hand, $sql);
-    $row = mysqli_fetch_array($result);
-    if(!$row)
-    {
-        $dan["msgCode"]='0';
-    }
-    else {
         $p=$_POST['phone'];
         $e=$_POST['email'];
         $i=$_POST['info'];
@@ -50,8 +42,7 @@ function infoModify()
             $dan["msgCode"]='1';
         }else
             $dan["msgCode"]='0';
-    }
-    echo json_encode($dan);
+        echo json_encode($dan);
 }
 
 function portraitUpload()
