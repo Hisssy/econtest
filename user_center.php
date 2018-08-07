@@ -11,6 +11,7 @@
 </head>
 <body style="
     margin: 0;">
+<?php require 'nav.html'?>
 <div class="zu_header container">
     <p>
         <a href="">首页</a>

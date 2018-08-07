@@ -18,17 +18,18 @@ switch ($_GET['action']) {
 }
 function contest()
 {
+    global $hand;
     $total=5;
     $min=$_POST["c_page"]*$total-$total;
     if($_POST["c_page"]==1)
     {
-        $sql="select * from contest_list";
+        $sql="select * from contest_list where status=1";
         $result=mysqli_query($hand, $sql);
         $row=mysqli_fetch_assoc($result);
         $num=count($row);
         $dan["allnum"]=$num;
     }
-    $sql_page="select name,intro,begin,stop,imagesrc from contest_list limit $min,5";
+    $sql_page="select name,intro,begin,stop,imagesrc from contest_list where status=1 limit $min,5";
     $result_page=mysqli_query($hand, $sql_page);
     $count=0;
     while($row=mysqli_fetch_assoc($result_page))
@@ -53,6 +54,7 @@ allnum数据数
 */
 function team()
 {
+    global $hand;
     $total=4;
     $min=$_POST["c_page"]*$total-$total;
     if($_POST["c_page"]==1)
@@ -71,7 +73,7 @@ function team()
         $dan["$count"]["name"]=$row["name"];
         $dan["$count"]["intro"]=$row["intro"];
         $dan["$count"]["people"]=$row["peoplenum"];
-        $sql_tc="select nickname from account_user where id='$row[tcid]'";
+        $sql_tc="select nickname from account_user where uid='$row[tcid]'";
         $result_tc = mysqli_query($hand, $sql_tc);
         $row_tc = mysqli_fetch_assoc($result_tc);
         $dan["$count"]["tc_name"]=$row_tc["nickname"];

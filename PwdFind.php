@@ -15,21 +15,22 @@ switch ($_GET['action']) {
 function check_user()
 {
     global $hand;
+    global $unspoken;
     $user=$_POST["user"];
     $sql_mail="select email from account_user where user='$user'";
     $result_mail = mysqli_query($hand, $sql_mail);
     $row_mail = mysqli_fetch_array($result_mail);
     if (!$row_mail) {
         //账号或密码错误
-        $dan["msgCode"]='0';
+        $dan["msgCode"]=0;
         echo json_encode($dan);
     } else {
         $num=new RandomNum();
         $captcha=$num->create(6);
         $sql_find="select id from find_back_captcha where user='$user'";
         $result_find = mysqli_query($hand, $sql_find);
-        $row_find = mysqli_fetch_array($result_find);
-        if(!$row_find)
+        //$row_find = mysqli_fetch_array($result_find);
+        if(!$result_find)
         {
             $time=time()+300;
             $sql_c="insert into find_back_captcha(`captcha`,`generate_time`,`user`)values('$captcha','$time','$user')";
@@ -47,7 +48,7 @@ function check_user()
             $mail=new MailSend($row_mail["email"],'重邮e站验证码',$captcha);
             $mail->send($unspoken);
         }
-        $dan["msgCode"]='1';
+        $dan["msgCode"]=1;
         echo json_encode($dan);
     }
 }
@@ -61,10 +62,10 @@ function check_captcha()
     $row = mysqli_fetch_array($result);
     if(!$row)
     {
-        $dan["msgCode"]='0';
+        $dan["msgCode"]=0;
     }
     else {
-        $dan["msgCode"]='1';
+        $dan["msgCode"]=1;
         update_password();
     }
     echo json_encode($dan);
